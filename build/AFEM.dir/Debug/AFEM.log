@@ -1,0 +1,10 @@
+﻿  AFEM_simulation.cpp
+c:\users\hyu754\downloads\opencloth_vision\opencloth_vision\afem\include\AFEM_geometry.hpp(115): warning C4551: function call missing argument list
+C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\AFEM\cuda\gpu_include\AFEM_cuda.cuh(74): warning C4305: 'initializing' : truncation from 'double' to 'float'
+C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\AFEM\source\AFEM_simulation.cpp(21): warning C4267: 'argument' : conversion from 'size_t' to 'int', possible loss of data
+C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\AFEM\source\AFEM_simulation.cpp(55): warning C4267: 'argument' : conversion from 'size_t' to 'int', possible loss of data
+C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\AFEM\source\AFEM_simulation.cpp(58): warning C4267: 'argument' : conversion from 'size_t' to 'int', possible loss of data
+C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\AFEM\source\AFEM_simulation.cpp(74): warning C4267: 'argument' : conversion from 'size_t' to 'int', possible loss of data
+C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\AFEM\source\AFEM_simulation.cpp(75): warning C4267: 'argument' : conversion from 'size_t' to 'int', possible loss of data
+C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\AFEM\source\AFEM_simulation.cpp(111): warning C4267: 'argument' : conversion from 'size_t' to 'int', possible loss of data
+  AFEM.vcxproj -> C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\build\Debug\AFEM.exe

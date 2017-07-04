@@ -1,0 +1,72 @@
+Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+Compiler:  
+Build flags: 
+Id flags: 
+
+The output was:
+1
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 4/07/2017 2:49:46 p.m..
+Project "C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\CMakeFiles\3.7.0\CompilerIdC\CompilerIdC.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "Debug\".
+  Creating directory "Debug\CompilerIdC.tlog\".
+InitializeBuildStatus:
+  Creating "Debug\CompilerIdC.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  CL.exe /c /nologo /W0 /WX- /Od /Oy- /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TC /analyze- /errorReport:queue CMakeCCompilerId.c
+TRACKER : error TRK0005: Failed to locate: "CL.exe". The system cannot find the file specified. [C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\CMakeFiles\3.7.0\CompilerIdC\CompilerIdC.vcxproj]
+  
+  
+Done Building Project "C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\CMakeFiles\3.7.0\CompilerIdC\CompilerIdC.vcxproj" (default targets) -- FAILED.
+
+Build FAILED.
+
+"C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\CMakeFiles\3.7.0\CompilerIdC\CompilerIdC.vcxproj" (default target) (1) ->
+(ClCompile target) -> 
+  TRACKER : error TRK0005: Failed to locate: "CL.exe". The system cannot find the file specified. [C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\CMakeFiles\3.7.0\CompilerIdC\CompilerIdC.vcxproj]
+
+    0 Warning(s)
+    1 Error(s)
+
+Time Elapsed 00:00:00.42
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler:  
+Build flags: 
+Id flags: 
+
+The output was:
+1
+Microsoft (R) Build Engine version 14.0.25420.1
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Build started 4/07/2017 2:49:47 p.m..
+Project "C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\CMakeFiles\3.7.0\CompilerIdCXX\CompilerIdCXX.vcxproj" on node 1 (default targets).
+PrepareForBuild:
+  Creating directory "Debug\".
+  Creating directory "Debug\CompilerIdCXX.tlog\".
+InitializeBuildStatus:
+  Creating "Debug\CompilerIdCXX.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  CL.exe /c /nologo /W0 /WX- /Od /Oy- /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:queue CMakeCXXCompilerId.cpp
+TRACKER : error TRK0005: Failed to locate: "CL.exe". The system cannot find the file specified. [C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\CMakeFiles\3.7.0\CompilerIdCXX\CompilerIdCXX.vcxproj]
+  
+  
+Done Building Project "C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\CMakeFiles\3.7.0\CompilerIdCXX\CompilerIdCXX.vcxproj" (default targets) -- FAILED.
+
+Build FAILED.
+
+"C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\CMakeFiles\3.7.0\CompilerIdCXX\CompilerIdCXX.vcxproj" (default target) (1) ->
+(ClCompile target) -> 
+  TRACKER : error TRK0005: Failed to locate: "CL.exe". The system cannot find the file specified. [C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\CMakeFiles\3.7.0\CompilerIdCXX\CompilerIdCXX.vcxproj]
+
+    0 Warning(s)
+    1 Error(s)
+
+Time Elapsed 00:00:00.23
+
+
