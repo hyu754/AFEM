@@ -72,7 +72,7 @@ void AFEM::Simulation::run(){
 
 	double start = std::clock();
 	cuda_tools_class.make_K(element_vec.size(), pos_vec.size());
-	cuda_tools_class.make_f(pos_vec.size(), 3);
+	//cuda_tools_class.make_f(pos_vec.size(), 3);
 	int node_force = 174;
 	if (origional_position_set == false){
 		

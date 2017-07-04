@@ -144,9 +144,9 @@ SET(CUDA_NVCC_DEPEND
  "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/include/vector_functions.h"
  "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/include/vector_functions.hpp"
  "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/include/vector_types.h"
- "C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/AFEM/cuda/gpu_include/AFEM_cuda.cuh"
- "C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/AFEM/cuda/gpu_source/AFEM_QR_solver.cu"
- "C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/AFEM/include/AFEM_geometry.hpp"
- "C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/AFEM/include/Utilities.cuh"
+ "D:/GitHub/AFEM/AFEM/cuda/gpu_include/AFEM_cuda.cuh"
+ "D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_QR_solver.cu"
+ "D:/GitHub/AFEM/AFEM/include/AFEM_geometry.hpp"
+ "D:/GitHub/AFEM/AFEM/include/Utilities.cuh"
 )
 

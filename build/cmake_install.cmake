@@ -1,8 +1,8 @@
-# Install script for directory: C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision
+# Install script for directory: D:/GitHub/AFEM
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Program Files/OpenCloth_Co_rotation")
+  set(CMAKE_INSTALL_PREFIX "C:/Program Files/AFEM")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -29,7 +29,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/build/AFEM/cuda/cmake_install.cmake")
+  include("D:/GitHub/AFEM/build/AFEM/cuda/cmake_install.cmake")
 
 endif()
 
@@ -41,5 +41,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "D:/GitHub/AFEM/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

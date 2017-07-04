@@ -983,25 +983,36 @@ __device__ void find_Jacobian_localK_localM(AFEM::element *in_element, AFEM::pos
 	//}
 	//return (x14*(y24*z34 - y34*z24) - y14*(x24*z34 - z24 * x34) + z14*(x24*y34 - y24*x34));
 	float b1 = 0.0;
-	float b2 = 0.0;//-(9.81 *1000.0)*(det_J / 6) / 4.0;
+	float b2 = -9.81*rho;//-(9.81 *1000.0)*(det_J / 6) / 4.0;
 	float b3 = 0.0;
 //	b1  = b2;
-	in_element->f_body[0] = b1;
-	in_element->f_body[1] =b2;// b2*det_J / 2;
-	in_element->f_body[2] = b3;
+	//in_element->f_body[0] = b1;
+	//in_element->f_body[1] =b2;// b2*det_J / 2;
+	//in_element->f_body[2] = b3;
 
-	in_element->f_body[3] = b1;
-	in_element->f_body[4] =  b2;// b2*det_J / 2;
-	in_element->f_body[5] = b3;
+	//in_element->f_body[3] = b1;
+	//in_element->f_body[4] =  b2;// b2*det_J / 2;
+	//in_element->f_body[5] = b3;
 
-	in_element->f_body[6] = b1;
-	in_element->f_body[7] = b2;// b2*det_J / 2;
-	in_element->f_body[8] = b3;
+	//in_element->f_body[6] = b1;
+	//in_element->f_body[7] = b2;// b2*det_J / 2;
+	//in_element->f_body[8] = b3;
 
-	in_element->f_body[9] = b1;
-	in_element->f_body[10] =  b2;// *det_J / 2;
-	in_element->f_body[11] = b3;
-
+	//in_element->f_body[9] = b1;
+	//in_element->f_body[10] =  b2;// *det_J / 2;
+	//in_element->f_body[11] = b3;
+	in_element->f_body[0] = b1*det_J / 12.0;
+	in_element->f_body[1] = b2*det_J / 12.0;
+	in_element->f_body[2] = b3*det_J / 12.0;
+	in_element->f_body[3] = b1*det_J / 12.0;
+	in_element->f_body[4] = b2*det_J / 12.0;
+	in_element->f_body[5] = b3*det_J / 12.0;
+	in_element->f_body[6] = b1*det_J / 12.0;
+	in_element->f_body[7] = b2*det_J / 12.0;
+	in_element->f_body[8] = b3*det_J / 12.0;
+	in_element->f_body[9] = -b1*det_J / 12.0;
+	in_element->f_body[10] = -b2*det_J / 12.0;
+	in_element->f_body[11] = -b3*det_J / 12.0;
 }
 
 
@@ -1376,17 +1387,17 @@ void cuda_tools::make_f(int num_nodes, int dim){
 	}
 	if (first){
 
-		gpu_make_f << <blocks, threads >> >(f_d, num_nodes, position_array_d, dim, first,0.0);
+		//gpu_make_f << <blocks, threads >> >(f_d, num_nodes, position_array_d, dim, first,0.0);
 		first = 0;
 	}
 	else {
 		if (force_change > -68.5){
-			gpu_make_f << <blocks, threads >> >(f_d, num_nodes, position_array_d, dim, 0, force_change);
+			//gpu_make_f << <blocks, threads >> >(f_d, num_nodes, position_array_d, dim, 0, force_change);
 			force_change -= 0.51;
 		}
 		else{
 			force_change = -68.5;
-			gpu_make_f << <blocks, threads >> >(f_d, num_nodes, position_array_d, dim, 0, force_change);
+			//gpu_make_f << <blocks, threads >> >(f_d, num_nodes, position_array_d, dim, 0, force_change);
 		}
 		
 	}

@@ -71,7 +71,7 @@ class cuda_tools{
 
 
 	//dt for dynamic
-	float dt = 1.0/360.0;
+	float dt = 1.0/150.0;
 	//float dt = 1.0;
 	//cuda allocations
 	//----------------------------------------------------------------------------------
@@ -110,7 +110,7 @@ class cuda_tools{
 	int M = 0, N = 0;// nz = 0, *I = NULL, *J = NULL;
 	float *val = NULL;
 	const float tol = 1e-8f;
-	const int max_iter =1150;
+	const int max_iter =1050;
 	float *x;
 	float *rhs;
 	float a, b, na, r0, r1;
