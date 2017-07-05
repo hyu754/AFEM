@@ -5,19 +5,19 @@ D:\GitHub\AFEM\AFEM\include\AFEM_geometry.hpp(115): warning : expression has no 
   
   
   
-D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(1346): warning : parameter "elem_array_ptr" was set but never used
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(1488): warning : parameter "elem_array_ptr" was set but never used
   
   
   
-D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(1346): warning : parameter "pos_array_ptr" was set but never used
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(1488): warning : parameter "pos_array_ptr" was set but never used
   
   
   
-D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(1379): warning : variable "blocks" was set but never used
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(1521): warning : variable "blocks" was set but never used
   
   
   
-D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(1379): warning : variable "threads" was set but never used
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(1521): warning : variable "threads" was set but never used
   
   
   
@@ -25,19 +25,19 @@ D:\GitHub\AFEM\AFEM\include\AFEM_geometry.hpp(115): warning : expression has no 
   
   
   
-D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(1346): warning : parameter "elem_array_ptr" was set but never used
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(1488): warning : parameter "elem_array_ptr" was set but never used
   
   
   
-D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(1346): warning : parameter "pos_array_ptr" was set but never used
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(1488): warning : parameter "pos_array_ptr" was set but never used
   
   
   
-D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(1379): warning : variable "blocks" was set but never used
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(1521): warning : variable "blocks" was set but never used
   
   
   
-D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(1379): warning : variable "threads" was set but never used
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(1521): warning : variable "threads" was set but never used
   
   
   
@@ -47,20 +47,20 @@ D:\GitHub\AFEM\AFEM\include\AFEM_geometry.hpp(115): warning C4551: function call
   
 D:\GitHub\AFEM\AFEM\cuda\gpu_include\AFEM_cuda.cuh(74): warning C4305: 'initializing' : truncation from 'double' to 'float'
   
-D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(1322): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(1464): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
   
-D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(1323): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(1465): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
   
-D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(1324): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(1466): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
   
-D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(1328): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(1470): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
   
-D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(1331): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(1473): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
   
-D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(1334): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(1476): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
   
-D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(1396): warning C4305: '-=' : truncation from 'double' to 'float'
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(1538): warning C4305: '-=' : truncation from 'double' to 'float'
   
-D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(1577): warning C4305: 'argument' : truncation from 'double' to 'float'
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(1719): warning C4305: 'argument' : truncation from 'double' to 'float'
   
   AFEM_cuda_lib.vcxproj -> D:\GitHub\AFEM\build\AFEM\cuda\Debug\AFEM_cuda_lib.lib
