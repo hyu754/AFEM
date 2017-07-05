@@ -1,23 +1,27 @@
-﻿  Building NVCC (Device) object AFEM/cuda/CMakeFiles/AFEM_cuda_lib.dir/gpu_source/Debug/AFEM_cuda_lib_generated_AFEM_cuda.cu.obj
-  AFEM_cuda.cu
+﻿  Building NVCC (Device) object AFEM/cuda/CMakeFiles/AFEM_cuda_lib.dir/gpu_source/Debug/AFEM_cuda_lib_generated_AFEM_corotational.cu.obj
+  AFEM_corotational.cu
   
 D:\GitHub\AFEM\AFEM\include\AFEM_geometry.hpp(115): warning : expression has no effect
   
   
   
-D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(1488): warning : parameter "elem_array_ptr" was set but never used
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(28): warning : variable "k1" was set but never used
   
   
   
-D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(1488): warning : parameter "pos_array_ptr" was set but never used
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(28): warning : variable "k2" was set but never used
   
   
   
-D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(1521): warning : variable "blocks" was set but never used
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(28): warning : variable "k3" was set but never used
   
   
   
-D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(1521): warning : variable "threads" was set but never used
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(28): warning : variable "k4" was set but never used
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(34): warning : variable "C" was set but never used
   
   
   
@@ -25,42 +29,28 @@ D:\GitHub\AFEM\AFEM\include\AFEM_geometry.hpp(115): warning : expression has no 
   
   
   
-D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(1488): warning : parameter "elem_array_ptr" was set but never used
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(28): warning : variable "k1" was set but never used
   
   
   
-D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(1488): warning : parameter "pos_array_ptr" was set but never used
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(28): warning : variable "k2" was set but never used
   
   
   
-D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(1521): warning : variable "blocks" was set but never used
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(28): warning : variable "k3" was set but never used
   
   
   
-D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(1521): warning : variable "threads" was set but never used
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(28): warning : variable "k4" was set but never used
   
   
   
-  AFEM_cuda.cu
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(34): warning : variable "C" was set but never used
+  
+  
+  
+  AFEM_corotational.cu
   
 D:\GitHub\AFEM\AFEM\include\AFEM_geometry.hpp(115): warning C4551: function call missing argument list
-  
-D:\GitHub\AFEM\AFEM\cuda\gpu_include\AFEM_cuda.cuh(74): warning C4305: 'initializing' : truncation from 'double' to 'float'
-  
-D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(1464): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
-  
-D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(1465): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
-  
-D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(1466): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
-  
-D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(1470): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
-  
-D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(1473): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
-  
-D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(1476): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
-  
-D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(1538): warning C4305: '-=' : truncation from 'double' to 'float'
-  
-D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(1719): warning C4305: 'argument' : truncation from 'double' to 'float'
   
   AFEM_cuda_lib.vcxproj -> D:\GitHub\AFEM\build\AFEM\cuda\Debug\AFEM_cuda_lib.lib

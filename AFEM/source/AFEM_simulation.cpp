@@ -69,28 +69,30 @@ std::ofstream file_output("tumour_pos.txt");
 
 void AFEM::Simulation::run(){
 
+	//set corotational bool variable
+	cuda_tools_class.set_corotational_bool(true);
 
 	double start = std::clock();
 	cuda_tools_class.make_K(element_vec.size(), pos_vec.size());
 	//cuda_tools_class.make_f(pos_vec.size(), 3);
-	int node_force = 174;
-	if (origional_position_set == false){
-		
-		
-		orig_x = pos_array[node_force].x;
-		orig_y = pos_array[node_force].y;
-		orig_z = pos_array[node_force].z;
-		origional_position_set = true;
-	}
-	else {
-		std::cout << "Position considered : " << pos_array[node_force].x-orig_x << " " << pos_array[node_force].y-orig_y << " " << pos_array[node_force].z -orig_z<< std::endl;
-	}
+	//int node_force = 174;
+	//if (origional_position_set == false){
+	//	
+	//	
+	//	orig_x = pos_array[node_force].x;
+	//	orig_y = pos_array[node_force].y;
+	//	orig_z = pos_array[node_force].z;
+	//	origional_position_set = true;
+	//}
+	//else {
+	//	std::cout << "Position considered : " << pos_array[node_force].x-orig_x << " " << pos_array[node_force].y-orig_y << " " << pos_array[node_force].z -orig_z<< std::endl;
+	//}
 
 
-#ifdef WRITE_TO_FILE
-	int node_of_interest = 767;
-	file_output<< pos_array[node_of_interest].x << " " <<pos_array[node_of_interest].y << " " << pos_array[node_of_interest].z <<std::endl;
-#endif
+//#ifdef WRITE_TO_FILE
+//	int node_of_interest = 767;
+//	file_output<< pos_array[node_of_interest].x << " " <<pos_array[node_of_interest].y << " " << pos_array[node_of_interest].z <<std::endl;
+//#endif
 
 	cuda_tools_class.dynamic();
 	//cuda_tools_class.set_RHS_LHS();

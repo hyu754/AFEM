@@ -7,6 +7,7 @@
 #include "cuda.h"
 #include <cuda_runtime.h>
 #include <fstream>
+#include "AFEM_Linear_routines.cuh"
 
 
 #define nodesinelemX(node,el,nodesPerElem) (node + nodesPerElem*el) //the first entry is the element # the second entry would be the element number and the last one is the number of nodes/element
@@ -14,26 +15,6 @@
 #define nodesDisplacementX(dof,node,dimension) (dof + node*dimension)
 #define IDX2C(i,j,ld) (((j)*(ld))+( i )) 
 
-//Atomic add for global K matrix assembly
-__device__ inline float atomicAdda(float* address, double value)
-
-{
-
-	float ret = atomicExch(address, 0.0f);
-
-	float old = ret + (float)value;
-
-	while ((old = atomicExch(address, old)) != 0.0f)
-
-	{
-
-		old = atomicExch(address, 0.0f) + old;
-
-	}
-
-	return ret;
-
-};
 //__device__ void find_localM(AFEM::element *in_element){
 //	float det_J = in_element->Jacobian;
 //	float rho = 1000.0; //in_element->density;
@@ -1507,8 +1488,15 @@ void cuda_tools::make_K(int num_elem, int num_nodes){
 		blocks = (num_elem + 256) / 256;
 		threads = 256;
 	}
-	gpu_make_K << <blocks, threads >> > (elem_array_d, position_array_d, num_elem, num_nodes, K_d, M_d, f_d);
+	if (corotational_bool == false){ //
+		gpu_make_K << <blocks, threads >> > (elem_array_d, position_array_d, num_elem, num_nodes, K_d, M_d, f_d);
 
+	}
+	else {
+		gpu_make_K_corotational << <blocks, threads >> > (elem_array_d, position_array_d, position_array_initial_d, num_elem, num_nodes, K_d, M_d, f_d);
+
+	}
+	
 	//cudaMemset(K_d, 0, sizeof(*K_d)*dim*num_nodes*dim*num_nodes); //initialize the vector K_d to zero
 
 	//std::cout << std::endl;
@@ -1632,33 +1620,6 @@ void cuda_tools::update_geometry(float *u_dot_sln){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	/*float *h_y = (float *)malloc(Ncols* sizeof(float));
-	cudaMemcpy(h_y, u_dot_sln, Ncols* sizeof(float), cudaMemcpyDeviceToHost);
-
-	for (int i = 1; i < 12; i++){
-	std::cout << h_y[i] << " ";
-	}
-	free(h_y);*/
-	//std::cout << std::endl;
-	//stationary_BC_f(u_dot_sln);
 	update_position_vector << <blocks_nodes, threads_nodes >> >(position_array_d, u_dot_sln, dt, Nnodes, 3);
 
 
@@ -1668,7 +1629,6 @@ void cuda_tools::update_geometry(float *u_dot_sln){
 
 
 
-	//update_Geo_CUDA << <blocks_element, threads_element >> >(elem_array_d, position_array_d,u_soln, Nelems);
 }
 void cuda_tools::dynamic(){
 	int blocks_nodesdim, threads_nodesdim;
@@ -1716,7 +1676,13 @@ void cuda_tools::dynamic(){
 
 	//stationary_BC_f(Nelems, Nnodes, Nstationary, 3);
 	//stationary_BC_f(f_d);
-	find_A_b_dynamic << <blocks_nodesdim, threads_nodesdim >> >(K_d, dx_d, u_dot_d, f_d, RHS, M_d, LHS, Nnodes, dt, 1.02, 0.002, 3);
+	if (corotational_bool == false){
+		find_A_b_dynamic << <blocks_nodesdim, threads_nodesdim >> >(K_d, dx_d, u_dot_d, f_d, RHS, M_d, LHS, Nnodes, dt, 1.02, 0.002, 3);
+	}
+	else{
+		find_A_b_dynamic_corotational << <blocks_nodesdim, threads_nodesdim >> >(K_d, dx_d, u_dot_d, f_d, RHS, M_d, LHS, Nnodes, dt, 1.02, 0.002, 3);
+	}
+	
 
 
 	//float *rhs_output = (float *)malloc(Ncols* Ncols*sizeof(float));

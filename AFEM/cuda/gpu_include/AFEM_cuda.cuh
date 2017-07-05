@@ -70,6 +70,9 @@ class cuda_tools{
 	float *RHS, *LHS;
 
 
+	//Boolean variable to set whether we are using corrotation or not
+	bool corotational_bool = false;
+
 	//dt for dynamic
 	float dt = 1.0/150.0;
 	//float dt = 1.0;
@@ -110,7 +113,7 @@ class cuda_tools{
 	int M = 0, N = 0;// nz = 0, *I = NULL, *J = NULL;
 	float *val = NULL;
 	const float tol = 1e-8f;
-	const int max_iter =1050;
+	const int max_iter =50;
 	float *x;
 	float *rhs;
 	float a, b, na, r0, r1;
@@ -141,6 +144,8 @@ public:
 	//A wrapper function that makes the K matrix on the GPU
 	void make_K(int num_elem,int num_nodes);
 
+	//set corotational bool
+	void set_corotational_bool(bool bool_in){corotational_bool = bool_in;}
 	
 	//A wrapper function that resets the value of K (device) when for the next simulation
 	void reset_K(int num_elem,int num_nodes);

@@ -142,6 +142,7 @@ SET(CUDA_NVCC_DEPEND
  "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/include/vector_functions.h"
  "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/include/vector_functions.hpp"
  "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/include/vector_types.h"
+ "D:/GitHub/AFEM/AFEM/cuda/gpu_include/AFEM_Linear_routines.cuh"
  "D:/GitHub/AFEM/AFEM/cuda/gpu_include/AFEM_cuda.cuh"
  "D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu"
  "D:/GitHub/AFEM/AFEM/include/AFEM_geometry.hpp"
