@@ -113,7 +113,7 @@ class cuda_tools{
 	int M = 0, N = 0;// nz = 0, *I = NULL, *J = NULL;
 	float *val = NULL;
 	const float tol = 1e-8f;
-	const int max_iter =50;
+	const int max_iter =250;
 	float *x;
 	float *rhs;
 	float a, b, na, r0, r1;

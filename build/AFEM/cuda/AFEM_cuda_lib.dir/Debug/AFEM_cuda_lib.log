@@ -5,23 +5,15 @@ D:\GitHub\AFEM\AFEM\include\AFEM_geometry.hpp(115): warning : expression has no 
   
   
   
-D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(28): warning : variable "k1" was set but never used
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(67): warning : variable "a13" was declared but never referenced
   
   
   
-D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(28): warning : variable "k2" was set but never used
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(70): warning : variable "a23" was declared but never referenced
   
   
   
-D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(28): warning : variable "k3" was set but never used
-  
-  
-  
-D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(28): warning : variable "k4" was set but never used
-  
-  
-  
-D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(34): warning : variable "C" was set but never used
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(73): warning : variable "a33" was declared but never referenced
   
   
   
@@ -29,23 +21,15 @@ D:\GitHub\AFEM\AFEM\include\AFEM_geometry.hpp(115): warning : expression has no 
   
   
   
-D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(28): warning : variable "k1" was set but never used
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(67): warning : variable "a13" was declared but never referenced
   
   
   
-D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(28): warning : variable "k2" was set but never used
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(70): warning : variable "a23" was declared but never referenced
   
   
   
-D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(28): warning : variable "k3" was set but never used
-  
-  
-  
-D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(28): warning : variable "k4" was set but never used
-  
-  
-  
-D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(34): warning : variable "C" was set but never used
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(73): warning : variable "a33" was declared but never referenced
   
   
   
