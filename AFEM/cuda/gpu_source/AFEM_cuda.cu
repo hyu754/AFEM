@@ -225,7 +225,7 @@ __device__ void find_Jacobian_localK_localM(AFEM::element *in_element, AFEM::pos
 	float E = 25000.0;
 	float nu = 0.49;
 
-#if 0 // if standard non corotational
+#if 1 // if standard non corotational
 	//float a = fabsf(1.0);
 	in_element->local_K[0] = 0.166666666666667*E*J_bar11*J_bar11*det_J*(-nu + 1.0) / (-2 * nu*nu - nu + 1) + 0.166666666666667*E*J_bar21*J_bar21*det_J*(-2 * nu + 1.0) / (-2 * nu*nu - nu + 1) + 0.166666666666667*E*J_bar31*J_bar31*det_J*(-2 * nu + 1.0) / (-2 * nu*nu - nu + 1);
 	in_element->local_K[1] = 0.166666666666667*E*J_bar11*J_bar21*det_J*nu / (-2 * nu*nu - nu + 1) + 0.166666666666667*E*J_bar11*J_bar21*det_J*(-2 * nu + 1.0) / (-2 * nu*nu - nu + 1);
@@ -1106,7 +1106,7 @@ in_element->local_K[143] = R31*(R31*(0.166666666666667*E*J_star1*J_star1*det_J*(
 	//}
 	//return (x14*(y24*z34 - y34*z24) - y14*(x24*z34 - z24 * x34) + z14*(x24*y34 - y24*x34));
 	float b1 = 0.0;
-	float b2 = -9.81*rho;//-(9.81 *1000.0)*(det_J / 6) / 4.0;
+	float b2 = -129.81*rho;//-(9.81 *1000.0)*(det_J / 6) / 4.0;
 	float b3 = 0.0;
 //	b1  = b2;
 	//in_element->f_body[0] = b1;
@@ -1194,16 +1194,18 @@ __global__ void reset_K_GPU(float *K_d, float *M_d, int numNodes, int dim){
 	if (x < numNodes*dim*numNodes*dim){
 		K_d[x] = 0;
 		M_d[x] = 0;
+		
 	}
 }
 
 //reset f external vector
 //Resets the K matrix to zero
-__global__ void reset_f_GPU(float *f_d, int numNodes, int dim){
+__global__ void reset_f_GPU(float *f_d, float *RKx_d,int numNodes, int dim){
 	int x = threadIdx.x + blockIdx.x * blockDim.x;
 
 	if (x < numNodes*dim){
 		f_d[x] = 0;
+		RKx_d[x] = 0;
 		//M_d[x] = 0;
 	}
 }
@@ -1265,7 +1267,7 @@ __global__ void gpu_stationary_BC(float *K_d, float *f_d, AFEM::stationary *stat
 				K_d[IDX2C(stat_d[x].displacement_index[i], n, 3 * (numnodes))] = 0.0f;
 			}
 			K_d[IDX2C(stat_d[x].displacement_index[i], stat_d[x].displacement_index[i], 3 * (numnodes))] = 1.0f;
-		 f_d[stat_d[x].displacement_index[i]] = 0.0f;
+			f_d[stat_d[x].displacement_index[i]] = 0.0f;
 		}
 
 	}
@@ -1307,14 +1309,14 @@ __global__ void gpu_stationary_BC(float *K_d, float *f_d, AFEM::stationary *stat
 
 
 
-__global__ void gpu_make_f(float *f_d, int numnodes, AFEM::position_3D *pos_info, int dim, int first,float force_in){
+__global__ void gpu_make_f(float *f_d, int numnodes, AFEM::position_3D *pos_info, int dim, int first, float force_in){
 
 	int x = threadIdx.x + blockIdx.x * blockDim.x;
 	if (x < numnodes){
 		if (x == 174){
 			if (first == 1){
 				f_d[pos_info[x].displacement_index[0]] += 0.0; //x
-				f_d[pos_info[x].displacement_index[1]] =  -1; //y
+				f_d[pos_info[x].displacement_index[1]] = -1; //y
 				f_d[pos_info[x].displacement_index[2]] = 0.0;// -250.0; //z
 			}
 			else{
@@ -1326,6 +1328,7 @@ __global__ void gpu_make_f(float *f_d, int numnodes, AFEM::position_3D *pos_info
 	}
 }
 
+//Finds u(t), or x(t)-x(0)
 __global__ void find_dx(float *dx_in, AFEM::position_3D *initial_pos, AFEM::position_3D *new_pos, int numnodes){
 	int x = threadIdx.x + blockIdx.x *blockDim.x;
 
@@ -1341,6 +1344,18 @@ __global__ void find_dx(float *dx_in, AFEM::position_3D *initial_pos, AFEM::posi
 
 	}
 }
+
+//Sets AFEM::position_3D into a vector. Namely, AFEM::position_3D -> x(t), or, x(0)
+__global__ void afem_info_to_device(float *out_vec, AFEM::position_3D *afem_position, int numnodes){
+	int x = threadIdx.x + blockIdx.x*blockDim.x;
+	if (x < numnodes){
+		out_vec[afem_position[x].displacement_index[0]] = afem_position[x].x;
+		out_vec[afem_position[x].displacement_index[1]] = afem_position[x].y;
+		out_vec[afem_position[x].displacement_index[2]] = afem_position[x].z;
+
+	}
+}
+
 
 //find the vector value of dt*f_ext - dt*K*(u(t)-u(0))+dt*dt K*u_dot(t)
 //In the code I have set:
@@ -1369,7 +1384,7 @@ __global__ void find_A_b_dynamic(float *K_in, float *dx_in, float *u_dot, float 
 
 			//Origional
 			//LHS[IDX2C(i, x, 3 * (num_nodes))] = (1.0-dt*rm)*M_in[IDX2C(i, x, 3 * (num_nodes))] - (dt*rk+dt*dt)*K_in[IDX2C(i, x, 3 * (num_nodes))];
-			LHS[IDX2C(i, x, 3 * (num_nodes))] = (1.0 + 0.2 * dt)*M_in[IDX2C(i, x, 3 * (num_nodes))] + (dt*dt)*K_in[IDX2C(i, x, 3 * (num_nodes))];
+			LHS[IDX2C(i, x, 3 * (num_nodes))] = (1.0)*M_in[IDX2C(i, x, 3 * (num_nodes))] + (dt*dt)*K_in[IDX2C(i, x, 3 * (num_nodes))];
 			/*if (i == x){
 
 			}
@@ -1380,15 +1395,15 @@ __global__ void find_A_b_dynamic(float *K_in, float *dx_in, float *u_dot, float 
 		}
 		a = a*dt;
 		b = b*dt;
+		
 
-
-		RHS[x] = a -b + c;
+		RHS[x] = a -b +c;
 		//RHS[x] = f_ext[x];
 	}
 }
 
 
-//updates the u_dot vector, so u_dot(t+dt) = u_dot(t)+du
+//updates the u_dot vector, so u_dot(t+dt) = sln
 __global__ void update_u_dot_vector(float *u_dot_pre, float *u_dot_sln, int numNodes, int dim){
 	int x = threadIdx.x + blockIdx.x *blockDim.x;
 
@@ -1430,10 +1445,13 @@ void cuda_tools::allocate_copy_CUDA_geometry_data(AFEM::element *in_array_elem, 
 	cudaMalloc((void**)&position_array_d, sizeof(AFEM::position_3D)*num_nodes);// the position vector with indicy information
 	cudaMalloc((void**)&position_array_initial_d, sizeof(AFEM::position_3D)*num_nodes);//initial position vector with indice 
 	cudaMalloc((void**)&dx_d, sizeof(*dx_d)*num_nodes*dim); // vector for u(t)-u(0)
+	cudaMalloc((void**)&xCurrent_d, sizeof(*xCurrent_d) *dim*num_nodes); // The current position vector 
+	cudaMalloc((void**)&xInitial_d, sizeof(*xInitial_d) *dim*num_nodes);//The initial positiion x(0)
 	cudaMalloc((void**)&Kdx_d, sizeof(*Kdx_d)*num_nodes*dim); //result vector of Kdx_d
 	cudaMalloc((void**)&u_dot_d, sizeof(*u_dot_d)*num_nodes*dim); //velocity of the displacement field
 	cudaMalloc((void**)&RHS, sizeof(*RHS)*num_nodes*dim); // allocating the vector for the RHS
 	cudaMalloc((void**)&LHS, sizeof(*LHS)*num_nodes*dim*num_nodes*dim);
+	cudaMalloc((void**)&RKx_matrix_d, sizeof(*RKx_matrix_d)*num_nodes*dim);// The R*K matrix used in corotational linear FEM
 
 	//cuda copy of memory from host to device
 	cudaMemcpy(elem_array_d, in_array_elem, sizeof(AFEM::element) *num_elem, cudaMemcpyHostToDevice);
@@ -1445,13 +1463,20 @@ void cuda_tools::allocate_copy_CUDA_geometry_data(AFEM::element *in_array_elem, 
 	cudaMemset(K_d, 0.0, sizeof(*K_d)*dim*num_nodes*dim*num_nodes);
 	cudaMemset(M_d, 0.0, sizeof(*M_d)*dim*num_nodes*dim*num_nodes);
 	cudaMemset(LHS, 0.0, sizeof(*LHS)*dim*num_nodes*dim*num_nodes);
-
+	cudaMemset(RKx_matrix_d, 0.0, sizeof(*RKx_matrix_d) *dim*num_nodes);
+	
+	//Initialize the initial position x(0) to be 0
+	cudaMemset(xInitial_d, 0.0, sizeof(*xInitial_d));
+	
 
 	//initialize the force to be 0
 	cudaMemset(f_d, 0.0, sizeof(*f_d)*dim*num_nodes);
 
 	//initialize x(t)-x(0) to be 0
 	cudaMemset(dx_d, 0.0, sizeof(*dx_d)*dim*num_nodes);
+
+	//Initialize x(t) to be 0
+	cudaMemset(xCurrent_d, 0.0, sizeof(*xCurrent_d)*dim*num_nodes);
 
 	//initialize u_dot to be 0
 	cudaMemset(u_dot_d, 0.0, sizeof(*u_dot_d)*dim*num_nodes);
@@ -1493,7 +1518,7 @@ void cuda_tools::make_K(int num_elem, int num_nodes){
 
 	}
 	else {
-		gpu_make_K_corotational << <blocks, threads >> > (elem_array_d, position_array_d, position_array_initial_d, num_elem, num_nodes, K_d, M_d, f_d);
+		gpu_make_K_corotational << <blocks, threads >> > (elem_array_d, position_array_d, position_array_initial_d, num_elem, num_nodes, K_d, M_d, f_d,RKx_matrix_d);
 
 	}
 	
@@ -1590,7 +1615,8 @@ void cuda_tools::reset_K(int num_elem, int num_nodes){
 
 
 	reset_K_GPU << <blocks, threads >> >(K_d, M_d, num_nodes, 3);
-	reset_f_GPU << <blocks2, threads2 >> >(f_d, num_nodes, 3);
+	reset_f_GPU << <blocks2, threads2 >> >(f_d,RKx_matrix_d, num_nodes, 3);
+
 }
 
 
@@ -1624,7 +1650,7 @@ void cuda_tools::update_geometry(float *u_dot_sln){
 
 
 
-
+	//Becareful that the update is done by setting : u(t+dt) = inv(A)b, and not u(t+dt) = u(t)+inv(A)b
 	update_u_dot_vector << <blocks_nodes2, threads_nodes2 >> >(u_dot_d, u_dot_sln, Nnodes, 3);
 
 
@@ -1680,7 +1706,13 @@ void cuda_tools::dynamic(){
 		find_A_b_dynamic << <blocks_nodesdim, threads_nodesdim >> >(K_d, dx_d, u_dot_d, f_d, RHS, M_d, LHS, Nnodes, dt, 1.02, 0.002, 3);
 	}
 	else{
-		find_A_b_dynamic_corotational << <blocks_nodesdim, threads_nodesdim >> >(K_d, dx_d, u_dot_d, f_d, RHS, M_d, LHS, Nnodes, dt, 1.02, 0.002, 3);
+		//almlocate current position to xcurrent_d vector
+		afem_info_to_device << <blocks_nodes, threads_nodes >> > (xCurrent_d, position_array_d, Nnodes);
+
+		//allocate original position to xinitial_x vector
+		afem_info_to_device << <blocks_nodes, threads_nodes >> >(xInitial_d, position_array_initial_d, Nnodes);
+
+		find_A_b_dynamic_corotational << <blocks_nodesdim, threads_nodesdim >> >(K_d, dx_d, xInitial_d,xCurrent_d,u_dot_d, f_d, RHS, M_d, LHS, RKx_matrix_d, Nnodes, dt, 3);
 	}
 	
 

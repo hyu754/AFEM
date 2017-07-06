@@ -1,40 +1,24 @@
 ﻿  Building NVCC (Device) object AFEM/cuda/CMakeFiles/AFEM_cuda_lib.dir/gpu_source/Debug/AFEM_cuda_lib_generated_AFEM_corotational.cu.obj
   AFEM_corotational.cu
   
-D:\GitHub\AFEM\AFEM\include\AFEM_geometry.hpp(115): warning : expression has no effect
+D:\GitHub\AFEM\AFEM\include\AFEM_geometry.hpp(120): warning : expression has no effect
   
   
   
-D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(67): warning : variable "a13" was declared but never referenced
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(869): warning : variable "b1" was set but never used
   
   
   
-D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(70): warning : variable "a23" was declared but never referenced
+D:\GitHub\AFEM\AFEM\include\AFEM_geometry.hpp(120): warning : expression has no effect
   
   
   
-D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(73): warning : variable "a33" was declared but never referenced
-  
-  
-  
-D:\GitHub\AFEM\AFEM\include\AFEM_geometry.hpp(115): warning : expression has no effect
-  
-  
-  
-D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(67): warning : variable "a13" was declared but never referenced
-  
-  
-  
-D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(70): warning : variable "a23" was declared but never referenced
-  
-  
-  
-D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(73): warning : variable "a33" was declared but never referenced
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(869): warning : variable "b1" was set but never used
   
   
   
   AFEM_corotational.cu
   
-D:\GitHub\AFEM\AFEM\include\AFEM_geometry.hpp(115): warning C4551: function call missing argument list
+D:\GitHub\AFEM\AFEM\include\AFEM_geometry.hpp(120): warning C4551: function call missing argument list
   
   AFEM_cuda_lib.vcxproj -> D:\GitHub\AFEM\build\AFEM\cuda\Debug\AFEM_cuda_lib.lib

@@ -63,6 +63,11 @@ namespace AFEM{
 		//For used during simulation
 		float local_M[12 * 12];
 
+		//local R*Kx ; used for corotational formulation
+		float local_RKx[12];
+
+		
+
 		//For used for body forces
 		float f_body[12];
 		//Jacobian of the element

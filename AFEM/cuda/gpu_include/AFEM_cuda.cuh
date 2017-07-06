@@ -56,6 +56,12 @@ class cuda_tools{
 	//Device pointer for f vector
 	float *f_d;
 
+	//Device pointer for the current position of the verticies
+	float *xCurrent_d;
+	
+	//Device pointer for the original position of the verticies
+	float *xInitial_d;
+
 	//Device pointer for the difference in the nodal positions ie. (x(t)-x(0))
 	float *dx_d;
 
@@ -69,12 +75,15 @@ class cuda_tools{
 	//RHS and LHS pointers for cholesky solver
 	float *RHS, *LHS;
 
+	//Matrices used for corotational FEM, this is a device matrix
+	float *RKx_matrix_d;
+
 
 	//Boolean variable to set whether we are using corrotation or not
 	bool corotational_bool = false;
 
 	//dt for dynamic
-	float dt = 1.0/150.0;
+	float dt = 1.0/140.0;
 	//float dt = 1.0;
 	//cuda allocations
 	//----------------------------------------------------------------------------------
@@ -113,7 +122,7 @@ class cuda_tools{
 	int M = 0, N = 0;// nz = 0, *I = NULL, *J = NULL;
 	float *val = NULL;
 	const float tol = 1e-8f;
-	const int max_iter =250;
+	const int max_iter =1850;
 	float *x;
 	float *rhs;
 	float a, b, na, r0, r1;
