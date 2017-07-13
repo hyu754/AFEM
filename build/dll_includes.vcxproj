@@ -65,7 +65,7 @@
     </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
-      <AdditionalIncludeDirectories>D:\GitHub\AFEM\include;D:\GitHub\AFEM\AFEM\include;D:\GitHub\AFEM\AFEM\cuda\gpu_include;D:\GitHub\AFEM\Geometry;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\GitHub\AFEM\include;D:\GitHub\AFEM\AFEM\include;D:\GitHub\AFEM\AFEM\cuda\gpu_include;D:\GitHub\AFEM\Geometry;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;D:\GitHub\AFEM\include\Eigen;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -75,7 +75,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
-      <AdditionalIncludeDirectories>D:\GitHub\AFEM\include;D:\GitHub\AFEM\AFEM\include;D:\GitHub\AFEM\AFEM\cuda\gpu_include;D:\GitHub\AFEM\Geometry;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\GitHub\AFEM\include;D:\GitHub\AFEM\AFEM\include;D:\GitHub\AFEM\AFEM\cuda\gpu_include;D:\GitHub\AFEM\Geometry;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;D:\GitHub\AFEM\include\Eigen;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -85,7 +85,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
     <Midl>
-      <AdditionalIncludeDirectories>D:\GitHub\AFEM\include;D:\GitHub\AFEM\AFEM\include;D:\GitHub\AFEM\AFEM\cuda\gpu_include;D:\GitHub\AFEM\Geometry;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\GitHub\AFEM\include;D:\GitHub\AFEM\AFEM\include;D:\GitHub\AFEM\AFEM\cuda\gpu_include;D:\GitHub\AFEM\Geometry;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;D:\GitHub\AFEM\include\Eigen;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -95,7 +95,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
     <Midl>
-      <AdditionalIncludeDirectories>D:\GitHub\AFEM\include;D:\GitHub\AFEM\AFEM\include;D:\GitHub\AFEM\AFEM\cuda\gpu_include;D:\GitHub\AFEM\Geometry;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\GitHub\AFEM\include;D:\GitHub\AFEM\AFEM\include;D:\GitHub\AFEM\AFEM\cuda\gpu_include;D:\GitHub\AFEM\Geometry;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;D:\GitHub\AFEM\include\Eigen;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>

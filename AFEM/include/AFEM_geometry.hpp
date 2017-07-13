@@ -40,6 +40,7 @@
 namespace AFEM{
 	enum dimension{ TWO_DIMENSION, THREE_DIMENSION };
 	//Structures to store geometry information
+
 	struct position_2D{
 		double x, y;
 	};

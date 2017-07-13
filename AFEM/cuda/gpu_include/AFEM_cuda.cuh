@@ -83,7 +83,7 @@ class cuda_tools{
 	bool corotational_bool = false;
 
 	//dt for dynamic
-	float dt = 1.0/140.0;
+	float dt = 1.0/160.0;
 	//float dt = 1.0;
 	//cuda allocations
 	//----------------------------------------------------------------------------------
@@ -121,8 +121,8 @@ class cuda_tools{
 	//Variables to use
 	int M = 0, N = 0;// nz = 0, *I = NULL, *J = NULL;
 	float *val = NULL;
-	const float tol = 1e-8f;
-	const int max_iter =1850;
+	const float tol = 1e-5f;
+	const int max_iter =175;
 	float *x;
 	float *rhs;
 	float a, b, na, r0, r1;
@@ -187,9 +187,12 @@ public:
 	//Runs the cholesky solver.
 	void cholesky();
 
-	//conjugate gradient
+	//conjugate gradient CUDA
 	void cg();
 
+	//conjugate gradient cpu with Eigen
+	void cg_cpu();
+	
 	//conjugate gradient with precondition
 	void cg_precond();
 	//Dynamic

@@ -461,7 +461,7 @@ void cuda_tools::cg(void){
 		alpham1 = -1.0;
 		beta = 0.0;
 		r0 = 0.0;
-		cudaMemcpy(d_x, RHS, N*sizeof(float), cudaMemcpyHostToDevice);
+		cudaMemcpy(d_x, x, N*sizeof(float), cudaMemcpyHostToDevice);
 		cudaMemcpy(d_r, RHS, N*sizeof(float), cudaMemcpyDeviceToDevice);
 	
 		cusparseScsrmv(cusparseHandle, CUSPARSE_OPERATION_NON_TRANSPOSE, Ncols, Ncols, nnz, &alpha, descr, d_A, d_A_RowIndices, d_A_ColIndices, d_x, &beta, d_Ax);
@@ -494,13 +494,13 @@ void cuda_tools::cg(void){
 			
 			cublasStatus = cublasSaxpy(cublasHandle, N, &a, d_p, 1, d_x, 1);
 			//stationary_BC_f(d_x);
-		//	stationary_BC_f(d_Ax);
+		 //   stationary_BC_f(d_Ax);
 
-			/*stationary_BC_f(d_r);
-						*/
-						
-						//stationary_BC_f(d_Ax);
-						//stationary_BC_f(d_r);
+			///*stationary_BC_f(d_r);
+			//			*/
+			//			
+			/*			stationary_BC_f(d_Ax);
+						stationary_BC_f(d_r);*/
 			na = -a;
 			cublasStatus = cublasSaxpy(cublasHandle, N, &na, d_Ax, 1, d_r, 1);
 		

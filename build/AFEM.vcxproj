@@ -85,7 +85,7 @@
     </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>D:\GitHub\AFEM\include;D:\GitHub\AFEM\AFEM\include;D:\GitHub\AFEM\AFEM\cuda\gpu_include;D:\GitHub\AFEM\Geometry;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\GitHub\AFEM\include;D:\GitHub\AFEM\AFEM\include;D:\GitHub\AFEM\AFEM\cuda\gpu_include;D:\GitHub\AFEM\Geometry;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;D:\GitHub\AFEM\include\Eigen;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>Debug/</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <CompileAs>CompileAsCpp</CompileAs>
@@ -102,10 +102,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\GitHub\AFEM\include;D:\GitHub\AFEM\AFEM\include;D:\GitHub\AFEM\AFEM\cuda\gpu_include;D:\GitHub\AFEM\Geometry;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\GitHub\AFEM\include;D:\GitHub\AFEM\AFEM\include;D:\GitHub\AFEM\AFEM\cuda\gpu_include;D:\GitHub\AFEM\Geometry;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;D:\GitHub\AFEM\include\Eigen;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>D:\GitHub\AFEM\include;D:\GitHub\AFEM\AFEM\include;D:\GitHub\AFEM\AFEM\cuda\gpu_include;D:\GitHub\AFEM\Geometry;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\GitHub\AFEM\include;D:\GitHub\AFEM\AFEM\include;D:\GitHub\AFEM\AFEM\cuda\gpu_include;D:\GitHub\AFEM\Geometry;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;D:\GitHub\AFEM\include\Eigen;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -129,7 +129,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>D:\GitHub\AFEM\include;D:\GitHub\AFEM\AFEM\include;D:\GitHub\AFEM\AFEM\cuda\gpu_include;D:\GitHub\AFEM\Geometry;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\GitHub\AFEM\include;D:\GitHub\AFEM\AFEM\include;D:\GitHub\AFEM\AFEM\cuda\gpu_include;D:\GitHub\AFEM\Geometry;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;D:\GitHub\AFEM\include\Eigen;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>Release/</AssemblerListingLocation>
       <CompileAs>CompileAsCpp</CompileAs>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -145,10 +145,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\GitHub\AFEM\include;D:\GitHub\AFEM\AFEM\include;D:\GitHub\AFEM\AFEM\cuda\gpu_include;D:\GitHub\AFEM\Geometry;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\GitHub\AFEM\include;D:\GitHub\AFEM\AFEM\include;D:\GitHub\AFEM\AFEM\cuda\gpu_include;D:\GitHub\AFEM\Geometry;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;D:\GitHub\AFEM\include\Eigen;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>D:\GitHub\AFEM\include;D:\GitHub\AFEM\AFEM\include;D:\GitHub\AFEM\AFEM\cuda\gpu_include;D:\GitHub\AFEM\Geometry;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\GitHub\AFEM\include;D:\GitHub\AFEM\AFEM\include;D:\GitHub\AFEM\AFEM\cuda\gpu_include;D:\GitHub\AFEM\Geometry;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;D:\GitHub\AFEM\include\Eigen;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -172,7 +172,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>D:\GitHub\AFEM\include;D:\GitHub\AFEM\AFEM\include;D:\GitHub\AFEM\AFEM\cuda\gpu_include;D:\GitHub\AFEM\Geometry;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\GitHub\AFEM\include;D:\GitHub\AFEM\AFEM\include;D:\GitHub\AFEM\AFEM\cuda\gpu_include;D:\GitHub\AFEM\Geometry;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;D:\GitHub\AFEM\include\Eigen;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>MinSizeRel/</AssemblerListingLocation>
       <CompileAs>CompileAsCpp</CompileAs>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -188,10 +188,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"MinSizeRel\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\GitHub\AFEM\include;D:\GitHub\AFEM\AFEM\include;D:\GitHub\AFEM\AFEM\cuda\gpu_include;D:\GitHub\AFEM\Geometry;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\GitHub\AFEM\include;D:\GitHub\AFEM\AFEM\include;D:\GitHub\AFEM\AFEM\cuda\gpu_include;D:\GitHub\AFEM\Geometry;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;D:\GitHub\AFEM\include\Eigen;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>D:\GitHub\AFEM\include;D:\GitHub\AFEM\AFEM\include;D:\GitHub\AFEM\AFEM\cuda\gpu_include;D:\GitHub\AFEM\Geometry;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\GitHub\AFEM\include;D:\GitHub\AFEM\AFEM\include;D:\GitHub\AFEM\AFEM\cuda\gpu_include;D:\GitHub\AFEM\Geometry;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;D:\GitHub\AFEM\include\Eigen;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -215,7 +215,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>D:\GitHub\AFEM\include;D:\GitHub\AFEM\AFEM\include;D:\GitHub\AFEM\AFEM\cuda\gpu_include;D:\GitHub\AFEM\Geometry;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\GitHub\AFEM\include;D:\GitHub\AFEM\AFEM\include;D:\GitHub\AFEM\AFEM\cuda\gpu_include;D:\GitHub\AFEM\Geometry;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;D:\GitHub\AFEM\include\Eigen;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>RelWithDebInfo/</AssemblerListingLocation>
       <CompileAs>CompileAsCpp</CompileAs>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -231,10 +231,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\GitHub\AFEM\include;D:\GitHub\AFEM\AFEM\include;D:\GitHub\AFEM\AFEM\cuda\gpu_include;D:\GitHub\AFEM\Geometry;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\GitHub\AFEM\include;D:\GitHub\AFEM\AFEM\include;D:\GitHub\AFEM\AFEM\cuda\gpu_include;D:\GitHub\AFEM\Geometry;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;D:\GitHub\AFEM\include\Eigen;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>D:\GitHub\AFEM\include;D:\GitHub\AFEM\AFEM\include;D:\GitHub\AFEM\AFEM\cuda\gpu_include;D:\GitHub\AFEM\Geometry;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\GitHub\AFEM\include;D:\GitHub\AFEM\AFEM\include;D:\GitHub\AFEM\AFEM\cuda\gpu_include;D:\GitHub\AFEM\Geometry;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;D:\GitHub\AFEM\include\Eigen;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -313,6 +313,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="D:\GitHub\AFEM\AFEM\source\AFEM_cpu_solver.cpp"  />
     <ClCompile Include="D:\GitHub\AFEM\AFEM\source\AFEM_geometry.cpp"  />
     <ClCompile Include="D:\GitHub\AFEM\AFEM\source\AFEM_simulation.cpp"  />
     <ClCompile Include="D:\GitHub\AFEM\AFEM\source\AFEM_visualization.cpp"  />

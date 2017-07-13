@@ -77,7 +77,7 @@ set(CUDA_NVCC_FLAGS_RELEASE  ; )
 set(CUDA_NVCC_FLAGS_MINSIZEREL  ; )
 set(CUDA_NVCC_FLAGS_RELWITHDEBINFO  ; )
 set(nvcc_flags -m64) # list
-set(CUDA_NVCC_INCLUDE_DIRS "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/include;D:/GitHub/AFEM/include;D:/GitHub/AFEM/AFEM/include;D:/GitHub/AFEM/AFEM/cuda/gpu_include;D:/GitHub/AFEM/Geometry;C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/include") # list (needs to be in quotes to handle spaces properly).
+set(CUDA_NVCC_INCLUDE_DIRS "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/include;D:/GitHub/AFEM/include;D:/GitHub/AFEM/AFEM/include;D:/GitHub/AFEM/AFEM/cuda/gpu_include;D:/GitHub/AFEM/Geometry;C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/include;D:/GitHub/AFEM/include/Eigen") # list (needs to be in quotes to handle spaces properly).
 set(CUDA_NVCC_COMPILE_DEFINITIONS "") # list (needs to be in quotes to handle spaces properly).
 set(format_flag "-c") # string
 set(cuda_language_flag ) # list

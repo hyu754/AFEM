@@ -14,9 +14,14 @@ find_package(CUDA REQUIRED)
 include_directories(${CUDA_TOOLKIT_ROOT_DIR}/include/)
 link_directories(${CUDA_TOOLKIT_ROOT_DIR}/lib)
 #link_libraries(${CUDA_LIBRARIES})
-message("${CUDA_LIBRARIES}")
+
 #add_executable(OpenCloth "OpenCloth/OpenCloth_CoRotated_Linear_FEM/main.cpp")
 
+#include Eigen headers
+include_directories(${CMAKE_SOURCE_DIR}/include/Eigen/)
+
+
+#include AFEM source
 file(GLOB SOURCES AFEM/source/*.cpp )
 #list(APPEND CUDA_NVCC_FLAGS "-arch=sm_20;-std=c++11;-O2;-DVERBOSE")
 

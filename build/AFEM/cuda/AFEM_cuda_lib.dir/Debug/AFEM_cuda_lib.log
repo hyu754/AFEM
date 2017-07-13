@@ -1,24 +1,128 @@
 ﻿  Building NVCC (Device) object AFEM/cuda/CMakeFiles/AFEM_cuda_lib.dir/gpu_source/Debug/AFEM_cuda_lib_generated_AFEM_corotational.cu.obj
   AFEM_corotational.cu
   
-D:\GitHub\AFEM\AFEM\include\AFEM_geometry.hpp(120): warning : expression has no effect
+D:\GitHub\AFEM\AFEM\include\AFEM_geometry.hpp(121): warning : expression has no effect
   
   
   
-D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(869): warning : variable "b1" was set but never used
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(467): warning : invalid narrowing conversion from "double" to "float"
   
   
   
-D:\GitHub\AFEM\AFEM\include\AFEM_geometry.hpp(120): warning : expression has no effect
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(467): warning : invalid narrowing conversion from "double" to "float"
   
   
   
-D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(869): warning : variable "b1" was set but never used
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(467): warning : invalid narrowing conversion from "double" to "float"
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(468): warning : invalid narrowing conversion from "double" to "float"
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(468): warning : invalid narrowing conversion from "double" to "float"
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(468): warning : invalid narrowing conversion from "double" to "float"
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(469): warning : invalid narrowing conversion from "double" to "float"
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(469): warning : invalid narrowing conversion from "double" to "float"
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(469): warning : invalid narrowing conversion from "double" to "float"
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(470): warning : invalid narrowing conversion from "double" to "float"
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(470): warning : invalid narrowing conversion from "double" to "float"
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(470): warning : invalid narrowing conversion from "double" to "float"
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(377): warning : variable "testingvalue" was declared but never referenced
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(718): warning : variable "b1" was set but never used
+  
+  
+  
+D:\GitHub\AFEM\AFEM\include\AFEM_geometry.hpp(121): warning : expression has no effect
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(467): warning : invalid narrowing conversion from "double" to "float"
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(467): warning : invalid narrowing conversion from "double" to "float"
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(467): warning : invalid narrowing conversion from "double" to "float"
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(468): warning : invalid narrowing conversion from "double" to "float"
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(468): warning : invalid narrowing conversion from "double" to "float"
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(468): warning : invalid narrowing conversion from "double" to "float"
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(469): warning : invalid narrowing conversion from "double" to "float"
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(469): warning : invalid narrowing conversion from "double" to "float"
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(469): warning : invalid narrowing conversion from "double" to "float"
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(470): warning : invalid narrowing conversion from "double" to "float"
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(470): warning : invalid narrowing conversion from "double" to "float"
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(470): warning : invalid narrowing conversion from "double" to "float"
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(377): warning : variable "testingvalue" was declared but never referenced
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_corotational.cu(718): warning : variable "b1" was set but never used
   
   
   
   AFEM_corotational.cu
   
-D:\GitHub\AFEM\AFEM\include\AFEM_geometry.hpp(120): warning C4551: function call missing argument list
+D:\GitHub\AFEM\AFEM\include\AFEM_geometry.hpp(121): warning C4551: function call missing argument list
   
   AFEM_cuda_lib.vcxproj -> D:\GitHub\AFEM\build\AFEM\cuda\Debug\AFEM_cuda_lib.lib
