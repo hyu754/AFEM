@@ -83,7 +83,7 @@ class cuda_tools{
 	bool corotational_bool = false;
 
 	//dt for dynamic
-	float dt = 1.0/160.0;
+	float dt = 1.0/60.0;
 	//float dt = 1.0;
 	//cuda allocations
 	//----------------------------------------------------------------------------------
@@ -122,7 +122,7 @@ class cuda_tools{
 	int M = 0, N = 0;// nz = 0, *I = NULL, *J = NULL;
 	float *val = NULL;
 	const float tol = 1e-5f;
-	const int max_iter =175;
+	const int max_iter =50;
 	float *x;
 	float *rhs;
 	float a, b, na, r0, r1;

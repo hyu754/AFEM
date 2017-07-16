@@ -76,7 +76,7 @@ std::ofstream file_output("tumour_pos.txt");
 void AFEM::Simulation::run(){
 
 	//set corotational bool variable
-	cuda_tools_class.set_corotational_bool(true);
+	cuda_tools_class.set_corotational_bool(false);
 
 	double start = std::clock();
 	cuda_tools_class.make_K(element_vec.size(), pos_vec.size());
