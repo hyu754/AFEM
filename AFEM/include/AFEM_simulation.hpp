@@ -1,15 +1,20 @@
-#include "AFEM_geometry.hpp"
-#include "AFEM_cuda.cuh"
+
 #ifndef AFEM_SIMULATION_H
 #define AFEM_SIMULATION_H
-
+#include "AFEM_geometry.hpp"
+#include "AFEM_cuda.cuh"
 namespace AFEM{
 	class Simulation;
+	//solver types 
+	
+
 }
 
 class AFEM::Simulation
 {
 public:
+	
+	
 	Simulation(AFEM::Geometry geo_in);
 	~Simulation();
 	
@@ -34,11 +39,20 @@ public:
 	stationary *stationary_array;
 	//An array for the pos_vec
 	position_3D *pos_array;
+
+	
+	//sets the solver type
+	void set_solver_type(elastic_solver_type type_input){ solver_type = type_input; }
+
+	//return solver type
+	elastic_solver_type get_solver_type(){ return solver_type; }
 private:
 	cuda_tools cuda_tools_class;
 	AFEM::Geometry afem_geometry;
 
 
+	//Solver type, can be dynamic (with or without corotation), and energy minimisation
+	AFEM::elastic_solver_type solver_type;
 	
 
 	

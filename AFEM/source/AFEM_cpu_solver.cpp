@@ -49,7 +49,7 @@ void cuda_tools::cg_cpu(){
 	
 	cudaMemcpy(RHS, temp, sizeof(*RHS) * 3 * Nnodes, cudaMemcpyHostToDevice);
 
-	update_geometry(RHS);
+//	update_geometry(RHS);
 
 		
 	//std::cout << "#iterations:     " << cg.iterations() << std::endl;

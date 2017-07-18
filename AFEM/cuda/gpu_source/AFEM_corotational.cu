@@ -54,7 +54,7 @@ __device__ void find_rotation_corotational(float R[3][3], AFEM::element *in_elem
 	omega[1][2] = (-(p1.x - p4.x)*((q2.y - q4.y)*((p1.x - p4.x)*(-p3.y + p4.y) + (p1.y - p4.y)*(p3.x - p4.x)) + (q3.y - q4.y)*((p1.x - p4.x)*(p2.y - p4.y) - (p1.y - p4.y)*(p2.x - p4.x))) + (q1.y - q4.y)*((p2.x - p4.x)*((p1.x - p4.x)*(-p3.y + p4.y) + (p1.y - p4.y)*(p3.x - p4.x)) + (p3.x - p4.x)*((p1.x - p4.x)*(p2.y - p4.y) - (p1.y - p4.y)*(p2.x - p4.x)))) / (-(p1.x - p4.x)*(p3.z - p4.z)*((p1.x - p4.x)*(p2.y - p4.y) - (p1.y - p4.y)*(p2.x - p4.x)) + (p1.z - p4.z)*(p3.x - p4.x)*((p1.x - p4.x)*(p2.y - p4.y) - (p1.y - p4.y)*(p2.x - p4.x)) + ((p1.x - p4.x)*(p2.z - p4.z) - (p1.z - p4.z)*(p2.x - p4.x))*((p1.x - p4.x)*(p3.y - p4.y) - (p1.y - p4.y)*(p3.x - p4.x)));
 	omega[2][0] = (p1.y*p2.z*q3.z - p1.y*p2.z*q4.z - p1.y*p3.z*q2.z + p1.y*p3.z*q4.z + p1.y*p4.z*q2.z - p1.y*p4.z*q3.z - p1.z*p2.y*q3.z + p1.z*p2.y*q4.z + p1.z*p3.y*q2.z - p1.z*p3.y*q4.z - p1.z*p4.y*q2.z + p1.z*p4.y*q3.z + p2.y*p3.z*q1.z - p2.y*p3.z*q4.z - p2.y*p4.z*q1.z + p2.y*p4.z*q3.z - p2.z*p3.y*q1.z + p2.z*p3.y*q4.z + p2.z*p4.y*q1.z - p2.z*p4.y*q3.z + p3.y*p4.z*q1.z - p3.y*p4.z*q2.z - p3.z*p4.y*q1.z + p3.z*p4.y*q2.z) / (p1.x*p2.y*p3.z - p1.x*p2.y*p4.z - p1.x*p2.z*p3.y + p1.x*p2.z*p4.y + p1.x*p3.y*p4.z - p1.x*p3.z*p4.y - p1.y*p2.x*p3.z + p1.y*p2.x*p4.z + p1.y*p2.z*p3.x - p1.y*p2.z*p4.x - p1.y*p3.x*p4.z + p1.y*p3.z*p4.x + p1.z*p2.x*p3.y - p1.z*p2.x*p4.y - p1.z*p2.y*p3.x + p1.z*p2.y*p4.x + p1.z*p3.x*p4.y - p1.z*p3.y*p4.x - p2.x*p3.y*p4.z + p2.x*p3.z*p4.y + p2.y*p3.x*p4.z - p2.y*p3.z*p4.x - p2.z*p3.x*p4.y + p2.z*p3.y*p4.x);
 	omega[2][1] = (-p1.x*p2.z*q3.z + p1.x*p2.z*q4.z + p1.x*p3.z*q2.z - p1.x*p3.z*q4.z - p1.x*p4.z*q2.z + p1.x*p4.z*q3.z + p1.z*p2.x*q3.z - p1.z*p2.x*q4.z - p1.z*p3.x*q2.z + p1.z*p3.x*q4.z + p1.z*p4.x*q2.z - p1.z*p4.x*q3.z - p2.x*p3.z*q1.z + p2.x*p3.z*q4.z + p2.x*p4.z*q1.z - p2.x*p4.z*q3.z + p2.z*p3.x*q1.z - p2.z*p3.x*q4.z - p2.z*p4.x*q1.z + p2.z*p4.x*q3.z - p3.x*p4.z*q1.z + p3.x*p4.z*q2.z + p3.z*p4.x*q1.z - p3.z*p4.x*q2.z) / (p1.x*p2.y*p3.z - p1.x*p2.y*p4.z - p1.x*p2.z*p3.y + p1.x*p2.z*p4.y + p1.x*p3.y*p4.z - p1.x*p3.z*p4.y - p1.y*p2.x*p3.z + p1.y*p2.x*p4.z + p1.y*p2.z*p3.x - p1.y*p2.z*p4.x - p1.y*p3.x*p4.z + p1.y*p3.z*p4.x + p1.z*p2.x*p3.y - p1.z*p2.x*p4.y - p1.z*p2.y*p3.x + p1.z*p2.y*p4.x + p1.z*p3.x*p4.y - p1.z*p3.y*p4.x - p2.x*p3.y*p4.z + p2.x*p3.z*p4.y + p2.y*p3.x*p4.z - p2.y*p3.z*p4.x - p2.z*p3.x*p4.y + p2.z*p3.y*p4.x);
-	omega[2][2] = (-(p1.x - p4.x)*((q2.z - q4.z)*((p1.x - p4.x)*(-p3.y + p4.y) + (p1.y - p4.y)*(p3.x - p4.x)) + (q3.z - q4.z)*((p1.x - p4.x)*(p2.y - p4.y) - (p1.y - p4.y)*(p2.x - p4.x))) + (q1.z - q4.z)*((p2.x - p4.x)*((p1.x - p4.x)*(-p3.y + p4.y) + (p1.y - p4.y)*(p3.x - p4.x)) + (p3.x - p4.x)*((p1.x - p4.x)*(p2.y - p4.y) - (p1.y - p4.y)*(p2.x - p4.x)))) / (-(p1.x - p4.x)*(p3.z - p4.z)*((p1.x - p4.x)*(p2.y - p4.y) - (p1.y - p4.y)*(p2.x - p4.x)) + (p1.z - p4.z)*(p3.x - p4.x)*((p1.x - p4.x)*(p2.y - p4.y) - (p1.y - p4.y)*(p2.x - p4.x)) + ((p1.x - p4.x)*(p2.z - p4.z) - (p1.z - p4.z)*(p2.x - p4.x))*((p1.x - p4.x)*(p3.y - p4.y) - (p1.y - p4.y)*(p3.x - p4.x))); 
+	omega[2][2] = (-(p1.x - p4.x)*((q2.z - q4.z)*((p1.x - p4.x)*(-p3.y + p4.y) + (p1.y - p4.y)*(p3.x - p4.x)) + (q3.z - q4.z)*((p1.x - p4.x)*(p2.y - p4.y) - (p1.y - p4.y)*(p2.x - p4.x))) + (q1.z - q4.z)*((p2.x - p4.x)*((p1.x - p4.x)*(-p3.y + p4.y) + (p1.y - p4.y)*(p3.x - p4.x)) + (p3.x - p4.x)*((p1.x - p4.x)*(p2.y - p4.y) - (p1.y - p4.y)*(p2.x - p4.x)))) / (-(p1.x - p4.x)*(p3.z - p4.z)*((p1.x - p4.x)*(p2.y - p4.y) - (p1.y - p4.y)*(p2.x - p4.x)) + (p1.z - p4.z)*(p3.x - p4.x)*((p1.x - p4.x)*(p2.y - p4.y) - (p1.y - p4.y)*(p2.x - p4.x)) + ((p1.x - p4.x)*(p2.z - p4.z) - (p1.z - p4.z)*(p2.x - p4.x))*((p1.x - p4.x)*(p3.y - p4.y) - (p1.y - p4.y)*(p3.x - p4.x)));
 	//perform gram schmit
 
 	glm::vec3 a0(omega[0][0], omega[1][0], omega[2][0]);
@@ -73,7 +73,7 @@ __device__ void find_rotation_corotational(float R[3][3], AFEM::element *in_elem
 	r2 = r2 / glm::length(r2);
 	r2 = glm::cross(r0, r1);
 	//printf("%f %f %f \n ", r1.x, r1.y, r1.z);
-	
+
 	//assign above to R
 	//col0
 	R[0][0] = r0[0];
@@ -104,10 +104,10 @@ __device__ void find_rotation_corotational(float R[3][3], AFEM::element *in_elem
 	//R[2][0] = r2[0];
 	//R[2][1] = r2[1];
 	//R[2][2] = r2[2];
-	
 
 
-	
+
+
 
 
 }
@@ -768,112 +768,3 @@ __global__ void find_A_b_dynamic_corotational(float *K_in, float *dx_in, float *
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#if 0
-
-__global__ void vecAdd(double *a, double *b, double *c, int n)
-{
-	// Get our global thread ID
-	int id = blockIdx.x*blockDim.x + threadIdx.x;
-
-	// Make sure we do not go out of bounds
-	if (id < n)
-		c[id] = a[id] + b[id];
-}
-
-void hello(){
-	// Size of vectors
-	int n = 100000;
-
-	// Host input vectors
-	double *h_a;
-	double *h_b;
-	//Host output vector
-	double *h_c;
-
-	// Device input vectors
-	double *d_a;
-	double *d_b;
-	//Device output vector
-	double *d_c;
-
-	// Size, in bytes, of each vector
-	size_t bytes = n*sizeof(double);
-
-	// Allocate memory for each vector on host
-	h_a = (double*)malloc(bytes);
-	h_b = (double*)malloc(bytes);
-	h_c = (double*)malloc(bytes);
-
-	// Allocate memory for each vector on GPU
-	cudaMalloc(&d_a, bytes);
-	cudaMalloc(&d_b, bytes);
-	cudaMalloc(&d_c, bytes);
-
-	int i;
-	// Initialize vectors on host
-	for (i = 0; i < n; i++) {
-		h_a[i] = sin(i)*sin(i);
-		h_b[i] = cos(i)*cos(i);
-	}
-
-	// Copy host vectors to device
-	cudaMemcpy(d_a, h_a, bytes, cudaMemcpyHostToDevice);
-	cudaMemcpy(d_b, h_b, bytes, cudaMemcpyHostToDevice);
-
-	int blockSize, gridSize;
-
-	// Number of threads in each thread block
-	blockSize = 1024;
-
-	// Number of thread blocks in grid
-	gridSize = (int)ceil((float)n / blockSize);
-
-	// Execute the kernel
-	vecAdd << <gridSize, blockSize >> >(d_a, d_b, d_c, n);
-
-	// Copy array back to host
-	cudaMemcpy(h_c, d_c, bytes, cudaMemcpyDeviceToHost);
-
-	// Sum up vector c and print result divided by n, this should equal 1 within error
-	double sum = 0;
-	for (i = 0; i < n; i++)
-		sum += h_c[i];
-	printf("final result: %f\n", sum / n);
-
-	// Release device memory
-	cudaFree(d_a);
-	cudaFree(d_b);
-	cudaFree(d_c);
-
-	// Release host memory
-	free(h_a);
-	free(h_b);
-	free(h_c);
-
-}
-
-//__global__ void make_K_cuda3d(double *E_vector, int *nodesInElem_device, double *x_vector, double *y_vector, double *z_vector, int *displaceInElem_device, float *d_A_dense, int *numnodes);//3D
-//__global__ void make_K_cuda2d(double *K, int *nodesInElem, double *x_vector, double *y_vector, int *displaceInElem_device, float *d_A_dense, int numnodes, double thickness,double young_E,double nu,double alpha,double beta1,double beta2, double rho, double dt,double c_xi,int numE);//2D
-//__global__ void make_global_K(void); 
-
-
-
-
-
-
-#endif // 0

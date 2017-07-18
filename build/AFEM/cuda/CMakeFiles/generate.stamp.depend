@@ -4,11 +4,14 @@ D:/GitHub/AFEM/build/AFEM/cuda/CMakeFiles/AFEM_cuda_lib.dir/gpu_source/AFEM_cuda
 D:/Program Files/CMake/share/cmake-3.7/Modules/FindCUDA/run_nvcc.cmake
 D:/GitHub/AFEM/build/AFEM/cuda/CMakeFiles/AFEM_cuda_lib.dir/gpu_source/AFEM_cuda_lib_generated_AFEM_corotational.cu.obj.depend
 D:/Program Files/CMake/share/cmake-3.7/Modules/FindCUDA/run_nvcc.cmake
+D:/GitHub/AFEM/build/AFEM/cuda/CMakeFiles/AFEM_cuda_lib.dir/gpu_source/AFEM_cuda_lib_generated_AFEM_corotational_energy_minimisation.cu.obj.depend
+D:/Program Files/CMake/share/cmake-3.7/Modules/FindCUDA/run_nvcc.cmake
 D:/GitHub/AFEM/build/AFEM/cuda/CMakeFiles/AFEM_cuda_lib.dir/gpu_source/AFEM_cuda_lib_generated_AFEM_cuda.cu.obj.depend
 D:/Program Files/CMake/share/cmake-3.7/Modules/FindCUDA/run_nvcc.cmake
 D:/GitHub/AFEM/build/AFEM/cuda/CMakeFiles/AFEM_cuda_lib.dir/gpu_source/AFEM_cuda_lib_generated_Utilities.cu.obj.depend
 D:/Program Files/CMake/share/cmake-3.7/Modules/FindCUDA/run_nvcc.cmake
 D:/GitHub/AFEM/build/AFEM/cuda/CMakeFiles/AFEM_cuda_lib.dir/gpu_source/AFEM_cuda_lib_generated_AFEM_QR_solver.cu.obj.cmake.pre-gen
 D:/GitHub/AFEM/build/AFEM/cuda/CMakeFiles/AFEM_cuda_lib.dir/gpu_source/AFEM_cuda_lib_generated_AFEM_corotational.cu.obj.cmake.pre-gen
+D:/GitHub/AFEM/build/AFEM/cuda/CMakeFiles/AFEM_cuda_lib.dir/gpu_source/AFEM_cuda_lib_generated_AFEM_corotational_energy_minimisation.cu.obj.cmake.pre-gen
 D:/GitHub/AFEM/build/AFEM/cuda/CMakeFiles/AFEM_cuda_lib.dir/gpu_source/AFEM_cuda_lib_generated_AFEM_cuda.cu.obj.cmake.pre-gen
 D:/GitHub/AFEM/build/AFEM/cuda/CMakeFiles/AFEM_cuda_lib.dir/gpu_source/AFEM_cuda_lib_generated_Utilities.cu.obj.cmake.pre-gen

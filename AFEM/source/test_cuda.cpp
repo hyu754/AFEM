@@ -15,7 +15,7 @@ int main(void){
 
 	AFEM::Simulation sim(geo);
 	sim.element_std_to_array();
-
+	sim.set_solver_type(AFEM::elastic_solver_type::ENERGY_MINISATION_COROTATION);
 	AFEM::Visualization viz(&sim);
 
 	viz.run_visualization();

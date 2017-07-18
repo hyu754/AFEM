@@ -38,6 +38,8 @@
 
 
 namespace AFEM{
+	//Solver type
+	enum elastic_solver_type{ DYNAMIC_NON_COROTATION, DYNAMIC_COROTATION, ENERGY_MINISATION_COROTATION };
 	enum dimension{ TWO_DIMENSION, THREE_DIMENSION };
 	//Structures to store geometry information
 
@@ -49,6 +51,15 @@ namespace AFEM{
 		double x, y, z;
 		int displacement_index[3];
 	};
+
+
+	//structure for sudo forces
+	struct sudo_force_struct
+	{
+		float fx, fy, fz;
+	};
+
+
 	struct element{
 		int nodes_in_elem[4]; // The node numbers that is in the geometry (currently supports only tetra elemnts)
 		//Make change so that we do not use t

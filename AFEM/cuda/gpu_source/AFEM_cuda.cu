@@ -2042,6 +2042,21 @@ __global__ void update_position_vector(AFEM::position_3D *pos_in, float *u_dot_i
 
 	}
 }
+
+__global__ void update_position_vector_energy_minisation(AFEM::position_3D *pos_in, float *u_dot_in, float dt, int numNodes, int dim){
+	int x = threadIdx.x + blockIdx.x *blockDim.x;
+
+	if (x < numNodes){
+		pos_in[x].x = dt*u_dot_in[pos_in[x].displacement_index[0]];
+		pos_in[x].y = dt*u_dot_in[pos_in[x].displacement_index[1]];
+		pos_in[x].z = dt*u_dot_in[pos_in[x].displacement_index[2]];
+		/*if (x == 100){
+		pos_in[x].x += 0.01;
+
+		}*/
+
+	}
+}
 __global__ void update_Geo_CUDA(AFEM::element *in_vec, AFEM::position_3D *pos_in, float *x_solution, int numElem){
 
 	int x = threadIdx.x + blockIdx.x * blockDim.x;
@@ -2268,6 +2283,8 @@ void cuda_tools::allocate_copy_CUDA_geometry_data(AFEM::element *in_array_elem, 
 	cudaMalloc((void**)&RHS, sizeof(*RHS)*num_nodes*dim); // allocating the vector for the RHS
 	cudaMalloc((void**)&LHS, sizeof(*LHS)*num_nodes*dim*num_nodes*dim);
 	cudaMalloc((void**)&RKx_matrix_d, sizeof(*RKx_matrix_d)*num_nodes*dim);// The R*K matrix used in corotational linear FEM
+	cudaMalloc((void**)&solution_vector_d, sizeof(*solution_vector_d)*num_nodes*dim);//Solution vector to Ax = b
+
 
 	//cuda copy of memory from host to device
 	cudaMemcpy(elem_array_d, in_array_elem, sizeof(AFEM::element) *num_elem, cudaMemcpyHostToDevice);
@@ -2319,7 +2336,7 @@ void cuda_tools::copy_data_from_cuda(AFEM::element *elem_array_ptr, AFEM::positi
 }
 
 //Host wrapper to call gpu_make_K
-void cuda_tools::make_K(int num_elem, int num_nodes){
+void cuda_tools::make_K(AFEM::elastic_solver_type solver_in, int num_elem, int num_nodes){
 	int blocks, threads;
 	if (num_elem <= 256){
 		blocks = 1;
@@ -2329,14 +2346,15 @@ void cuda_tools::make_K(int num_elem, int num_nodes){
 		blocks = (num_elem + 256) / 256;
 		threads = 256;
 	}
-	if (corotational_bool == false){ //
+	if (solver_in == AFEM::elastic_solver_type::DYNAMIC_NON_COROTATION)
 		gpu_make_K << <blocks, threads >> > (elem_array_d, position_array_d, num_elem, num_nodes, K_d, M_d, f_d);
 
-	}
-	else {
+	if (solver_in == AFEM::elastic_solver_type::DYNAMIC_COROTATION)
 		gpu_make_K_corotational << <blocks, threads >> > (elem_array_d, position_array_d, position_array_initial_d, num_elem, num_nodes, K_d, M_d, f_d,RKx_matrix_d);
 
-	}
+	if (solver_in == AFEM::elastic_solver_type::ENERGY_MINISATION_COROTATION)
+		gpu_make_K << <blocks, threads >> > (elem_array_d, position_array_initial_d, num_elem, num_nodes, K_d, M_d, f_d);
+		//gpu_make_K_energy_corotational << <blocks, threads >> > (elem_array_d, position_array_d, position_array_initial_d, num_elem, num_nodes, K_d, M_d, f_d, RKx_matrix_d);
 	
 #ifdef TESTING
 	/*
@@ -2498,7 +2516,7 @@ void cuda_tools::reset_K(int num_elem, int num_nodes){
 }
 
 
-void cuda_tools::update_geometry(float *u_dot_sln){
+void cuda_tools::update_geometry(AFEM::elastic_solver_type type_in){
 	int blocks_nodes2, threads_nodes2;
 	int nnodesdim = Nnodes * 3;
 	if (nnodesdim <= 256){
@@ -2587,12 +2605,18 @@ void cuda_tools::update_geometry(float *u_dot_sln){
 	//std::cout << "estimated error: " << cg.error() << std::endl;
 	//// update b, and solve again
 	//x = cg.solve(b);
-	update_position_vector << <blocks_nodes, threads_nodes >> >(position_array_d, u_dot_sln, dt, Nnodes, 3);
+	if ((type_in == AFEM::elastic_solver_type::DYNAMIC_COROTATION) || (type_in == AFEM::elastic_solver_type::DYNAMIC_NON_COROTATION)){
+		update_position_vector << <blocks_nodes, threads_nodes >> >(position_array_d, solution_vector_d, dt, Nnodes, 3);
+
+		//Becareful that the update is done by setting : u(t+dt) = inv(A)b, and not u(t+dt) = u(t)+inv(A)b
+		update_u_dot_vector << <blocks_nodes2, threads_nodes2 >> >(u_dot_d, solution_vector_d, Nnodes, 3);
+	}
+	else if (type_in == AFEM::elastic_solver_type::ENERGY_MINISATION_COROTATION){
+		update_position_vector_energy_minisation << <blocks_nodes, threads_nodes >> >(position_array_d, solution_vector_d, 1.0f, Nnodes, 3);
+	}
+	
 
 
-
-	//Becareful that the update is done by setting : u(t+dt) = inv(A)b, and not u(t+dt) = u(t)+inv(A)b
-	update_u_dot_vector << <blocks_nodes2, threads_nodes2 >> >(u_dot_d, u_dot_sln, Nnodes, 3);
 
 
 
@@ -2620,34 +2644,15 @@ void cuda_tools::dynamic(){
 	}
 
 
-	//float *K_in, float *dx_in, float *u_dot, float *f_ext, float *RHS
+	//finds dx, or, x(t) - x(0)
 	find_dx << <blocks_nodes, threads_nodes >> >(dx_d, position_array_initial_d, position_array_d, Nnodes);
 
-	/*float *sln_ptr = (float *)malloc(Ncols*sizeof(float));
-	cudaMemcpy(sln_ptr, f_d, Ncols*sizeof(float), cudaMemcpyDeviceToHost);
 
-
-	std::ofstream output;
-	output.open("SLN.txt");
-
-	for (int i = 0; i < Ncols; i++){
-
-	output << sln_ptr[i];
-
-	std::cout << std::endl;
-	output << std::endl;
-	}
-
-	output.close();
-	free(sln_ptr);*/
-
-	//stationary_BC_f(Nelems, Nnodes, Nstationary, 3);
-	//stationary_BC_f(f_d);
 	if (corotational_bool == false){
 		find_A_b_dynamic << <blocks_nodesdim, threads_nodesdim >> >(K_d, dx_d, u_dot_d, f_d, RHS, M_d, LHS, Nnodes, dt, 1.02, 0.002, 3);
 	}
 	else{
-		//almlocate current position to xcurrent_d vector
+		//allocate current position to xcurrent_d vector
 		afem_info_to_device << <blocks_nodes, threads_nodes >> > (xCurrent_d, position_array_d, Nnodes);
 
 		//allocate original position to xinitial_x vector
@@ -2658,33 +2663,7 @@ void cuda_tools::dynamic(){
 	
 
 
-	//float *rhs_output = (float *)malloc(Ncols* Ncols*sizeof(float));
-	
-	//cudaMemcpy(rhs_output, LHS, Ncols* Ncols*sizeof(float), cudaMemcpyDeviceToHost);
-
-	//std::ofstream output_RHS;
-	//output_RHS.open("LHS.txt");
-
-	//for (int i = 0; i < Ncols; i++){
-
-	//	//std::cout << h_y[IDX2C(j, i, Ncols)] << " ";
-	//	for (int j = 0; j < Ncols; j++){
-	//		output_RHS << rhs_output[IDX2C(j, i, Ncols)] << " ";
-	//	}
-	//	output_RHS << std::endl;
-
-
-	//	//output_RHS << rhs_output[i] << std::endl;
-
-	//	//std::cout << std::endl;
-	//	//output << std::endl;
-	//}
-
-	//output_RHS.close();
-
-
-	//update_geometry(d_y);
-
+	//allocate boundary condition
 	stationary_BC(Nelems, Nnodes, Nstationary, 3);
 
 
@@ -2693,14 +2672,81 @@ void cuda_tools::dynamic(){
 
 }
 
+void cuda_tools::energy_minisation(){
+	int blocks_nodesdim, threads_nodesdim;
+	if (Nnodes * 3 <= 256){
+		blocks_nodesdim = 1;
+		threads_nodesdim = Nnodes * 3;
+	}
+	else {
+		blocks_nodesdim = (Nnodes * 3 + 256) / 256;
+		threads_nodesdim = 256;
+	}
 
 
-void cuda_tools::set_RHS_LHS(){
+	int blocks_nodes, threads_nodes;
+	if (Nnodes <= 256){
+		blocks_nodes = 1;
+		threads_nodes = Nnodes;
+	}
+	else {
+		blocks_nodes = (Nnodes + 256) / 256;
+		threads_nodes = 256;
+	}
+	//Find initial position
+	afem_info_to_device << <blocks_nodes, threads_nodes >> > (xInitial_d, position_array_initial_d, Nnodes);
 
 
-	/*LHS = M_d;
-	RHS = Kdx_d;*/
+	//Dynamic allocating CPU arrays
+	AFEM::sudo_force_struct *sudo_force_array;
+	int *sudo_force_indicies;
+	sudo_force_array = new AFEM::sudo_force_struct[number_sudo_forces];
+	sudo_force_indicies = new int[number_sudo_forces];
+
+	//Allocating GPU arrays
+	AFEM::sudo_force_struct *sudo_force_array_d;
+	int *sudo_force_indicies_d;
+	cudaMalloc((void**)&sudo_force_array_d, sizeof(*sudo_force_array_d) *number_sudo_forces); //element array
+	cudaMalloc((void**)&sudo_force_indicies_d, sizeof(*sudo_force_indicies_d)*number_sudo_forces);
+	
+	//Populate the stretch energy vector
+	//apply a non zero force if the sudo force vector size is greater than 0
+	if (sudo_force_vector.size() > 0){
+		int _c = 0;
+		for (auto auto_ptr = sudo_force_vector.begin(); auto_ptr != sudo_force_vector.end(); ++auto_ptr){
+
+			sudo_force_array[_c].fx = auto_ptr->at(0);
+			sudo_force_array[_c].fy = auto_ptr->at(1);
+			sudo_force_array[_c].fz = auto_ptr->at(2);
+			_c++;
+		}
+
+		_c = 0;
+		for (auto auto_ptr = sudo_force_indicies_vector.begin(); auto_ptr != sudo_force_indicies_vector.end(); ++auto_ptr){
+
+			sudo_force_indicies[_c] = *auto_ptr;
+			_c++;
+		}
+
+
+		cudaMemcpy(sudo_force_array_d, sudo_force_array, sizeof(*sudo_force_array)*number_sudo_forces, cudaMemcpyHostToDevice);
+		cudaMemcpy(sudo_force_indicies_d, sudo_force_indicies, sizeof(*sudo_force_indicies)*number_sudo_forces, cudaMemcpyHostToDevice);
+
+
+	}
+
+
+	//Find A and b to solve.
+	float alpha = 100000000000.0f;
+	find_A_b_energy_minimisation_corotational << <blocks_nodesdim, threads_nodesdim >> >(K_d, xInitial_d, u_dot_d, f_d, RHS, M_d, LHS, Nnodes, dt, alpha, 0.002, 3, stationary_array_d, Nstationary, sudo_force_array_d, sudo_force_indicies_d, sudo_force_vector.size());
+	//Free memory
+	delete sudo_force_array;
+	cudaFree(sudo_force_array);
+	cudaFree(sudo_force_indicies_d);
+
 }
+
+
 cuda_tools::cuda_tools(){
 	std::cout << "CUDA solver initialized " << std::endl;
 }

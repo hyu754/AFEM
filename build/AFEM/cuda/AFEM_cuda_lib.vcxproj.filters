@@ -3,6 +3,7 @@
   <ItemGroup>
     <CustomBuild Include="D:\GitHub\AFEM\AFEM\cuda\gpu_source\AFEM_QR_solver.cu" />
     <CustomBuild Include="D:\GitHub\AFEM\AFEM\cuda\gpu_source\AFEM_corotational.cu" />
+    <CustomBuild Include="D:\GitHub\AFEM\AFEM\cuda\gpu_source\AFEM_corotational_energy_minimisation.cu" />
     <CustomBuild Include="D:\GitHub\AFEM\AFEM\cuda\gpu_source\AFEM_cuda.cu" />
     <CustomBuild Include="D:\GitHub\AFEM\AFEM\cuda\gpu_source\Utilities.cu" />
     <CustomBuild Include="D:\GitHub\AFEM\AFEM\cuda\CMakeLists.txt" />
@@ -26,6 +27,9 @@
       <Filter>Object Files</Filter>
     </Object>
     <Object Include="D:\GitHub\AFEM\build\AFEM\cuda\CMakeFiles\AFEM_cuda_lib.dir\gpu_source\$(Configuration)\AFEM_cuda_lib_generated_AFEM_corotational.cu.obj">
+      <Filter>Object Files</Filter>
+    </Object>
+    <Object Include="D:\GitHub\AFEM\build\AFEM\cuda\CMakeFiles\AFEM_cuda_lib.dir\gpu_source\$(Configuration)\AFEM_cuda_lib_generated_AFEM_corotational_energy_minimisation.cu.obj">
       <Filter>Object Files</Filter>
     </Object>
     <Object Include="D:\GitHub\AFEM\build\AFEM\cuda\CMakeFiles\AFEM_cuda_lib.dir\gpu_source\$(Configuration)\AFEM_cuda_lib_generated_AFEM_cuda.cu.obj">

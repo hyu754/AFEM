@@ -74,68 +74,58 @@ double orig_x, orig_y, orig_z;
 std::ofstream file_output("tumour_pos.txt");
 
 void AFEM::Simulation::run(){
-
 	//set corotational bool variable
-	cuda_tools_class.set_corotational_bool(true);
+	if ((solver_type == AFEM::elastic_solver_type::DYNAMIC_COROTATION) || (solver_type == AFEM::elastic_solver_type::ENERGY_MINISATION_COROTATION)){
+		cuda_tools_class.set_corotational_bool(true);
+	}
+	else if (solver_type == AFEM::DYNAMIC_NON_COROTATION){
+		cuda_tools_class.set_corotational_bool(false);
+	}
 
-	double start = std::clock();
-	cuda_tools_class.make_K(element_vec.size(), pos_vec.size());
-	
+
+
+
+	cuda_tools_class.make_K(solver_type, element_vec.size(), pos_vec.size());
+
 	std::vector<int> force_vector_indicies;
 	int dummy_array[5] = { 121, 116, 111, 106, 101 };
-		force_vector_indicies.assign(dummy_array, dummy_array + 5);
+	force_vector_indicies.assign(dummy_array, dummy_array + 5);
 	std::vector<float> zero_force;
 	zero_force.push_back(0.0f); // x
-	zero_force.push_back(0.0f); //y
-	zero_force.push_back(-2.0f);
+	zero_force.push_back(-0.03f); //y
+	zero_force.push_back(0.0f);
 	std::vector<std::vector<float>> force_vector;
 	for (int i = 0; i < 5; i++)
 		force_vector.push_back(zero_force);
 	//force_vector_indicies.push_back(10);
-	cuda_tools_class.make_f(force_vector_indicies, force_vector, pos_vec.size(), 3);
-	//int node_force = 174;
-	//if (origional_position_set == false){
-	//	
-	//	
-	//	orig_x = pos_array[node_force].x;
-	//	orig_y = pos_array[node_force].y;
-	//	orig_z = pos_array[node_force].z;
-	//	origional_position_set = true;
-	//}
-	//else {
-	//	std::cout << "Position considered : " << pos_array[node_force].x-orig_x << " " << pos_array[node_force].y-orig_y << " " << pos_array[node_force].z -orig_z<< std::endl;
-	//}
+	if ((solver_type == AFEM::elastic_solver_type::DYNAMIC_COROTATION) || (solver_type == AFEM::elastic_solver_type::DYNAMIC_NON_COROTATION)){
+		cuda_tools_class.make_f(force_vector_indicies, force_vector, pos_vec.size(), 3);
+	}
+	else if (solver_type == AFEM::elastic_solver_type::ENERGY_MINISATION_COROTATION){
+
+		cuda_tools_class.get_number_sudo_forces(force_vector.size());
+		cuda_tools_class.get_sudo_force_information(force_vector, force_vector_indicies);
+	}
+
+	if ((solver_type == AFEM::DYNAMIC_COROTATION) || (solver_type == AFEM::DYNAMIC_NON_COROTATION)){
+		cuda_tools_class.dynamic();
+	}
+	else if (solver_type == AFEM::ENERGY_MINISATION_COROTATION){
+		cuda_tools_class.energy_minisation();
+	}
 
 
-//#ifdef WRITE_TO_FILE
-//	int node_of_interest = 767;
-//	file_output<< pos_array[node_of_interest].x << " " <<pos_array[node_of_interest].y << " " << pos_array[node_of_interest].z <<std::endl;
-//#endif
-	
-	cuda_tools_class.dynamic();
-	std::cout << "TIME Make FEM matricies : " << ((std::clock() - start) / CLOCKS_PER_SEC) << std::endl;
-	//cuda_tools_class.set_RHS_LHS();
-	
-	start = std::clock();
+
 #ifdef CPU_CG_SOLVER
 	cuda_tools_class.cg_cpu();
 #else //else we use CUDA CG
 	cuda_tools_class.cg();
 #endif
+	cuda_tools_class.update_geometry(solver_type);
+	cuda_tools_class.copy_data_from_cuda(element_array, pos_array);
 
-
-	if (afem_geometry.get_dim() == AFEM::dimension::THREE_DIMENSION){
-		cuda_tools_class.copy_data_from_cuda(element_array, pos_array);
-
-	}
-	else{
-		cuda_tools_class.copy_data_from_cuda(element_array, pos_array);
-
-	}
-	//cuda_tools_class.copy_data_from_cuda();
-	
 	cuda_tools_class.reset_K(element_vec.size(), pos_vec.size());
-	std::cout << "FPS dynamic + solver: " << 1.0 / ((std::clock() - start) / CLOCKS_PER_SEC) << std::endl;
+
 
 
 }
@@ -151,6 +141,26 @@ void AFEM::Simulation::run(){
 
 
 
+/*
 
+//int node_force = 174;
+//if (origional_position_set == false){
+//
+//
+//	orig_x = pos_array[node_force].x;
+//	orig_y = pos_array[node_force].y;
+//	orig_z = pos_array[node_force].z;
+//	origional_position_set = true;
+//}
+//else {
+//	std::cout << "Position considered : " << pos_array[node_force].x-orig_x << " " << pos_array[node_force].y-orig_y << " " << pos_array[node_force].z -orig_z<< std::endl;
+//}
+
+
+//#ifdef WRITE_TO_FILE
+//	int node_of_interest = 767;
+//	file_output<< pos_array[node_of_interest].x << " " <<pos_array[node_of_interest].y << " " << pos_array[node_of_interest].z <<std::endl;
+//#endif
+*/
 
 

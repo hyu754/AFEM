@@ -1,4 +1,7 @@
+#ifndef AFEM_CUDA_H
+#define AFEM_CUDA_H
 #include "AFEM_geometry.hpp"
+
 #include "cuda.h"
 
 
@@ -15,8 +18,7 @@
 #include <cusparse_v2.h>
 
 
-#ifndef AFEM_CUDA_H
-#define AFEM_CUDA_H
+
 
 
 
@@ -51,7 +53,8 @@ class cuda_tools{
 	//Device and host memory pointer for global M matrix
 	float *M_d, *M_h;
 
-	
+	//Device solution vector to Ax = b
+	float *solution_vector_d;
 
 	//Device pointer for f vector
 	float *f_d;
@@ -122,7 +125,7 @@ class cuda_tools{
 	int M = 0, N = 0;// nz = 0, *I = NULL, *J = NULL;
 	float *val = NULL;
 	const float tol = 1e-5f;
-	const int max_iter =450;
+	const int max_iter =10000;
 	float *x;
 	float *rhs;
 	float a, b, na, r0, r1;
@@ -134,6 +137,13 @@ class cuda_tools{
 
 	cudaDeviceProp deviceProp;
 	
+	//Variables related to energy minisation
+	//Sudo force related variables
+	//number of sudo forces
+	int number_sudo_forces;
+	std::vector<std::vector<float>> sudo_force_vector;
+	std::vector<int> sudo_force_indicies_vector;
+
 public:
 	cuda_tools();
 	~cuda_tools();
@@ -151,7 +161,7 @@ public:
 
 	
 	//A wrapper function that makes the K matrix on the GPU
-	void make_K(int num_elem,int num_nodes);
+	void make_K(AFEM::elastic_solver_type solver_in, int num_elem, int num_nodes);
 
 	//set corotational bool
 	void set_corotational_bool(bool bool_in){corotational_bool = bool_in;}
@@ -180,10 +190,6 @@ public:
 	//before calling cholesky we need to initialize the gpu variables, only once needed.
 	void initialize_cholesky_variables(int numnodes,int numelem,int dim);
 
-	//Sets RHS and LHS memory pointers for cholesky solver
-	void set_RHS_LHS();
-
-
 	//Runs the cholesky solver.
 	void cholesky();
 
@@ -194,12 +200,24 @@ public:
 	void cg_cpu();
 	
 	//conjugate gradient with precondition
-	void cg_precond();
-	//Dynamic
+	void cg_precond(); //NOTUSED
+
+	//Dynamic routines, finds the matrix A an vector b: Ax=b
 	void dynamic();
 
+	//Energy minisation routine
+	void energy_minisation();
+
+	//Getting information about energy minisation parameters
+	void get_number_sudo_forces(int _in){ number_sudo_forces = _in; }
+	void get_sudo_force_information(std::vector<std::vector<float>> force_vec, std::vector<int> indicies){
+		sudo_force_vector = force_vec;
+		sudo_force_indicies_vector = indicies;
+	}
+
+
 	//after solving for cholesky, this function will update the geometry
-	void update_geometry( float *u_sln);
+	void update_geometry( AFEM::elastic_solver_type type);
 };
 
 

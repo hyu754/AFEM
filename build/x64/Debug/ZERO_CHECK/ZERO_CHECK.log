@@ -1,9 +1,3 @@
 ﻿  Checking Build System
   CMake does not need to re-run because D:/GitHub/AFEM/build/CMakeFiles/generate.stamp is up-to-date.
-  CMake is re-running because D:/GitHub/AFEM/build/AFEM/cuda/CMakeFiles/generate.stamp is out-of-date.
-    the file 'D:/GitHub/AFEM/build/AFEM/cuda/CMakeFiles/AFEM_cuda_lib.dir/gpu_source/AFEM_cuda_lib_generated_AFEM_corotational.cu.obj.depend'
-    is newer than 'D:/GitHub/AFEM/build/AFEM/cuda/CMakeFiles/generate.stamp.depend'
-    result='-1'
-  -- Configuring done
-  -- Generating done
-  -- Build files have been written to: D:/GitHub/AFEM/build
+  CMake does not need to re-run because D:/GitHub/AFEM/build/AFEM/cuda/CMakeFiles/generate.stamp is up-to-date.

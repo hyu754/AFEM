@@ -287,7 +287,7 @@ void cuda_tools::cholesky()
 	//outputSLN.close();
 
 
-	update_geometry(d_y);
+	//update_geometry(d_y);
 
 
 
@@ -533,7 +533,8 @@ void cuda_tools::cg(void){
 				err = diff;
 			}
 		}*/
-		update_geometry(d_x);
+		solution_vector_d = d_x;
+		
 		cusparseDestroy(cusparseHandle);
 		cublasDestroy(cublasHandle);
 		
@@ -774,7 +775,7 @@ void cuda_tools::cg(void){
 		err = diff;
 		}
 		}*/
-		update_geometry(d_x);
+//		update_geometry(d_x);
 		//cusparseDestroy(cusparseHandle);
 		//cublasDestroy(cublasHandle);
 		///* Destroy parameters */
