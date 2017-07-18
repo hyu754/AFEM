@@ -122,7 +122,7 @@ class cuda_tools{
 	int M = 0, N = 0;// nz = 0, *I = NULL, *J = NULL;
 	float *val = NULL;
 	const float tol = 1e-5f;
-	const int max_iter =50;
+	const int max_iter =450;
 	float *x;
 	float *rhs;
 	float a, b, na, r0, r1;
@@ -167,7 +167,7 @@ public:
 	void stationary_BC_f(float *zero_u);
 
 	//Make f vector
-	void make_f(int num_nodes, int dim);
+	void make_f(std::vector<int> indicies, std::vector<std::vector<float>> force,int num_nodes, int dim);
 
 
 	//place holder for host -> device

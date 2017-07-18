@@ -76,13 +76,23 @@ std::ofstream file_output("tumour_pos.txt");
 void AFEM::Simulation::run(){
 
 	//set corotational bool variable
-	cuda_tools_class.set_corotational_bool(false);
+	cuda_tools_class.set_corotational_bool(true);
 
 	double start = std::clock();
 	cuda_tools_class.make_K(element_vec.size(), pos_vec.size());
 	
-
-	//cuda_tools_class.make_f(pos_vec.size(), 3);
+	std::vector<int> force_vector_indicies;
+	int dummy_array[5] = { 121, 116, 111, 106, 101 };
+		force_vector_indicies.assign(dummy_array, dummy_array + 5);
+	std::vector<float> zero_force;
+	zero_force.push_back(0.0f); // x
+	zero_force.push_back(0.0f); //y
+	zero_force.push_back(-2.0f);
+	std::vector<std::vector<float>> force_vector;
+	for (int i = 0; i < 5; i++)
+		force_vector.push_back(zero_force);
+	//force_vector_indicies.push_back(10);
+	cuda_tools_class.make_f(force_vector_indicies, force_vector, pos_vec.size(), 3);
 	//int node_force = 174;
 	//if (origional_position_set == false){
 	//	

@@ -627,7 +627,7 @@ __device__ void find_Jacobian_localK_localM_corotational(AFEM::element *in_eleme
 
 
 	float b1 = 0.0;
-	float b2 = (-9.81 *rho);// *(det_J / 6) / 4.0;
+	float b2 = (-0 *rho);// *(det_J / 6) / 4.0;
 	float b3 = 0.0;
 
 	in_element->f_body[0] = b1*volume / 12.0;

@@ -1688,7 +1688,7 @@ in_element->local_M[143] = volume*6.0*rho / 24.0;
 	//}
 	//return (x14*(y24*z34 - y34*z24) - y14*(x24*z34 - z24 * x34) + z14*(x24*y34 - y24*x34));
 	float b1 = 0.0;
-	float b2 =  -9.81*rho;//-(9.81 *1000.0)*(det_J / 6) / 4.0;
+	float b2 =  -0*rho;//-(9.81 *1000.0)*(det_J / 6) / 4.0;
 	float b3 = 0.0;
 //	b1  = b2;
 	//in_element->f_body[0] = b1;
@@ -2129,22 +2129,17 @@ __global__ void gpu_stationary_BC(float *K_d, float *f_d, AFEM::stationary *stat
 
 
 
-__global__ void gpu_make_f(float *f_d, int numnodes, AFEM::position_3D *pos_info, int dim, int first, float force_in){
+__global__ void gpu_make_f(float *f_d, int numnodes, AFEM::position_3D *pos_info, int dim, int node_apply, float force_x, float force_y, float force_z){
 
 	int x = threadIdx.x + blockIdx.x * blockDim.x;
 	if (x < numnodes){
-		//if (x == 187){
-			if (first == 1){
-				f_d[pos_info[x].displacement_index[0]] += 0.0; //x
-				f_d[pos_info[x].displacement_index[1]] += -50.0*0.00025; //y
-				f_d[pos_info[x].displacement_index[2]] = 0.0;// -250.0; //z
-			}
-			else{
-				f_d[pos_info[x].displacement_index[0]] += 0.0; //x
-				f_d[pos_info[x].displacement_index[1]] += -50.0 *0.00025; //y
-				f_d[pos_info[x].displacement_index[2]] =0.0;// -250.0; //z
-			}
-		//}
+
+		if (x == node_apply){
+			f_d[pos_info[x].displacement_index[0]] += force_x; 
+			f_d[pos_info[x].displacement_index[1]] += force_y;
+			f_d[pos_info[x].displacement_index[2]] += force_z;
+
+		}
 	}
 }
 
@@ -2389,7 +2384,7 @@ void cuda_tools::make_K(int num_elem, int num_nodes){
 }
 int first = 1;
 float force_change = -2;
-void cuda_tools::make_f(int num_nodes, int dim){
+void cuda_tools::make_f(std::vector<int> indicies, std::vector<std::vector<float>> force,int num_nodes, int dim){
 	int blocks, threads;
 	if (num_nodes <= 256){
 		blocks = 1;
@@ -2399,22 +2394,31 @@ void cuda_tools::make_f(int num_nodes, int dim){
 		blocks = (num_nodes + 256) / 256;
 		threads = 256;
 	}
-	if (first){
+	//if (first){
 
-		gpu_make_f << <blocks, threads >> >(f_d, num_nodes, position_array_d, dim, first,0.0);
-		first = 0;
-	}
-	else {
-		gpu_make_f << <blocks, threads >> >(f_d, num_nodes, position_array_d, dim, 0, 0.0);
-		/*if (force_change > -68.5){
-			gpu_make_f << <blocks, threads >> >(f_d, num_nodes, position_array_d, dim, 0, force_change);
-			force_change -= 0.51;
-		}
-		else{
-			force_change = -68.5;
-			gpu_make_f << <blocks, threads >> >(f_d, num_nodes, position_array_d, dim, 0, force_change);
-		}
-		*/
+	//	gpu_make_f << <blocks, threads >> >(f_d, num_nodes, position_array_d, dim, first,0.0);
+	//	first = 0;
+	//}
+	//else {
+	//	gpu_make_f << <blocks, threads >> >(f_d, num_nodes, position_array_d, dim, 0, 0.0);
+	//	/*if (force_change > -68.5){
+	//		gpu_make_f << <blocks, threads >> >(f_d, num_nodes, position_array_d, dim, 0, force_change);
+	//		force_change -= 0.51;
+	//	}
+	//	else{
+	//		force_change = -68.5;
+	//		gpu_make_f << <blocks, threads >> >(f_d, num_nodes, position_array_d, dim, 0, force_change);
+	//	}
+	//	*/
+	//}
+	//_ASSERT(indicies.size() == force.size());
+	int _counter_ = 0;
+	for(auto indicies_ptr = indicies.begin(); indicies_ptr != indicies.end(); ++indicies_ptr){
+		//indicies_ptr - indicies_ptr[0];
+		gpu_make_f << <blocks, threads >> >(f_d, num_nodes, position_array_d, dim, *indicies_ptr, force[_counter_].at(0), force[_counter_].at(1), force[_counter_].at(2));
+
+
+		_counter_++;
 	}
 #ifdef TESTING
 	float *f_host;
