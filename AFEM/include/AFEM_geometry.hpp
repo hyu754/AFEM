@@ -40,6 +40,7 @@
 namespace AFEM{
 	enum dimension{ TWO_DIMENSION, THREE_DIMENSION };
 	//Structures to store geometry information
+
 	struct position_2D{
 		double x, y;
 	};
@@ -62,6 +63,11 @@ namespace AFEM{
 
 		//For used during simulation
 		float local_M[12 * 12];
+
+		//local R*Kx ; used for corotational formulation
+		float local_RKx[12];
+
+		
 
 		//For used for body forces
 		float f_body[12];

@@ -1,50 +1,313 @@
-﻿  Building NVCC (Device) object AFEM/cuda/CMakeFiles/AFEM_cuda_lib.dir/gpu_source/Debug/AFEM_cuda_lib_generated_AFEM_cuda.cu.obj
+﻿  Building NVCC (Device) object AFEM/cuda/CMakeFiles/AFEM_cuda_lib.dir/gpu_source/Debug/AFEM_cuda_lib_generated_AFEM_QR_solver.cu.obj
+  AFEM_QR_solver.cu
+  
+D:\GitHub\AFEM\AFEM\include\AFEM_geometry.hpp(121): warning : expression has no effect
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_QR_solver.cu(375): warning : variable "cublasStatus" was set but never used
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_QR_solver.cu(382): warning : variable "cusparseStatus" was set but never used
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_QR_solver.cu(595): warning : variable "cublasStatus" was set but never used
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_QR_solver.cu(601): warning : variable "cusparseStatus" was set but never used
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_QR_solver.cu(714): warning : variable "dot" was declared but never referenced
+  
+  
+  
+D:\GitHub\AFEM\AFEM\include\AFEM_geometry.hpp(121): warning : expression has no effect
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_QR_solver.cu(375): warning : variable "cublasStatus" was set but never used
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_QR_solver.cu(382): warning : variable "cusparseStatus" was set but never used
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_QR_solver.cu(595): warning : variable "cublasStatus" was set but never used
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_QR_solver.cu(601): warning : variable "cusparseStatus" was set but never used
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_QR_solver.cu(714): warning : variable "dot" was declared but never referenced
+  
+  
+  
+  AFEM_QR_solver.cu
+  
+D:\GitHub\AFEM\AFEM\include\AFEM_geometry.hpp(121): warning C4551: function call missing argument list
+  
+D:\GitHub\AFEM\AFEM\cuda\gpu_include\AFEM_cuda.cuh(86): warning C4305: 'initializing' : truncation from 'double' to 'float'
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_QR_solver.cu(714): warning C4101: 'dot' : unreferenced local variable
+  
+  Building NVCC (Device) object AFEM/cuda/CMakeFiles/AFEM_cuda_lib.dir/gpu_source/Debug/AFEM_cuda_lib_generated_AFEM_cuda.cu.obj
   AFEM_cuda.cu
   
-C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\AFEM\include\AFEM_geometry.hpp(115): warning : expression has no effect
+D:\GitHub\AFEM\AFEM\include\AFEM_geometry.hpp(121): warning : expression has no effect
   
   
   
-C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/AFEM/cuda/gpu_source/AFEM_cuda.cu(1335): warning : parameter "elem_array_ptr" was set but never used
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(224): warning : invalid narrowing conversion from "double" to "float"
   
   
   
-C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/AFEM/cuda/gpu_source/AFEM_cuda.cu(1335): warning : parameter "pos_array_ptr" was set but never used
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(224): warning : invalid narrowing conversion from "double" to "float"
   
   
   
-C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\AFEM\include\AFEM_geometry.hpp(115): warning : expression has no effect
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(224): warning : invalid narrowing conversion from "double" to "float"
   
   
   
-C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/AFEM/cuda/gpu_source/AFEM_cuda.cu(1335): warning : parameter "elem_array_ptr" was set but never used
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(224): warning : invalid narrowing conversion from "double" to "float"
   
   
   
-C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/AFEM/cuda/gpu_source/AFEM_cuda.cu(1335): warning : parameter "pos_array_ptr" was set but never used
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(224): warning : invalid narrowing conversion from "double" to "float"
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(224): warning : invalid narrowing conversion from "double" to "float"
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(224): warning : invalid narrowing conversion from "double" to "float"
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(224): warning : invalid narrowing conversion from "double" to "float"
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(224): warning : invalid narrowing conversion from "double" to "float"
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(249): warning : invalid narrowing conversion from "double" to "float"
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(256): warning : invalid narrowing conversion from "double" to "float"
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(263): warning : invalid narrowing conversion from "double" to "float"
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(224): warning : variable "E" was declared but never referenced
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(395): warning : variable "testingvalue" was declared but never referenced
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(499): warning : variable "R11" was declared but never referenced
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(499): warning : variable "R12" was declared but never referenced
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(499): warning : variable "R13" was declared but never referenced
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(499): warning : variable "R21" was declared but never referenced
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(499): warning : variable "R22" was declared but never referenced
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(499): warning : variable "R23" was declared but never referenced
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(499): warning : variable "R31" was declared but never referenced
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(499): warning : variable "R32" was declared but never referenced
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(499): warning : variable "R33" was declared but never referenced
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(1903): warning : variable "testingvalue" was declared but never referenced
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(2191): warning : variable "d" was set but never used
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(2315): warning : parameter "elem_array_ptr" was set but never used
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(2315): warning : parameter "pos_array_ptr" was set but never used
+  
+  
+  
+D:\GitHub\AFEM\AFEM\include\AFEM_geometry.hpp(121): warning : expression has no effect
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(224): warning : invalid narrowing conversion from "double" to "float"
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(224): warning : invalid narrowing conversion from "double" to "float"
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(224): warning : invalid narrowing conversion from "double" to "float"
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(224): warning : invalid narrowing conversion from "double" to "float"
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(224): warning : invalid narrowing conversion from "double" to "float"
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(224): warning : invalid narrowing conversion from "double" to "float"
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(224): warning : invalid narrowing conversion from "double" to "float"
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(224): warning : invalid narrowing conversion from "double" to "float"
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(224): warning : invalid narrowing conversion from "double" to "float"
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(249): warning : invalid narrowing conversion from "double" to "float"
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(256): warning : invalid narrowing conversion from "double" to "float"
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(263): warning : invalid narrowing conversion from "double" to "float"
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(224): warning : variable "E" was declared but never referenced
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(395): warning : variable "testingvalue" was declared but never referenced
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(499): warning : variable "R11" was declared but never referenced
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(499): warning : variable "R12" was declared but never referenced
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(499): warning : variable "R13" was declared but never referenced
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(499): warning : variable "R21" was declared but never referenced
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(499): warning : variable "R22" was declared but never referenced
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(499): warning : variable "R23" was declared but never referenced
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(499): warning : variable "R31" was declared but never referenced
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(499): warning : variable "R32" was declared but never referenced
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(499): warning : variable "R33" was declared but never referenced
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(1903): warning : variable "testingvalue" was declared but never referenced
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(2191): warning : variable "d" was set but never used
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(2315): warning : parameter "elem_array_ptr" was set but never used
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(2315): warning : parameter "pos_array_ptr" was set but never used
   
   
   
   AFEM_cuda.cu
   
-C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\AFEM\include\AFEM_geometry.hpp(115): warning C4551: function call missing argument list
+D:\GitHub\AFEM\AFEM\include\AFEM_geometry.hpp(121): warning C4551: function call missing argument list
   
-C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\AFEM\cuda\gpu_include\AFEM_cuda.cuh(74): warning C4305: 'initializing' : truncation from 'double' to 'float'
+D:\GitHub\AFEM\AFEM\cuda\gpu_include\AFEM_cuda.cuh(86): warning C4305: 'initializing' : truncation from 'double' to 'float'
   
-C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/AFEM/cuda/gpu_source/AFEM_cuda.cu(1311): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(2284): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
   
-C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/AFEM/cuda/gpu_source/AFEM_cuda.cu(1312): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(2285): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
   
-C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/AFEM/cuda/gpu_source/AFEM_cuda.cu(1313): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(2286): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
   
-C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/AFEM/cuda/gpu_source/AFEM_cuda.cu(1317): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(2287): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
   
-C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/AFEM/cuda/gpu_source/AFEM_cuda.cu(1320): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(2290): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
   
-C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/AFEM/cuda/gpu_source/AFEM_cuda.cu(1323): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(2294): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
   
-C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/AFEM/cuda/gpu_source/AFEM_cuda.cu(1385): warning C4305: '-=' : truncation from 'double' to 'float'
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(2297): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
   
-C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/AFEM/cuda/gpu_source/AFEM_cuda.cu(1566): warning C4305: 'argument' : truncation from 'double' to 'float'
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(2300): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
   
-  AFEM_cuda_lib.vcxproj -> C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\build\AFEM\cuda\Debug\AFEM_cuda_lib.lib
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(2303): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(2643): warning C4305: 'argument' : truncation from 'double' to 'float'
+  
+  AFEM_cuda_lib.vcxproj -> D:\GitHub\AFEM\build\AFEM\cuda\Debug\AFEM_cuda_lib.lib

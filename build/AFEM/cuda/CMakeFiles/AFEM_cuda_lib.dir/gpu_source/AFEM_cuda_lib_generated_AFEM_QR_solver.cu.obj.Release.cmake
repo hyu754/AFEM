@@ -56,18 +56,18 @@ endif()
 
 # Set these up as variables to make reading the generated file easier
 set(CMAKE_COMMAND "D:/Program Files/CMake/bin/cmake.exe") # path
-set(source_file "C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/AFEM/cuda/gpu_source/AFEM_QR_solver.cu") # path
-set(NVCC_generated_dependency_file "C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/build/AFEM/cuda/CMakeFiles/AFEM_cuda_lib.dir/gpu_source/AFEM_cuda_lib_generated_AFEM_QR_solver.cu.obj.NVCC-depend") # path
-set(cmake_dependency_file "C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/build/AFEM/cuda/CMakeFiles/AFEM_cuda_lib.dir/gpu_source/AFEM_cuda_lib_generated_AFEM_QR_solver.cu.obj.depend") # path
+set(source_file "D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_QR_solver.cu") # path
+set(NVCC_generated_dependency_file "D:/GitHub/AFEM/build/AFEM/cuda/CMakeFiles/AFEM_cuda_lib.dir/gpu_source/AFEM_cuda_lib_generated_AFEM_QR_solver.cu.obj.NVCC-depend") # path
+set(cmake_dependency_file "D:/GitHub/AFEM/build/AFEM/cuda/CMakeFiles/AFEM_cuda_lib.dir/gpu_source/AFEM_cuda_lib_generated_AFEM_QR_solver.cu.obj.depend") # path
 set(CUDA_make2cmake "D:/Program Files/CMake/share/cmake-3.7/Modules/FindCUDA/make2cmake.cmake") # path
 set(CUDA_parse_cubin "D:/Program Files/CMake/share/cmake-3.7/Modules/FindCUDA/parse_cubin.cmake") # path
 set(build_cubin OFF) # bool
 set(CUDA_HOST_COMPILER "$(VCInstallDir)bin") # path
 # We won't actually use these variables for now, but we need to set this, in
 # order to force this file to be run again if it changes.
-set(generated_file_path "C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/build/AFEM/cuda/CMakeFiles/AFEM_cuda_lib.dir/gpu_source/$(Configuration)") # path
-set(generated_file_internal "C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/build/AFEM/cuda/CMakeFiles/AFEM_cuda_lib.dir/gpu_source/$(Configuration)/AFEM_cuda_lib_generated_AFEM_QR_solver.cu.obj") # path
-set(generated_cubin_file_internal "C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/build/AFEM/cuda/CMakeFiles/AFEM_cuda_lib.dir/gpu_source/$(Configuration)/AFEM_cuda_lib_generated_AFEM_QR_solver.cu.obj.cubin.txt") # path
+set(generated_file_path "D:/GitHub/AFEM/build/AFEM/cuda/CMakeFiles/AFEM_cuda_lib.dir/gpu_source/$(Configuration)") # path
+set(generated_file_internal "D:/GitHub/AFEM/build/AFEM/cuda/CMakeFiles/AFEM_cuda_lib.dir/gpu_source/$(Configuration)/AFEM_cuda_lib_generated_AFEM_QR_solver.cu.obj") # path
+set(generated_cubin_file_internal "D:/GitHub/AFEM/build/AFEM/cuda/CMakeFiles/AFEM_cuda_lib.dir/gpu_source/$(Configuration)/AFEM_cuda_lib_generated_AFEM_QR_solver.cu.obj.cubin.txt") # path
 
 set(CUDA_NVCC_EXECUTABLE "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/bin/nvcc.exe") # path
 set(CUDA_NVCC_FLAGS --gpu-architecture;sm_20 ;; ) # list
@@ -77,7 +77,7 @@ set(CUDA_NVCC_FLAGS_RELEASE  ; )
 set(CUDA_NVCC_FLAGS_MINSIZEREL  ; )
 set(CUDA_NVCC_FLAGS_RELWITHDEBINFO  ; )
 set(nvcc_flags -m64) # list
-set(CUDA_NVCC_INCLUDE_DIRS "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/include;C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/include;C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/AFEM/include;C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/AFEM/cuda/gpu_include;C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/Geometry;C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/include") # list (needs to be in quotes to handle spaces properly).
+set(CUDA_NVCC_INCLUDE_DIRS "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/include;D:/GitHub/AFEM/include;D:/GitHub/AFEM/AFEM/include;D:/GitHub/AFEM/AFEM/cuda/gpu_include;D:/GitHub/AFEM/Geometry;C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/include;D:/GitHub/AFEM/include/Eigen") # list (needs to be in quotes to handle spaces properly).
 set(CUDA_NVCC_COMPILE_DEFINITIONS "") # list (needs to be in quotes to handle spaces properly).
 set(format_flag "-c") # string
 set(cuda_language_flag ) # list

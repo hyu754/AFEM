@@ -51,7 +51,7 @@ glm::vec3 gravity=glm::vec3(0.0f,-9.81f,0.0f);
 GLint viewport[4];
 GLdouble MV[16];
 GLdouble P[16];
-double zoom = 40;
+double zoom = 60;
 glm::vec3 Up=glm::vec3(0,1,0), Right, viewDir;
 
 LARGE_INTEGER frequency;        // ticks per second
@@ -241,7 +241,7 @@ void OnReshape(int nw, int nh) {
 	glViewport(0, 0, nw, nh);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(zoom, (GLfloat)nw / (GLfloat)nh, 0.1f, 100.0f);
+	gluPerspective(60, (GLfloat)nw / (GLfloat)nh, 0.1f, 100.0f);
 
 	glGetIntegerv(GL_VIEWPORT, viewport);
 	glGetDoublev(GL_PROJECTION_MATRIX, P);
@@ -472,7 +472,7 @@ void OnKey(unsigned char key, int, int) {
 	else if (key == 'x'){
 		zoom = zoom - 10;
 	}
-	printf("Stiffness Warping %s\n",bUseStiffnessWarping?"On":"Off");
+	//printf("Stiffness Warping %s\n",bUseStiffnessWarping?"On":"Off");
 	glutPostRedisplay();
 }
 

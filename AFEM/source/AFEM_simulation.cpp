@@ -5,6 +5,12 @@
 #include <fstream>
 #include <string>
 #define WRITE_TO_FILE
+//#define CPU_CG_SOLVER
+#ifdef CPU_CG_SOLVER
+#include <Eigen\Eigen>
+#include <Eigen\IterativeLinearSolvers>
+#include <Eigen/Sparse>
+#endif
 
 
 
@@ -69,33 +75,43 @@ std::ofstream file_output("tumour_pos.txt");
 
 void AFEM::Simulation::run(){
 
+	//set corotational bool variable
+	cuda_tools_class.set_corotational_bool(false);
 
 	double start = std::clock();
 	cuda_tools_class.make_K(element_vec.size(), pos_vec.size());
-	cuda_tools_class.make_f(pos_vec.size(), 3);
-	int node_force = 174;
-	if (origional_position_set == false){
-		
-		
-		orig_x = pos_array[node_force].x;
-		orig_y = pos_array[node_force].y;
-		orig_z = pos_array[node_force].z;
-		origional_position_set = true;
-	}
-	else {
-		std::cout << "Position considered : " << pos_array[node_force].x-orig_x << " " << pos_array[node_force].y-orig_y << " " << pos_array[node_force].z -orig_z<< std::endl;
-	}
+	
+
+	//cuda_tools_class.make_f(pos_vec.size(), 3);
+	//int node_force = 174;
+	//if (origional_position_set == false){
+	//	
+	//	
+	//	orig_x = pos_array[node_force].x;
+	//	orig_y = pos_array[node_force].y;
+	//	orig_z = pos_array[node_force].z;
+	//	origional_position_set = true;
+	//}
+	//else {
+	//	std::cout << "Position considered : " << pos_array[node_force].x-orig_x << " " << pos_array[node_force].y-orig_y << " " << pos_array[node_force].z -orig_z<< std::endl;
+	//}
 
 
-#ifdef WRITE_TO_FILE
-	int node_of_interest = 767;
-	file_output<< pos_array[node_of_interest].x << " " <<pos_array[node_of_interest].y << " " << pos_array[node_of_interest].z <<std::endl;
-#endif
-
+//#ifdef WRITE_TO_FILE
+//	int node_of_interest = 767;
+//	file_output<< pos_array[node_of_interest].x << " " <<pos_array[node_of_interest].y << " " << pos_array[node_of_interest].z <<std::endl;
+//#endif
+	
 	cuda_tools_class.dynamic();
+	std::cout << "TIME Make FEM matricies : " << ((std::clock() - start) / CLOCKS_PER_SEC) << std::endl;
 	//cuda_tools_class.set_RHS_LHS();
+	
+	start = std::clock();
+#ifdef CPU_CG_SOLVER
+	cuda_tools_class.cg_cpu();
+#else //else we use CUDA CG
 	cuda_tools_class.cg();
-
+#endif
 
 
 	if (afem_geometry.get_dim() == AFEM::dimension::THREE_DIMENSION){
@@ -109,7 +125,7 @@ void AFEM::Simulation::run(){
 	//cuda_tools_class.copy_data_from_cuda();
 	
 	cuda_tools_class.reset_K(element_vec.size(), pos_vec.size());
-	std::cout << "FPS : " << 1.0 / ((std::clock() - start) / CLOCKS_PER_SEC) << std::endl;
+	std::cout << "FPS dynamic + solver: " << 1.0 / ((std::clock() - start) / CLOCKS_PER_SEC) << std::endl;
 
 
 }

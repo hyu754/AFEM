@@ -56,18 +56,18 @@ endif()
 
 # Set these up as variables to make reading the generated file easier
 set(CMAKE_COMMAND "D:/Program Files/CMake/bin/cmake.exe") # path
-set(source_file "C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/AFEM/cuda/gpu_source/AFEM_cuda.cu") # path
-set(NVCC_generated_dependency_file "C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/build/AFEM/cuda/CMakeFiles/AFEM_cuda_lib.dir/gpu_source/AFEM_cuda_lib_generated_AFEM_cuda.cu.obj.NVCC-depend") # path
-set(cmake_dependency_file "C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/build/AFEM/cuda/CMakeFiles/AFEM_cuda_lib.dir/gpu_source/AFEM_cuda_lib_generated_AFEM_cuda.cu.obj.depend") # path
+set(source_file "D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu") # path
+set(NVCC_generated_dependency_file "D:/GitHub/AFEM/build/AFEM/cuda/CMakeFiles/AFEM_cuda_lib.dir/gpu_source/AFEM_cuda_lib_generated_AFEM_cuda.cu.obj.NVCC-depend") # path
+set(cmake_dependency_file "D:/GitHub/AFEM/build/AFEM/cuda/CMakeFiles/AFEM_cuda_lib.dir/gpu_source/AFEM_cuda_lib_generated_AFEM_cuda.cu.obj.depend") # path
 set(CUDA_make2cmake "D:/Program Files/CMake/share/cmake-3.7/Modules/FindCUDA/make2cmake.cmake") # path
 set(CUDA_parse_cubin "D:/Program Files/CMake/share/cmake-3.7/Modules/FindCUDA/parse_cubin.cmake") # path
 set(build_cubin OFF) # bool
 set(CUDA_HOST_COMPILER "$(VCInstallDir)bin") # path
 # We won't actually use these variables for now, but we need to set this, in
 # order to force this file to be run again if it changes.
-set(generated_file_path "C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/build/AFEM/cuda/CMakeFiles/AFEM_cuda_lib.dir/gpu_source/$(Configuration)") # path
-set(generated_file_internal "C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/build/AFEM/cuda/CMakeFiles/AFEM_cuda_lib.dir/gpu_source/$(Configuration)/AFEM_cuda_lib_generated_AFEM_cuda.cu.obj") # path
-set(generated_cubin_file_internal "C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/build/AFEM/cuda/CMakeFiles/AFEM_cuda_lib.dir/gpu_source/$(Configuration)/AFEM_cuda_lib_generated_AFEM_cuda.cu.obj.cubin.txt") # path
+set(generated_file_path "D:/GitHub/AFEM/build/AFEM/cuda/CMakeFiles/AFEM_cuda_lib.dir/gpu_source/$(Configuration)") # path
+set(generated_file_internal "D:/GitHub/AFEM/build/AFEM/cuda/CMakeFiles/AFEM_cuda_lib.dir/gpu_source/$(Configuration)/AFEM_cuda_lib_generated_AFEM_cuda.cu.obj") # path
+set(generated_cubin_file_internal "D:/GitHub/AFEM/build/AFEM/cuda/CMakeFiles/AFEM_cuda_lib.dir/gpu_source/$(Configuration)/AFEM_cuda_lib_generated_AFEM_cuda.cu.obj.cubin.txt") # path
 
 set(CUDA_NVCC_EXECUTABLE "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/bin/nvcc.exe") # path
 set(CUDA_NVCC_FLAGS --gpu-architecture;sm_20 ;; ) # list

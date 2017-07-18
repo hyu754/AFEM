@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGUID>{39641537-9066-3B36-9A6D-0B68B41731CE}</ProjectGUID>
+    <ProjectGUID>{4D038CDA-E4F1-365B-A52F-FF77CBA2BFED}</ProjectGUID>
     <Keyword>Win32Proj</Keyword>
     <Platform>x64</Platform>
     <ProjectName>AFEM</ProjectName>
@@ -58,25 +58,25 @@
   <PropertyGroup Label="UserMacros" />
     <PropertyGroup>
       <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
-      <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\build\Debug\</OutDir>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\GitHub\AFEM\build\Debug\</OutDir>
       <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">AFEM.dir\Debug\</IntDir>
       <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">AFEM</TargetName>
       <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.exe</TargetExt>
       <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
       <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
-      <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\build\Release\</OutDir>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\GitHub\AFEM\build\Release\</OutDir>
       <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">AFEM.dir\Release\</IntDir>
       <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">AFEM</TargetName>
       <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.exe</TargetExt>
       <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
       <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
-      <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\build\MinSizeRel\</OutDir>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\GitHub\AFEM\build\MinSizeRel\</OutDir>
       <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">AFEM.dir\MinSizeRel\</IntDir>
       <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">AFEM</TargetName>
       <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.exe</TargetExt>
       <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkIncremental>
       <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</GenerateManifest>
-      <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\build\RelWithDebInfo\</OutDir>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\GitHub\AFEM\build\RelWithDebInfo\</OutDir>
       <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">AFEM.dir\RelWithDebInfo\</IntDir>
       <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">AFEM</TargetName>
       <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.exe</TargetExt>
@@ -85,7 +85,7 @@
     </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\include;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\AFEM\include;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\AFEM\cuda\gpu_include;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\Geometry;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\GitHub\AFEM\include;D:\GitHub\AFEM\AFEM\include;D:\GitHub\AFEM\AFEM\cuda\gpu_include;D:\GitHub\AFEM\Geometry;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;D:\GitHub\AFEM\include\Eigen;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>Debug/</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <CompileAs>CompileAsCpp</CompileAs>
@@ -102,10 +102,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\include;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\AFEM\include;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\AFEM\cuda\gpu_include;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\Geometry;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\GitHub\AFEM\include;D:\GitHub\AFEM\AFEM\include;D:\GitHub\AFEM\AFEM\cuda\gpu_include;D:\GitHub\AFEM\Geometry;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;D:\GitHub\AFEM\include\Eigen;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\include;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\AFEM\include;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\AFEM\cuda\gpu_include;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\Geometry;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\GitHub\AFEM\include;D:\GitHub\AFEM\AFEM\include;D:\GitHub\AFEM\AFEM\cuda\gpu_include;D:\GitHub\AFEM\Geometry;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;D:\GitHub\AFEM\include\Eigen;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -115,11 +115,11 @@
     <Link>
       <AdditionalOptions> /machine:x64 %(AdditionalOptions)</AdditionalOptions>
       <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;AFEM\cuda\Debug\AFEM_cuda_lib.lib;cudart.lib;freeglutd.lib;glew32d.lib;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\lib\x64\cudart_static.lib;cudart.lib;cublas.lib;cusparse.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/lib;C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/lib/$(Configuration);C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/lib;C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/lib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>D:/GitHub/AFEM/lib;D:/GitHub/AFEM/lib/$(Configuration);C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/lib;C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/lib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/build/Debug/AFEM.lib</ImportLibrary>
-      <ProgramDataBaseFile>C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/build/Debug/AFEM.pdb</ProgramDataBaseFile>
+      <ImportLibrary>D:/GitHub/AFEM/build/Debug/AFEM.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/GitHub/AFEM/build/Debug/AFEM.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
       <Version></Version>
     </Link>
@@ -129,7 +129,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\include;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\AFEM\include;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\AFEM\cuda\gpu_include;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\Geometry;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\GitHub\AFEM\include;D:\GitHub\AFEM\AFEM\include;D:\GitHub\AFEM\AFEM\cuda\gpu_include;D:\GitHub\AFEM\Geometry;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;D:\GitHub\AFEM\include\Eigen;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>Release/</AssemblerListingLocation>
       <CompileAs>CompileAsCpp</CompileAs>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -145,10 +145,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\include;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\AFEM\include;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\AFEM\cuda\gpu_include;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\Geometry;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\GitHub\AFEM\include;D:\GitHub\AFEM\AFEM\include;D:\GitHub\AFEM\AFEM\cuda\gpu_include;D:\GitHub\AFEM\Geometry;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;D:\GitHub\AFEM\include\Eigen;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\include;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\AFEM\include;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\AFEM\cuda\gpu_include;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\Geometry;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\GitHub\AFEM\include;D:\GitHub\AFEM\AFEM\include;D:\GitHub\AFEM\AFEM\cuda\gpu_include;D:\GitHub\AFEM\Geometry;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;D:\GitHub\AFEM\include\Eigen;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -158,11 +158,11 @@
     <Link>
       <AdditionalOptions> /machine:x64 %(AdditionalOptions)</AdditionalOptions>
       <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;AFEM\cuda\Release\AFEM_cuda_lib.lib;cudart.lib;freeglutd.lib;glew32d.lib;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\lib\x64\cudart_static.lib;cudart.lib;cublas.lib;cusparse.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/lib;C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/lib/$(Configuration);C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/lib;C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/lib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>D:/GitHub/AFEM/lib;D:/GitHub/AFEM/lib/$(Configuration);C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/lib;C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/lib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/build/Release/AFEM.lib</ImportLibrary>
-      <ProgramDataBaseFile>C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/build/Release/AFEM.pdb</ProgramDataBaseFile>
+      <ImportLibrary>D:/GitHub/AFEM/build/Release/AFEM.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/GitHub/AFEM/build/Release/AFEM.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
       <Version></Version>
     </Link>
@@ -172,7 +172,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\include;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\AFEM\include;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\AFEM\cuda\gpu_include;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\Geometry;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\GitHub\AFEM\include;D:\GitHub\AFEM\AFEM\include;D:\GitHub\AFEM\AFEM\cuda\gpu_include;D:\GitHub\AFEM\Geometry;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;D:\GitHub\AFEM\include\Eigen;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>MinSizeRel/</AssemblerListingLocation>
       <CompileAs>CompileAsCpp</CompileAs>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -188,10 +188,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"MinSizeRel\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\include;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\AFEM\include;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\AFEM\cuda\gpu_include;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\Geometry;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\GitHub\AFEM\include;D:\GitHub\AFEM\AFEM\include;D:\GitHub\AFEM\AFEM\cuda\gpu_include;D:\GitHub\AFEM\Geometry;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;D:\GitHub\AFEM\include\Eigen;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\include;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\AFEM\include;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\AFEM\cuda\gpu_include;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\Geometry;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\GitHub\AFEM\include;D:\GitHub\AFEM\AFEM\include;D:\GitHub\AFEM\AFEM\cuda\gpu_include;D:\GitHub\AFEM\Geometry;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;D:\GitHub\AFEM\include\Eigen;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -201,11 +201,11 @@
     <Link>
       <AdditionalOptions> /machine:x64 %(AdditionalOptions)</AdditionalOptions>
       <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;AFEM\cuda\MinSizeRel\AFEM_cuda_lib.lib;cudart.lib;freeglutd.lib;glew32d.lib;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\lib\x64\cudart_static.lib;cudart.lib;cublas.lib;cusparse.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/lib;C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/lib/$(Configuration);C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/lib;C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/lib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>D:/GitHub/AFEM/lib;D:/GitHub/AFEM/lib/$(Configuration);C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/lib;C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/lib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/build/MinSizeRel/AFEM.lib</ImportLibrary>
-      <ProgramDataBaseFile>C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/build/MinSizeRel/AFEM.pdb</ProgramDataBaseFile>
+      <ImportLibrary>D:/GitHub/AFEM/build/MinSizeRel/AFEM.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/GitHub/AFEM/build/MinSizeRel/AFEM.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
       <Version></Version>
     </Link>
@@ -215,7 +215,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\include;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\AFEM\include;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\AFEM\cuda\gpu_include;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\Geometry;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\GitHub\AFEM\include;D:\GitHub\AFEM\AFEM\include;D:\GitHub\AFEM\AFEM\cuda\gpu_include;D:\GitHub\AFEM\Geometry;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;D:\GitHub\AFEM\include\Eigen;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>RelWithDebInfo/</AssemblerListingLocation>
       <CompileAs>CompileAsCpp</CompileAs>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -231,10 +231,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\include;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\AFEM\include;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\AFEM\cuda\gpu_include;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\Geometry;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\GitHub\AFEM\include;D:\GitHub\AFEM\AFEM\include;D:\GitHub\AFEM\AFEM\cuda\gpu_include;D:\GitHub\AFEM\Geometry;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;D:\GitHub\AFEM\include\Eigen;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\include;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\AFEM\include;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\AFEM\cuda\gpu_include;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\Geometry;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\GitHub\AFEM\include;D:\GitHub\AFEM\AFEM\include;D:\GitHub\AFEM\AFEM\cuda\gpu_include;D:\GitHub\AFEM\Geometry;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\include;D:\GitHub\AFEM\include\Eigen;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -244,11 +244,11 @@
     <Link>
       <AdditionalOptions> /machine:x64 %(AdditionalOptions)</AdditionalOptions>
       <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;AFEM\cuda\RelWithDebInfo\AFEM_cuda_lib.lib;cudart.lib;freeglutd.lib;glew32d.lib;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v7.5\lib\x64\cudart_static.lib;cudart.lib;cublas.lib;cusparse.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/lib;C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/lib/$(Configuration);C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/lib;C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/lib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>D:/GitHub/AFEM/lib;D:/GitHub/AFEM/lib/$(Configuration);C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/lib;C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/lib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/build/RelWithDebInfo/AFEM.lib</ImportLibrary>
-      <ProgramDataBaseFile>C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/build/RelWithDebInfo/AFEM.pdb</ProgramDataBaseFile>
+      <ImportLibrary>D:/GitHub/AFEM/build/RelWithDebInfo/AFEM.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/GitHub/AFEM/build/RelWithDebInfo/AFEM.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
       <Version></Version>
     </Link>
@@ -257,10 +257,10 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\CMakeLists.txt">
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/CMakeLists.txt</Message>
+    <CustomBuild Include="D:\GitHub\AFEM\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule D:/GitHub/AFEM/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
-"D:\Program Files\CMake\bin\cmake.exe" -HC:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision -BC:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/build --check-stamp-file C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\build\CMakeFiles\generate.stamp
+"D:\Program Files\CMake\bin\cmake.exe" -HD:/GitHub/AFEM -BD:/GitHub/AFEM/build --check-stamp-file D:\GitHub\AFEM\build\CMakeFiles\generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -268,12 +268,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/CMakeLists.txt;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\CMakeLists.txt;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\build\CMakeFiles\3.7.0\CMakeSystem.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeSystemSpecificInitialize.cmake;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\build\CMakeFiles\3.7.0\CMakeCCompiler.cmake;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\build\CMakeFiles\3.7.0\CMakeCXXCompiler.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeSystemSpecificInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeGenericSystem.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\Windows.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\WindowsPaths.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeCInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeLanguageInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC-C.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC.cmake;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\build\CMakeFiles\3.7.0\CMakeRCCompiler.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeRCInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeCommonLanguageInclude.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeCXXInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeLanguageInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Compiler\MSVC-CXX.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC-CXX.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeCommonLanguageInclude.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\FindCUDA.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\FindCUDA\select_compute_arch.cmake;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\build\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/GitHub/AFEM/CMakeLists.txt;D:\GitHub\AFEM\CMakeLists.txt;D:\GitHub\AFEM\build\CMakeFiles\3.7.0\CMakeSystem.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeSystemSpecificInitialize.cmake;D:\GitHub\AFEM\build\CMakeFiles\3.7.0\CMakeCCompiler.cmake;D:\GitHub\AFEM\build\CMakeFiles\3.7.0\CMakeCXXCompiler.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeSystemSpecificInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeGenericSystem.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\Windows.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\WindowsPaths.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeCInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeLanguageInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC-C.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC.cmake;D:\GitHub\AFEM\build\CMakeFiles\3.7.0\CMakeRCCompiler.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeRCInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeCommonLanguageInclude.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeCXXInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeLanguageInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Compiler\MSVC-CXX.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC-CXX.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeCommonLanguageInclude.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\FindCUDA.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\FindCUDA\select_compute_arch.cmake;D:\GitHub\AFEM\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\GitHub\AFEM\build\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule D:/GitHub/AFEM/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
-"D:\Program Files\CMake\bin\cmake.exe" -HC:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision -BC:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/build --check-stamp-file C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\build\CMakeFiles\generate.stamp
+"D:\Program Files\CMake\bin\cmake.exe" -HD:/GitHub/AFEM -BD:/GitHub/AFEM/build --check-stamp-file D:\GitHub\AFEM\build\CMakeFiles\generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -281,12 +281,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/CMakeLists.txt;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\CMakeLists.txt;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\build\CMakeFiles\3.7.0\CMakeSystem.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeSystemSpecificInitialize.cmake;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\build\CMakeFiles\3.7.0\CMakeCCompiler.cmake;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\build\CMakeFiles\3.7.0\CMakeCXXCompiler.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeSystemSpecificInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeGenericSystem.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\Windows.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\WindowsPaths.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeCInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeLanguageInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC-C.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC.cmake;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\build\CMakeFiles\3.7.0\CMakeRCCompiler.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeRCInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeCommonLanguageInclude.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeCXXInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeLanguageInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Compiler\MSVC-CXX.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC-CXX.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeCommonLanguageInclude.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\FindCUDA.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\FindCUDA\select_compute_arch.cmake;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\build\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/GitHub/AFEM/CMakeLists.txt;D:\GitHub\AFEM\CMakeLists.txt;D:\GitHub\AFEM\build\CMakeFiles\3.7.0\CMakeSystem.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeSystemSpecificInitialize.cmake;D:\GitHub\AFEM\build\CMakeFiles\3.7.0\CMakeCCompiler.cmake;D:\GitHub\AFEM\build\CMakeFiles\3.7.0\CMakeCXXCompiler.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeSystemSpecificInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeGenericSystem.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\Windows.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\WindowsPaths.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeCInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeLanguageInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC-C.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC.cmake;D:\GitHub\AFEM\build\CMakeFiles\3.7.0\CMakeRCCompiler.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeRCInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeCommonLanguageInclude.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeCXXInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeLanguageInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Compiler\MSVC-CXX.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC-CXX.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeCommonLanguageInclude.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\FindCUDA.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\FindCUDA\select_compute_arch.cmake;D:\GitHub\AFEM\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\GitHub\AFEM\build\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule D:/GitHub/AFEM/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
-"D:\Program Files\CMake\bin\cmake.exe" -HC:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision -BC:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/build --check-stamp-file C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\build\CMakeFiles\generate.stamp
+"D:\Program Files\CMake\bin\cmake.exe" -HD:/GitHub/AFEM -BD:/GitHub/AFEM/build --check-stamp-file D:\GitHub\AFEM\build\CMakeFiles\generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -294,12 +294,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/CMakeLists.txt;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\CMakeLists.txt;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\build\CMakeFiles\3.7.0\CMakeSystem.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeSystemSpecificInitialize.cmake;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\build\CMakeFiles\3.7.0\CMakeCCompiler.cmake;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\build\CMakeFiles\3.7.0\CMakeCXXCompiler.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeSystemSpecificInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeGenericSystem.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\Windows.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\WindowsPaths.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeCInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeLanguageInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC-C.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC.cmake;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\build\CMakeFiles\3.7.0\CMakeRCCompiler.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeRCInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeCommonLanguageInclude.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeCXXInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeLanguageInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Compiler\MSVC-CXX.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC-CXX.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeCommonLanguageInclude.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\FindCUDA.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\FindCUDA\select_compute_arch.cmake;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\build\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/GitHub/AFEM/CMakeLists.txt;D:\GitHub\AFEM\CMakeLists.txt;D:\GitHub\AFEM\build\CMakeFiles\3.7.0\CMakeSystem.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeSystemSpecificInitialize.cmake;D:\GitHub\AFEM\build\CMakeFiles\3.7.0\CMakeCCompiler.cmake;D:\GitHub\AFEM\build\CMakeFiles\3.7.0\CMakeCXXCompiler.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeSystemSpecificInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeGenericSystem.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\Windows.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\WindowsPaths.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeCInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeLanguageInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC-C.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC.cmake;D:\GitHub\AFEM\build\CMakeFiles\3.7.0\CMakeRCCompiler.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeRCInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeCommonLanguageInclude.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeCXXInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeLanguageInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Compiler\MSVC-CXX.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC-CXX.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeCommonLanguageInclude.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\FindCUDA.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\FindCUDA\select_compute_arch.cmake;D:\GitHub\AFEM\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\GitHub\AFEM\build\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule D:/GitHub/AFEM/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
-"D:\Program Files\CMake\bin\cmake.exe" -HC:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision -BC:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/build --check-stamp-file C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\build\CMakeFiles\generate.stamp
+"D:\Program Files\CMake\bin\cmake.exe" -HD:/GitHub/AFEM -BD:/GitHub/AFEM/build --check-stamp-file D:\GitHub\AFEM\build\CMakeFiles\generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -307,26 +307,27 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/CMakeLists.txt;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\CMakeLists.txt;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\build\CMakeFiles\3.7.0\CMakeSystem.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeSystemSpecificInitialize.cmake;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\build\CMakeFiles\3.7.0\CMakeCCompiler.cmake;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\build\CMakeFiles\3.7.0\CMakeCXXCompiler.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeSystemSpecificInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeGenericSystem.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\Windows.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\WindowsPaths.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeCInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeLanguageInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC-C.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC.cmake;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\build\CMakeFiles\3.7.0\CMakeRCCompiler.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeRCInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeCommonLanguageInclude.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeCXXInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeLanguageInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Compiler\MSVC-CXX.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC-CXX.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeCommonLanguageInclude.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\FindCUDA.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\FindCUDA\select_compute_arch.cmake;C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\build\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/GitHub/AFEM/CMakeLists.txt;D:\GitHub\AFEM\CMakeLists.txt;D:\GitHub\AFEM\build\CMakeFiles\3.7.0\CMakeSystem.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeSystemSpecificInitialize.cmake;D:\GitHub\AFEM\build\CMakeFiles\3.7.0\CMakeCCompiler.cmake;D:\GitHub\AFEM\build\CMakeFiles\3.7.0\CMakeCXXCompiler.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeSystemSpecificInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeGenericSystem.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\Windows.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\WindowsPaths.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeCInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeLanguageInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC-C.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC.cmake;D:\GitHub\AFEM\build\CMakeFiles\3.7.0\CMakeRCCompiler.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeRCInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeCommonLanguageInclude.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeCXXInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeLanguageInformation.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Compiler\MSVC-CXX.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC-CXX.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\Platform\Windows-MSVC.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeCommonLanguageInclude.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\FindCUDA.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\FindPackageHandleStandardArgs.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\FindPackageMessage.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\CMakeParseArguments.cmake;D:\Program Files\CMake\share\cmake-3.7\Modules\FindCUDA\select_compute_arch.cmake;D:\GitHub\AFEM\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\GitHub\AFEM\build\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\AFEM\source\AFEM_geometry.cpp"  />
-    <ClCompile Include="C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\AFEM\source\AFEM_simulation.cpp"  />
-    <ClCompile Include="C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\AFEM\source\AFEM_visualization.cpp"  />
-    <ClCompile Include="C:\Users\hyu754\Downloads\opencloth_vision\opencloth_vision\AFEM\source\test_cuda.cpp"  />
+    <ClCompile Include="D:\GitHub\AFEM\AFEM\source\AFEM_cpu_solver.cpp"  />
+    <ClCompile Include="D:\GitHub\AFEM\AFEM\source\AFEM_geometry.cpp"  />
+    <ClCompile Include="D:\GitHub\AFEM\AFEM\source\AFEM_simulation.cpp"  />
+    <ClCompile Include="D:\GitHub\AFEM\AFEM\source\AFEM_visualization.cpp"  />
+    <ClCompile Include="D:\GitHub\AFEM\AFEM\source\test_cuda.cpp"  />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/build/ZERO_CHECK.vcxproj">
-      <Project>8BE8CA6C-ADAF-3F14-9BD6-D0271F7ED6C2</Project>
+    <ProjectReference Include="D:/GitHub/AFEM/build/ZERO_CHECK.vcxproj">
+      <Project>C5AACCED-8018-31C6-A35D-E2876291647A</Project>
     </ProjectReference>
-    <ProjectReference Include="C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/build/AFEM/cuda/AFEM_cuda_lib.vcxproj">
-      <Project>7C35A29F-72DE-3ED7-9414-5D1F2251B506</Project>
+    <ProjectReference Include="D:/GitHub/AFEM/build/AFEM/cuda/AFEM_cuda_lib.vcxproj">
+      <Project>8F23D97C-2F13-3CF7-8457-F9A76C0457B2</Project>
     </ProjectReference>
-    <ProjectReference Include="C:/Users/hyu754/Downloads/opencloth_vision/opencloth_vision/build/dll_includes.vcxproj">
-      <Project>9BC7DD59-B62C-32C8-B2EB-759884DA37AC</Project>
+    <ProjectReference Include="D:/GitHub/AFEM/build/dll_includes.vcxproj">
+      <Project>5C9DCF8F-D052-3ADE-B982-4CFFF8F1FEDF</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
