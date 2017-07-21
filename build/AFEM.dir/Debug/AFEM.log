@@ -1,1 +1,12 @@
-﻿  AFEM.vcxproj -> D:\GitHub\AFEM\build\Debug\AFEM.exe
+﻿  AFEM_simulation.cpp
+d:\github\afem\afem\include\AFEM_geometry.hpp(132): warning C4551: function call missing argument list
+D:\GitHub\AFEM\AFEM\cuda\gpu_include\AFEM_cuda.cuh(89): warning C4305: 'initializing' : truncation from 'double' to 'float'
+D:\GitHub\AFEM\AFEM\source\AFEM_simulation.cpp(27): warning C4267: 'argument' : conversion from 'size_t' to 'int', possible loss of data
+D:\GitHub\AFEM\AFEM\source\AFEM_simulation.cpp(61): warning C4267: 'argument' : conversion from 'size_t' to 'int', possible loss of data
+D:\GitHub\AFEM\AFEM\source\AFEM_simulation.cpp(64): warning C4267: 'argument' : conversion from 'size_t' to 'int', possible loss of data
+D:\GitHub\AFEM\AFEM\source\AFEM_simulation.cpp(88): warning C4267: 'argument' : conversion from 'size_t' to 'int', possible loss of data
+D:\GitHub\AFEM\AFEM\source\AFEM_simulation.cpp(97): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+D:\GitHub\AFEM\AFEM\source\AFEM_simulation.cpp(103): warning C4267: 'argument' : conversion from 'size_t' to 'int', possible loss of data
+D:\GitHub\AFEM\AFEM\source\AFEM_simulation.cpp(107): warning C4267: 'argument' : conversion from 'size_t' to 'int', possible loss of data
+D:\GitHub\AFEM\AFEM\source\AFEM_simulation.cpp(128): warning C4267: 'argument' : conversion from 'size_t' to 'int', possible loss of data
+  AFEM.vcxproj -> D:\GitHub\AFEM\build\Debug\AFEM.exe

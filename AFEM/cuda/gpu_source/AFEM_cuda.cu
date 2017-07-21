@@ -2353,8 +2353,8 @@ void cuda_tools::make_K(AFEM::elastic_solver_type solver_in, int num_elem, int n
 		gpu_make_K_corotational << <blocks, threads >> > (elem_array_d, position_array_d, position_array_initial_d, num_elem, num_nodes, K_d, M_d, f_d,RKx_matrix_d);
 
 	if (solver_in == AFEM::elastic_solver_type::ENERGY_MINISATION_COROTATION)
-		gpu_make_K << <blocks, threads >> > (elem_array_d, position_array_initial_d, num_elem, num_nodes, K_d, M_d, f_d);
-		//gpu_make_K_energy_corotational << <blocks, threads >> > (elem_array_d, position_array_d, position_array_initial_d, num_elem, num_nodes, K_d, M_d, f_d, RKx_matrix_d);
+		//gpu_make_K << <blocks, threads >> > (elem_array_d, position_array_initial_d, num_elem, num_nodes, K_d, M_d, f_d);
+		gpu_make_K_energy_corotational << <blocks, threads >> > (elem_array_d, position_array_d, position_array_initial_d, num_elem, num_nodes, K_d, M_d, f_d, RKx_matrix_d);
 	
 #ifdef TESTING
 	/*
@@ -2737,10 +2737,11 @@ void cuda_tools::energy_minisation(){
 
 
 	//Find A and b to solve.
-	float alpha = 100000000000.0f;
-	find_A_b_energy_minimisation_corotational << <blocks_nodesdim, threads_nodesdim >> >(K_d, xInitial_d, u_dot_d, f_d, RHS, M_d, LHS, Nnodes, dt, alpha, 0.002, 3, stationary_array_d, Nstationary, sudo_force_array_d, sudo_force_indicies_d, sudo_force_vector.size());
+	float alpha = 1000000000.0f;
+	find_A_b_energy_minimisation_corotational << <blocks_nodesdim, threads_nodesdim >> >(K_d, xInitial_d, RKx_matrix_d, f_d, RHS, M_d, LHS, Nnodes, dt, alpha, 0.002, 3, stationary_array_d, Nstationary, sudo_force_array_d, sudo_force_indicies_d, sudo_force_vector.size());
 	//Free memory
 	delete sudo_force_array;
+	delete sudo_force_indicies;
 	cudaFree(sudo_force_array);
 	cudaFree(sudo_force_indicies_d);
 

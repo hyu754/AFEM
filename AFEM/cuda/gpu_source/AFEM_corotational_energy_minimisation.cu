@@ -670,7 +670,7 @@ __global__ void gpu_make_K_energy_corotational(AFEM::element *in_vec, AFEM::posi
 			for (int r = 0; r < 12; r++){
 
 				//d_A_dense[IDX2C(DOF[c], DOF[r], 3000)] = d_A_dense[IDX2C(DOF[c], DOF[r], 3000)] + E_vector[offset * 144 + c*12+r];
-				atomicAdda(&(K_d[IDX2C(DOF[c], DOF[r], 3 * (numNodes))]), in_vec[x].local_K[c * 12 + r]*fabsf(in_vec[x].volume));
+				atomicAdda(&(K_d[IDX2C(DOF[c], DOF[r], 3 * (numNodes))]), in_vec[x].local_K[c * 12 + r]);
 
 
 				//atomicAdda(&(M_d[IDX2C(DOF[c], DOF[r], 3 * (numNodes))]), in_vec[x].local_M[c * 12 + r]);
@@ -701,7 +701,7 @@ __global__ void gpu_make_K_energy_corotational(AFEM::element *in_vec, AFEM::posi
 
 
 
-__global__ void find_A_b_energy_minimisation_corotational(float *K_in, float *dx_in, float *u_dot, float *f_ext, float *RHS, float *M_in, float *LHS, int num_nodes, float dt, float alpha, float rk, int dim, AFEM::stationary *stationary, int num_station, AFEM::sudo_force_struct * sudo_force_vec, int *sudo_force_ind,int number_of_sudo_force){
+__global__ void find_A_b_energy_minimisation_corotational(float *K_in, float *xInitial, float *RKx_matrix, float *f_ext, float *RHS, float *M_in, float *LHS, int num_nodes, float dt, float alpha, float rk, int dim, AFEM::stationary *stationary, int num_station, AFEM::sudo_force_struct * sudo_force_vec, int *sudo_force_ind, int number_of_sudo_force){
 	int x = threadIdx.x + blockIdx.x *blockDim.x;
 
 	if (x < num_nodes*dim){
@@ -711,13 +711,13 @@ __global__ void find_A_b_energy_minimisation_corotational(float *K_in, float *dx
 	
 		for (int i = 0; i < num_nodes*dim; i++){
 		
-			b = b + K_in[IDX2C(i, x, 3 * (num_nodes))] * dx_in[i];
+			//b = b + K_in[IDX2C(i, x, 3 * (num_nodes))] * xInitial[i];
 
 
 			LHS[IDX2C(i, x, 3 * (num_nodes))] = K_in[IDX2C(i, x, 3 * (num_nodes))];
 
 		}
-		RHS[x] = b;
+		RHS[x] = RKx_matrix[x];
 
 	}
 	
@@ -728,7 +728,7 @@ __global__ void find_A_b_energy_minimisation_corotational(float *K_in, float *dx
 				int station_array = stationary[nnn].displacement_index[i];
 
 				LHS[IDX2C(station_array, station_array, 3 * (num_nodes))] = LHS[IDX2C(station_array, station_array, 3 * (num_nodes))] + alpha;
-				RHS[station_array] = RHS[station_array] + alpha* (dx_in[station_array]);
+				RHS[station_array] = RHS[station_array] + alpha* (xInitial[station_array]);
 
 			}
 		}
@@ -744,15 +744,15 @@ __global__ void find_A_b_energy_minimisation_corotational(float *K_in, float *dx
 				LHS[IDX2C(dof, dof, 3 * (num_nodes))] = LHS[IDX2C(dof, dof, 3 * (num_nodes))] + alpha;
 
 				if (dof_counter == 0){
-					RHS[dof] = RHS[dof] + alpha* (dx_in[dof] + sudo_force_vec[i].fx);//sudo_force_vec[i].fx);
+					RHS[dof] = RHS[dof] + alpha* (xInitial[dof] + sudo_force_vec[i].fx);//sudo_force_vec[i].fx);
 				}
 				else if (dof_counter == 1){
-					RHS[dof] = RHS[dof] + alpha* (dx_in[dof] + sudo_force_vec[i].fy);//sudo_force_vec[i].fy);
+					RHS[dof] = RHS[dof] + alpha* (xInitial[dof] + sudo_force_vec[i].fy);//sudo_force_vec[i].fy);
 
 				}
 				else if (dof_counter == 2){
 
-					RHS[dof] = RHS[dof] + alpha* (dx_in[dof] + sudo_force_vec[i].fz);//sudo_force_vec[i].fz);
+					RHS[dof] = RHS[dof] + alpha* (xInitial[dof] + sudo_force_vec[i].fz);//sudo_force_vec[i].fz);
 				}
 
 				dof_counter++;

@@ -72,7 +72,7 @@ void AFEM::Simulation::element_std_to_array(){
 bool origional_position_set = false;
 double orig_x, orig_y, orig_z;
 std::ofstream file_output("tumour_pos.txt");
-
+float sin_in = 0.0f;
 void AFEM::Simulation::run(){
 	//set corotational bool variable
 	if ((solver_type == AFEM::elastic_solver_type::DYNAMIC_COROTATION) || (solver_type == AFEM::elastic_solver_type::ENERGY_MINISATION_COROTATION)){
@@ -88,14 +88,15 @@ void AFEM::Simulation::run(){
 	cuda_tools_class.make_K(solver_type, element_vec.size(), pos_vec.size());
 
 	std::vector<int> force_vector_indicies;
-	int dummy_array[5] = { 121, 116, 111, 106, 101 };
-	force_vector_indicies.assign(dummy_array, dummy_array + 5);
+	int dummy_array[4] = { 124  , 120  , 116   ,112 };
+	force_vector_indicies.assign(dummy_array, dummy_array + 4);
 	std::vector<float> zero_force;
 	zero_force.push_back(0.0f); // x
-	zero_force.push_back(-0.03f); //y
-	zero_force.push_back(0.0f);
+	zero_force.push_back(0.0f); //y
+	zero_force.push_back(-sin(sin_in)/30.f);
+	sin_in = sin_in + 0.1;
 	std::vector<std::vector<float>> force_vector;
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < force_vector_indicies.size(); i++)
 		force_vector.push_back(zero_force);
 	//force_vector_indicies.push_back(10);
 	if ((solver_type == AFEM::elastic_solver_type::DYNAMIC_COROTATION) || (solver_type == AFEM::elastic_solver_type::DYNAMIC_NON_COROTATION)){

@@ -26,7 +26,7 @@ file(GLOB SOURCES AFEM/source/*.cpp )
 #list(APPEND CUDA_NVCC_FLAGS "-arch=sm_20;-std=c++11;-O2;-DVERBOSE")
 
 
-set(CUDA_NVCC_FLAGS ${CUDA_NVCC_FLAGS} --gpu-architecture sm_20)
+set(CUDA_NVCC_FLAGS ${CUDA_NVCC_FLAGS} --gpu-architecture sm_50)
 add_subdirectory(AFEM/cuda)
 ADD_EXECUTABLE(AFEM ${SOURCES})
 
