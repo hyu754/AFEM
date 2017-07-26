@@ -1,0 +1,2 @@
+﻿CV_CUSTOM_WRAPPER.lib(viz_tools.obj) : error LNK2019: unresolved external symbol "public: class cv::viz::Mesh __cdecl cv::viz::Widget::cast<class cv::viz::Mesh>(void)" (??$cast@VMesh@viz@cv@@@Widget@viz@cv@@QEAA?AVMesh@12@XZ) referenced in function "public: void __cdecl viz_tools::ray_tracer(void)" (?ray_tracer@viz_tools@@QEAAXXZ)
+D:\GitHub\AFEM\build\Debug\CV_TEST.exe : fatal error LNK1120: 1 unresolved externals

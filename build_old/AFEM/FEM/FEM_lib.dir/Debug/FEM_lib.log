@@ -1,0 +1,39 @@
+﻿  Building Custom Rule D:/GitHub/AFEM/AFEM/FEM/CMakeLists.txt
+  CMake does not need to re-run because D:\GitHub\AFEM\build\AFEM\FEM\CMakeFiles\generate.stamp is up-to-date.
+  AFEM_cpu_solver.cpp
+D:\GitHub\AFEM\AFEM\FEM\include\AFEM_geometry.hpp(132): warning C4551: function call missing argument list
+D:\GitHub\AFEM\AFEM\cuda\gpu_include\AFEM_cuda.cuh(89): warning C4305: 'initializing' : truncation from 'double' to 'float'
+D:\GitHub\AFEM\AFEM\FEM\source\AFEM_cpu_solver.cpp(47): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+  AFEM_geometry.cpp
+D:\GitHub\AFEM\AFEM\FEM\include\AFEM_geometry.hpp(132): warning C4551: function call missing argument list
+  AFEM_simulation.cpp
+d:\github\afem\afem\fem\include\AFEM_geometry.hpp(132): warning C4551: function call missing argument list
+D:\GitHub\AFEM\AFEM\cuda\gpu_include\AFEM_cuda.cuh(89): warning C4305: 'initializing' : truncation from 'double' to 'float'
+D:\GitHub\AFEM\AFEM\FEM\source\AFEM_simulation.cpp(27): warning C4267: 'argument' : conversion from 'size_t' to 'int', possible loss of data
+D:\GitHub\AFEM\AFEM\FEM\source\AFEM_simulation.cpp(61): warning C4267: 'argument' : conversion from 'size_t' to 'int', possible loss of data
+D:\GitHub\AFEM\AFEM\FEM\source\AFEM_simulation.cpp(64): warning C4267: 'argument' : conversion from 'size_t' to 'int', possible loss of data
+D:\GitHub\AFEM\AFEM\FEM\source\AFEM_simulation.cpp(88): warning C4267: 'argument' : conversion from 'size_t' to 'int', possible loss of data
+D:\GitHub\AFEM\AFEM\FEM\source\AFEM_simulation.cpp(97): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+D:\GitHub\AFEM\AFEM\FEM\source\AFEM_simulation.cpp(103): warning C4267: 'argument' : conversion from 'size_t' to 'int', possible loss of data
+D:\GitHub\AFEM\AFEM\FEM\source\AFEM_simulation.cpp(107): warning C4267: 'argument' : conversion from 'size_t' to 'int', possible loss of data
+D:\GitHub\AFEM\AFEM\FEM\source\AFEM_simulation.cpp(128): warning C4267: 'argument' : conversion from 'size_t' to 'int', possible loss of data
+  AFEM_visualization.cpp
+d:\github\afem\afem\fem\include\AFEM_geometry.hpp(132): warning C4551: function call missing argument list
+D:\GitHub\AFEM\AFEM\cuda\gpu_include\AFEM_cuda.cuh(89): warning C4305: 'initializing' : truncation from 'double' to 'float'
+D:\GitHub\AFEM\AFEM\FEM\source\AFEM_visualization.cpp(118): warning C4267: '=' : conversion from 'size_t' to 'int', possible loss of data
+D:\GitHub\AFEM\AFEM\FEM\source\AFEM_visualization.cpp(232): warning C4101: 'e' : unreferenced local variable
+D:\GitHub\AFEM\AFEM\FEM\source\AFEM_visualization.cpp(312): warning C4244: 'argument' : conversion from 'double' to 'GLfloat', possible loss of data
+D:\GitHub\AFEM\AFEM\FEM\source\AFEM_visualization.cpp(313): warning C4244: 'argument' : conversion from 'double' to 'GLfloat', possible loss of data
+D:\GitHub\AFEM\AFEM\FEM\source\AFEM_visualization.cpp(314): warning C4244: 'argument' : conversion from 'double' to 'GLfloat', possible loss of data
+D:\GitHub\AFEM\AFEM\FEM\source\AFEM_visualization.cpp(316): warning C4244: 'argument' : conversion from 'double' to 'GLfloat', possible loss of data
+D:\GitHub\AFEM\AFEM\FEM\source\AFEM_visualization.cpp(317): warning C4244: 'argument' : conversion from 'double' to 'GLfloat', possible loss of data
+D:\GitHub\AFEM\AFEM\FEM\source\AFEM_visualization.cpp(319): warning C4244: 'argument' : conversion from 'double' to 'GLfloat', possible loss of data
+D:\GitHub\AFEM\AFEM\FEM\source\AFEM_visualization.cpp(346): warning C4244: 'argument' : conversion from 'double' to 'GLfloat', possible loss of data
+D:\GitHub\AFEM\AFEM\FEM\source\AFEM_visualization.cpp(347): warning C4244: 'argument' : conversion from 'double' to 'GLfloat', possible loss of data
+D:\GitHub\AFEM\AFEM\FEM\source\AFEM_visualization.cpp(348): warning C4244: 'argument' : conversion from 'double' to 'GLfloat', possible loss of data
+D:\GitHub\AFEM\AFEM\FEM\source\AFEM_visualization.cpp(349): warning C4244: 'argument' : conversion from 'double' to 'GLfloat', possible loss of data
+D:\GitHub\AFEM\AFEM\FEM\source\AFEM_visualization.cpp(370): warning C4244: 'argument' : conversion from 'double' to 'GLfloat', possible loss of data
+  Generating Code...
+d:\github\afem\afem\fem\source\afem_geometry.cpp(168): warning C4715: 'AFEM::Geometry::read_stationary' : not all control paths return a value
+d:\github\afem\afem\fem\source\afem_geometry.cpp(140): warning C4715: 'AFEM::Geometry::read_elem' : not all control paths return a value
+  FEM_lib.vcxproj -> D:\GitHub\AFEM\build\AFEM\FEM\Debug\FEM_lib.lib
