@@ -1,5 +1,5 @@
 ﻿  viz_tools.cpp
 D:\GitHub\AFEM\AFEM\FEM\include\AFEM_geometry.hpp(132): warning C4551: function call missing argument list
-D:\GitHub\AFEM\cv_wrappers\source\viz_tools.cpp(41): warning C4102: 'std' : unreferenced label
-D:\GitHub\AFEM\cv_wrappers\source\viz_tools.cpp(241): warning C4102: 'std' : unreferenced label
+D:\GitHub\AFEM\cv_wrappers\source\viz_tools.cpp(42): warning C4102: 'std' : unreferenced label
+D:\GitHub\AFEM\cv_wrappers\source\viz_tools.cpp(244): warning C4102: 'std' : unreferenced label
   CV_CUSTOM_WRAPPER.vcxproj -> D:\GitHub\AFEM\build\cv_wrappers\Debug\CV_CUSTOM_WRAPPER.lib

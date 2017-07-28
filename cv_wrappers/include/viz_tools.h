@@ -22,11 +22,58 @@
 #include <opencv2/viz/widgets.hpp>
 #include <opencv2/viz/widget_accessor.hpp>
 #include <AFEM_geometry.hpp>
-
+#include "raytracer.h"
 
 class viz_tools
 {
-	
+public:
+	/*
+	Structure of intersection information
+	u,v,w - barycentric coordinate
+	intersection_position - the position on the face of intersection
+	*/
+	struct intersection{
+		//barycentric coordinates
+		float u, v, w;
+		//The position on the face of intersection
+		glm::vec3 inversection_position;
+	};
+
+	/*
+	This struct will store the face_information.
+	vector of intersections. Each intersection will have
+	*/
+	struct face_information{
+		//face_id
+		int face_id;
+
+		//element_id, which element is it in
+		int element_id;
+
+		//vector of intersections at time 0, or the original position
+		std::vector<intersection> intersection_vector_t0;
+		
+		//vector of intersections at time t
+		std::vector<intersection> intersection_vector_t;
+		
+		//Vector of nodal positions, at the original time
+		std::vector<glm::vec3> nodal_positions_t0;
+
+		//Vector of nodal positions, at the current time
+		std::vector<glm::vec3> nodal_positions_t;
+
+		//Vector of indicies for all 3 nodes;
+		std::vector<int> indicies;
+
+		//Clear everything
+		void clear(){
+			intersection_vector_t0.clear();
+			intersection_vector_t.clear();
+			nodal_positions_t0.clear();
+			nodal_positions_t.clear();
+			indicies.clear();
+		}
+	};
 
 
 private:
@@ -50,6 +97,18 @@ private:
 	//Transformation to make view direction the same
 	cv::Affine3f transform;// = viz::makeTransformToGlobal(Vec3f(0.0f, -1.0f, 0.0f), Vec3f(-1.0f, 0.0f, 0.0f), Vec3f(0.0f, 0.0f, -1.0f), cam_pos);
 
+
+	//Temporary pointer to a geometry in the field of view
+	cv::viz::Mesh global_mesh_ptr;
+
+	//Ray tracer class
+	raytracer ray_tracer_class;
+
+	//Vector of faces
+	std::vector<face_information> face_information_vector;
+
+	//vector of intersected faces
+	std::vector<face_information> face_information_intersected;
 public:
 
 	//Get geometry
@@ -94,6 +153,16 @@ public:
 
 	//Ray tracer
 	void ray_tracer(void);
+
+	
+
+	//GLM to CV for 2d
+	template<typename T, typename S> 
+	std::vector<S> glm_to_cv_2d(std::vector<T>);
+
+	//GLM to CV for 3d
+	template<typename T, typename S>
+	std::vector<S> glm_to_cv_3d(std::vector<T>);
 
 
 	//constructors

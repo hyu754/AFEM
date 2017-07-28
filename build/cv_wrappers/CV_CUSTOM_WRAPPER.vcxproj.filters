@@ -7,6 +7,9 @@
     <ClCompile Include="D:\GitHub\AFEM\cv_wrappers\source\optic_flow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="D:\GitHub\AFEM\cv_wrappers\source\raytracer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="D:\GitHub\AFEM\cv_wrappers\source\surf.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -22,6 +25,9 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="D:\GitHub\AFEM\cv_wrappers\include\optic_flow.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\AFEM\cv_wrappers\include\raytracer.h">
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="D:\GitHub\AFEM\cv_wrappers\include\surf.h">

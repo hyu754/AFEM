@@ -1,5 +1,6 @@
 #include <iostream>
 #include "AFEM_geometry.hpp"
+#include "AFEM_simulation.hpp"
 
 
 #include "opencv2/opencv_modules.hpp"
@@ -9,6 +10,7 @@
 
 #include "viz_tools.h"
 //#include "AFEM_cuda.cuh"
+#include "raytracer.h"
 
 int main(void){
 	AFEM::Geometry geo;
@@ -16,6 +18,13 @@ int main(void){
 	geo.read_nodes("FEM_Nodes.txt");
 	geo.read_elem("FEM_Elem.txt");
 	geo.read_stationary("FEM_Stationary.txt");
+
+	AFEM::Simulation sim(geo);
+	sim.element_std_to_array();
+	sim.set_solver_type(AFEM::elastic_solver_type::ENERGY_MINISATION_COROTATION);
+	
+	sim.run();
+
 	std::vector<AFEM::element> element_ =geo.return_element_vector();
 	std::vector<AFEM::position_3D> position_ = geo.return_position3D();
 	cv::VideoCapture cap(0);
@@ -48,6 +57,18 @@ int main(void){
 
 	viz_class.generate_rays();
 	viz_class.ray_tracer();
+
+	glm::vec3 A(0, 0, 0);
+	glm::vec3 B(0, 10, 0);
+	glm::vec3 C(10, 10, 0);
+
+	glm::vec3 ray(0, 0,1);
+	glm::vec3 start_ray(0.2, 0.7, 500);
+	raytracer tr;
+	glm::vec3 output = tr.ray_tracer(A, B, C, start_ray, ray);
+
+	glm::vec3 reprojected = tr. reproject_trace(A, B, C, output.x, output.y);
+
 	while (1){
 		cap >> input_image;
 		std::vector<cv::Point2f> out_vector_unordered= ar_class.find_aruco_center_four_corners(input_image);
