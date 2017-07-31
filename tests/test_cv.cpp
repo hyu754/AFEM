@@ -19,11 +19,13 @@ int main(void){
 	geo.read_elem("FEM_Elem.txt");
 	geo.read_stationary("FEM_Stationary.txt");
 
+
+
 	AFEM::Simulation sim(geo);
 	sim.element_std_to_array();
 	sim.set_solver_type(AFEM::elastic_solver_type::ENERGY_MINISATION_COROTATION);
 	
-	sim.run();
+	
 
 	std::vector<AFEM::element> element_ =geo.return_element_vector();
 	std::vector<AFEM::position_3D> position_ = geo.return_position3D();
@@ -70,6 +72,16 @@ int main(void){
 	glm::vec3 reprojected = tr. reproject_trace(A, B, C, output.x, output.y);
 
 	while (1){
+		std::vector<cv::Point3f> position_3f;
+		
+		AFEM::position_3D * position_ptr = sim.get_position_vector();
+		for (int node_i = 0; node_i < geo.get_num_nodes();node_i++){
+
+			AFEM::position_3D node_current = position_ptr[node_i];
+			position_.at(node_i) = node_current;
+			position_3f.push_back(cv::Point3f(node_current.x, node_current.y, node_current.z));
+		}
+		viz_class.update_mesh_position("geometry", position_);
 		cap >> input_image;
 		std::vector<cv::Point2f> out_vector_unordered= ar_class.find_aruco_center_four_corners(input_image);
 		int text_counter = 0;
@@ -103,7 +115,8 @@ int main(void){
 
 
 		viz_class.render();
-
+	
+		sim.run();
 	}
 	return 0;
 }

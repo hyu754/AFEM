@@ -2329,10 +2329,10 @@ void cuda_tools::copy_data_from_cuda(AFEM::element *elem_array_ptr, AFEM::positi
 	cudaMemcpy(position_array_h, position_array_d, sizeof(AFEM::position_3D) *Nnodes, cudaMemcpyDeviceToHost);
 
 	//std::cout << elem_array_h[0].position_info[0].x << std::endl;
-
+	
 	elem_array_ptr = elem_array_h;
 	pos_array_ptr = position_array_h;
-
+	
 }
 
 //Host wrapper to call gpu_make_K

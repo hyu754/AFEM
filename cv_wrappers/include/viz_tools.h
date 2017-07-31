@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <map>
 #include <ctime>
 #include "opencv2/opencv_modules.hpp"
 
@@ -109,6 +110,9 @@ private:
 
 	//vector of intersected faces
 	std::vector<face_information> face_information_intersected;
+
+	//Geometry mapper
+	std::map<std::string, cv::viz::Mesh> geometry_mapper;
 public:
 
 	//Get geometry
@@ -164,6 +168,10 @@ public:
 	template<typename T, typename S>
 	std::vector<S> glm_to_cv_3d(std::vector<T>);
 
+	//Update the position of the verticies of the mesh
+	//Input:	std::string name - name of object to be changed
+	//			AFEM::position_3D - the new position of the mesh
+	void update_mesh_position(std::string object_name, std::vector<AFEM::position_3D> new_position);
 
 	//constructors
 	viz_tools();

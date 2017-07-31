@@ -147,7 +147,10 @@ public:
 
 	void make_K_matrix(void);
 
-	
+	//Return number of nodes
+	int get_num_nodes(void){ return position_vector_3D.size(); }
+
+
 	//return position 
 	std::vector<position_3D> return_position3D(){ return position_vector_3D; }
 

@@ -88,12 +88,13 @@ void AFEM::Simulation::run(){
 	cuda_tools_class.make_K(solver_type, element_vec.size(), pos_vec.size());
 
 	std::vector<int> force_vector_indicies;
-	int dummy_array[4] = { 124  , 120  , 116   ,112 };
-	force_vector_indicies.assign(dummy_array, dummy_array + 4);
+	int dummy_array[8] = { 124 ,  120  , 116,   112   ,127  , 123 ,  119 ,  115 };// , 120  , 116   ,112 };
+	force_vector_indicies.assign(dummy_array, dummy_array +8);
 	std::vector<float> zero_force;
 	zero_force.push_back(0.0f); // x
+	zero_force.push_back(-sin(sin_in) * 50);
 	zero_force.push_back(0.0f); //y
-	zero_force.push_back(-sin(sin_in)/30.f);
+	
 	sin_in = sin_in + 0.1;
 	std::vector<std::vector<float>> force_vector;
 	for (int i = 0; i < force_vector_indicies.size(); i++)

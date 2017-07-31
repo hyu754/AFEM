@@ -46,6 +46,9 @@ public:
 
 	//return solver type
 	elastic_solver_type get_solver_type(){ return solver_type; }
+
+	//return position vector , this will be updated to the new position every time this->run() is called
+	position_3D* get_position_vector(void){ return pos_array; }
 private:
 	cuda_tools cuda_tools_class;
 	AFEM::Geometry afem_geometry;

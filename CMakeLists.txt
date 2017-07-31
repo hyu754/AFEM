@@ -42,7 +42,7 @@ ADD_EXECUTABLE(CV_TEST tests/test_cv.cpp)
 #target_link_libraries(OpenCloth freeglutd glew32d)
 #target_link_libraries( AFEM cudart cublas cuda cusparse)
 target_link_libraries( FEM_TEST AFEM_cuda_lib FEM_lib cudart freeglutd glew32d)
-target_link_libraries(CV_TEST ${OpenCV_LIBS} FEM_lib CV_CUSTOM_WRAPPER ${VTK_LIBRARIES})
+target_link_libraries(CV_TEST ${OpenCV_LIBS} AFEM_cuda_lib FEM_lib CV_CUSTOM_WRAPPER ${VTK_LIBRARIES})
 #Adding dll to the debug (assuming debug) folder
 
 
