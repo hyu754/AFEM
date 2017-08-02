@@ -38,6 +38,13 @@ public:
 		float u, v, w;
 		//The position on the face of intersection
 		glm::vec3 inversection_position;
+
+		//The ray id, that corresponds to the optic flow feature ids
+		int ray_id;
+
+		//Boolean variable to state if this intersection is still being used.
+		//Usually the status (uchar) vector optic flow determines this
+		bool istracked;
 	};
 
 	/*
@@ -78,7 +85,7 @@ public:
 
 
 private:
-
+	
 
 	//Viz camera pointer
 	cv::viz::Viz3d *myWindow;
@@ -95,9 +102,7 @@ private:
 	//Camera position matrix
 	cv::Affine3f cam_pose;
 
-	//Transformation to make view direction the same
-	cv::Affine3f transform;// = viz::makeTransformToGlobal(Vec3f(0.0f, -1.0f, 0.0f), Vec3f(-1.0f, 0.0f, 0.0f), Vec3f(0.0f, 0.0f, -1.0f), cam_pos);
-
+	
 
 	//Temporary pointer to a geometry in the field of view
 	cv::viz::Mesh global_mesh_ptr;
@@ -113,9 +118,21 @@ private:
 
 	//Geometry mapper
 	std::map<std::string, cv::viz::Mesh> geometry_mapper;
-public:
 
-	//Get geometry
+public:
+	
+
+	//Get intrinsic matrix for the view port camera
+	cv::Mat get_intrinisic_matrix(){ return camMat; }
+	
+	//Transformation to make view direction the same
+	cv::Affine3f transform;// = viz::makeTransformToGlobal(Vec3f(0.0f, -1.0f, 0.0f), Vec3f(-1.0f, 0.0f, 0.0f), Vec3f(0.0f, 0.0f, -1.0f), cam_pos);
+
+	//Pose found; if the extrinsic between camera and the object has been found
+	bool extrinsic_found = false;
+
+	//Extrinic rotation (R) and translation (T) found by using solve_pnp_matr(...)
+	cv::Affine3f pose_affine;
 
 	//Create a plane of size
 	void create_plane(cv::Vec2d size_plane);
@@ -152,17 +169,23 @@ public:
 	//Get geometry from AFEM::geometry
 	void render_geometry_FEM(std::vector<AFEM::element> geometry, std::vector<AFEM::position_3D> position_vector);
 
+	//Renders the stationary points on screen
+	void render_stationary_FEM(std::string geometry_name,std::vector<AFEM::stationary> stationary_vec);
+
 	//Generates the rays used for ray tracing
-	void generate_rays(void);
+	//Features in origiinal reference contains features transformed into the original reference frame,
+	//The points should be planner to the face being tracked.
+	void generate_rays(std::vector<cv::Point3f> features_in_original_reference);
 
 	//Ray tracer
 	void ray_tracer(void);
 
-	
+	//Return result from ray tracer
+	std::vector<face_information> return_ray_trace_vector(){		return face_information_intersected;	}
 
 	//GLM to CV for 2d
-	template<typename T, typename S> 
-	std::vector<S> glm_to_cv_2d(std::vector<T>);
+	template<typename cvtype, typename glmtype> 
+	std::vector<glmtype> glm_to_cv_2d(std::vector<cvtype>);
 
 	//GLM to CV for 3d
 	template<typename T, typename S>
@@ -172,6 +195,14 @@ public:
 	//Input:	std::string name - name of object to be changed
 	//			AFEM::position_3D - the new position of the mesh
 	void update_mesh_position(std::string object_name, std::vector<AFEM::position_3D> new_position);
+
+	//Gets the ray tracer class pointer
+	raytracer* return_ray_tracer_class(){ return &ray_tracer_class; };
+
+	//This function transforms an image point and transforms it to the original orientation (or the frame of the geometry)
+	//Input:	(u,v)-point on the image frame
+	//Output: (x,y,z)-3d position in the original reference frame
+	cv::Point3f transform_image_to_original_frame(const cv::Point2f);
 
 	//constructors
 	viz_tools();

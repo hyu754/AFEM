@@ -98,7 +98,7 @@ std::vector<raytracer::intersected_rays> raytracer::ray_tracer_run(){
 					min_point.u = ans.x;
 					min_point.v = ans.y;
 					min_point.w = 1.0f - ans.x - ans.y;
-	
+					min_point.ray_id = ray_vector_ptr->ray_id;
 					ray_intersect = ans;
 				
 					number_intersected++;

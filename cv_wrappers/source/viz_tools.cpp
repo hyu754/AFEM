@@ -134,7 +134,7 @@ cv::Affine3f viz_tools::solve_pnp_matrix(std::vector<cv::Point3f>_p3d /*3d point
 
 
 	cv::Affine3f pose(rot_mat, cv::Vec3f(tout_temp.at(0), tout_temp.at(1), tout_temp.at(2)));
-
+	
 	return pose;
 
 }
@@ -184,6 +184,7 @@ cv::Affine3f viz_tools::solve_pnp_matrix(
 	Rodrigues(rot_vec, rot_mat);
 
 	cv::Affine3f pose(rot_mat, cv::Vec3f(tout_temp.at(0), tout_temp.at(1), tout_temp.at(2)));
+	pose_affine = pose;
 	return pose;
 
 }
@@ -194,16 +195,34 @@ cv::Mat viz_tools::augment_mesh(cv::Mat input_image,std::string object_name, cv:
 	//myWindow->setWidgetPose("geometryline", pose);
 	myWindow->setWidgetPose("geometry", pose);
 	myWindow->setWidgetPose("geometryline", pose);
+	myWindow->setWidgetPose("stationary_cloud", pose);
 
+	/*myWindow->setRenderingProperty("stationary_cloud", cv::viz::RenderingProperties::POINT_SIZE, 3.0);
+	*/
+	try{
+		myWindow->setWidgetPose("cloud", pose);
+		myWindow->setRenderingProperty("cloud", cv::viz::RenderingProperties::POINT_SIZE, 10.0);
 
+	}
+	catch(...){
+		std::cout << "no cloud" << std::endl;
+	}
 	
 	cv::Mat screenshot = myWindow->getScreenshot();
 	
 	//Perform ray tracing
 	//ray_tracer();
 
-	myWindow->setWidgetPose("cloud", pose);
-	myWindow->spinOnce();
+	//myWindow->setWidgetPose("cloud", pose);
+	
+	//myWindow->removeAllLights();
+	float cx = size_window.width / 2.0f;
+	float cy = size_window.height / 2.0f;
+
+
+	cv::Vec3f cam_pos(cx, cy, 640.0);
+	cv::Vec3f cam_focal_point(cx, cy, 0);
+	myWindow->addLight( cam_focal_point, cam_pos,cv::viz::Color::blue());
 	//copy the color image with binary image as mask
 	//screenshot.copyTo(screenshot, mask);
 
@@ -213,20 +232,32 @@ cv::Mat viz_tools::augment_mesh(cv::Mat input_image,std::string object_name, cv:
 	cv::cvtColor(screenshot, screenshot_gray, cv::COLOR_RGBA2GRAY);
 
 	cv::Mat mask,mask_inv;
-	cv::threshold(screenshot_gray, mask, 10, 255, cv::THRESH_BINARY);
+	cv::threshold(screenshot_gray, mask, 0.0001, 255, cv::THRESH_BINARY);
 	cv::bitwise_not(mask, mask_inv );
 	//backout the image in input image;
+	//cv::GaussianBlur(mask_inv, mask_inv, cv::Size(5, 5), 2.0,2.0);
 	cv::cvtColor(mask_inv, mask_inv, CV_GRAY2RGB);
+	cv::cvtColor(mask, mask, CV_GRAY2BGR);
+	cv::Mat input_image_not;
+	cv::bitwise_and(input_image, mask, input_image_not);
 	cv::bitwise_and(input_image, mask_inv, input_image);
+
+	
+	
+	cv::bitwise_and(screenshot, mask, screenshot);
 	cv::Mat dst;
 
-	cv::imshow("input_image", input_image);
+	cv::imshow("input_image_from_VIZ", input_image);
 	cv::imshow("mask", mask);
-	dst = input_image + screenshot;
-	//cv::addWeighted(input_image, 1, screenshot, 1, 0, dst);
+	cv::addWeighted(input_image_not, 0.4, screenshot, 0.6, 0, dst);
+	cv::imshow("dst_dst", dst);
+	dst = input_image + dst;
+	
 	
 	return dst;
 }
+
+
 
 void viz_tools::render_geometry_FEM(std::vector<AFEM::element> element_vector,std::vector<AFEM::position_3D> position_vector){
 	cv::viz::Mesh geometry;
@@ -404,17 +435,17 @@ void viz_tools::render_geometry_FEM(std::vector<AFEM::element> element_vector,st
 		geometry.polygons = cv::Mat(polygons, true).reshape(1, 1);
 		cv::viz::WMesh mesh_geometry = cv::viz::WMesh(geometry);
 		cv::viz::WMesh mesh_geometry_line = cv::viz::WMesh(geometry);
-		mesh_geometry.setColor(cv::viz::Color::orange());
-		myWindow->setBackgroundColor();
+		mesh_geometry.setColor(cv::viz::Color::blue());
+		myWindow->setBackgroundColor();// cv::viz::Color::white());//cv::viz::Color::white()
 		
-		mesh_geometry_line.setColor(cv::viz::Color::blue());
+		mesh_geometry_line.setColor(cv::viz::Color::magenta());
 		//mesh_geometry_line.
 		myWindow->showWidget("geometryline", mesh_geometry_line);
 
 		myWindow->showWidget("geometry", mesh_geometry);
 		myWindow->setRenderingProperty("geometryline", cv::viz::RenderingProperties::REPRESENTATION, cv::viz::RepresentationValues::REPRESENTATION_WIREFRAME);
 	//	myWindow->setRenderingProperty("geometry", cv::viz::RenderingProperties::REPRESENTATION, cv::viz::RepresentationValues::REPRESENTATION_WIREFRAME);
-		myWindow->setRenderingProperty("geometryline", cv::viz::RenderingProperties::LINE_WIDTH,2);
+		myWindow->setRenderingProperty("geometryline", cv::viz::RenderingProperties::LINE_WIDTH,4);
 		//myWindow->setRenderingProperty("geometry", cv::viz::RenderingProperties::OPACITY, 0.5);
 		
 
@@ -468,18 +499,33 @@ void viz_tools::update_mesh_position(std::string object_name, std::vector<AFEM::
 
 	cv::viz::WMesh WMesh_ = cv::viz::WMesh(_mesh);
 	cv::viz::WMesh WMesh_line = cv::viz::WMesh(_mesh);
-	WMesh_.setColor(cv::viz::Color::orange());
-	WMesh_line.setColor(cv::viz::Color::blue());
+	WMesh_.setColor(cv::viz::Color::blue());
+	WMesh_line.setColor(cv::viz::Color::cherry());
 	myWindow->showWidget(object_name, WMesh_);
 	myWindow->showWidget(object_name + "line", WMesh_line);
+	myWindow->setRenderingProperty(object_name, cv::viz::RenderingProperties::OPACITY, 1);
 	myWindow->setRenderingProperty(object_name + "line", cv::viz::RenderingProperties::REPRESENTATION, cv::viz::RepresentationValues::REPRESENTATION_WIREFRAME);
 	//	myWindow->setRenderingProperty("geometry", cv::viz::RenderingProperties::REPRESENTATION, cv::viz::RepresentationValues::REPRESENTATION_WIREFRAME);
-	myWindow->setRenderingProperty(object_name + "line", cv::viz::RenderingProperties::LINE_WIDTH, 2);
+	myWindow->setRenderingProperty(object_name + "line", cv::viz::RenderingProperties::LINE_WIDTH, 3);
 
 }
 
+void viz_tools::render_stationary_FEM(std::string geometry_name,::vector<AFEM::stationary> stationary_vec){
+	std::vector<cv::Point3f> cloud_;
 
-void viz_tools::generate_rays(void){
+	cv::viz::Mesh _mesh = global_mesh_ptr;
+	for (auto stationary_ptr = stationary_vec.begin(); stationary_ptr != stationary_vec.end(); ++stationary_ptr){
+		cv::Vec3f pos_ = _mesh.cloud.at<cv::Vec3f>((int)stationary_ptr->node_number);
+		cloud_.push_back(cv::Point3f(pos_.val[0],pos_.val[1],pos_.val[2]));
+	}
+	cv::viz::WCloud cloud_temp(cloud_);
+	cloud_temp.setColor(cv::viz::Color::apricot());
+	myWindow->showWidget("stationary_cloud", cloud_temp);
+	myWindow->setRenderingProperty("stationary_cloud", cv::viz::RenderingProperties::POINT_SIZE, 20.0);
+}
+
+
+void viz_tools::generate_rays(std::vector<cv::Point3f> features_in_original_reference){
 
 	int height = size_window.height;
 	int width = size_window.width;
@@ -496,17 +542,29 @@ void viz_tools::generate_rays(void){
 			raytracer::ray_struct _ray_st;
 			_ray_st.ray = glm::vec3(0, 0, -1.0);
 			_ray_st.start_position = glm::vec3(i, j, 100);
-			myWindow->showWidget(std::to_string(line_counter) + "ray", line);
+			//myWindow->showWidget(std::to_string(line_counter) + "ray", line);
 			line_counter++;
 			ray_vec.push_back(_ray_st);
 		}
 	}
-	//std::vector<raytracer::ray_struct> ray_vec2;
-	//raytracer::ray_struct _ray_st;
-	//_ray_st.ray = glm::vec3(0, 0, -1.0);
-	//_ray_st.start_position = glm::vec3(21, 21, 200);
-	//ray_vec2.push_back(_ray_st);
-	ray_tracer_class.set_ray_vector(ray_vec);
+	std::vector<raytracer::ray_struct> ray_vec2;
+	raytracer::ray_struct _ray_st;
+	std::vector<cv::Point3f> ray_start_vec;
+	int _id = 0;
+	for (auto feature_ptr = features_in_original_reference.begin(); feature_ptr != features_in_original_reference.end(); ++feature_ptr){
+		_ray_st.ray = glm::vec3(0, 0, -1.0);
+		_ray_st.start_position = glm::vec3(feature_ptr->x , feature_ptr->y, feature_ptr->z);
+		//Used when we are using optic flow
+		_ray_st.ray_id = _id;
+		ray_start_vec.push_back(cv::Point3f(_ray_st.start_position.x, _ray_st.start_position.y, _ray_st.start_position.z));
+		ray_vec2.push_back(_ray_st);
+		_id++;
+	}
+	cv::viz::WCloud cloud(ray_start_vec);
+	myWindow->showWidget("cloud_start", cloud);
+	
+	if (!ray_vec2.empty())
+		ray_tracer_class.set_ray_vector(ray_vec2);
 	
 }
 template<typename T, typename S>
@@ -529,7 +587,44 @@ std::vector<S> viz_tools::glm_to_cv_3d(std::vector<T> glm_vec){
 	return output_;
 }
 
+cv::Point3f viz_tools::transform_image_to_original_frame(const cv::Point2f t_p){
 
+	cv::Point3f worldPoint = cv::Point3f(t_p.x, t_p.y, 1.0);
+	cv::Mat cam_matrix = camMat;
+	//cv::Affine3f cam_matrix_affine(cam_matrix);
+	//cv::Affine3f pose_inv = (cam_matrix_affine*pose_affine);//
+	//pose_inv = pose_inv.inv();
+	//worldPoint = pose_inv * worldPoint;
+
+	//cv::Affine3f pose_aff = pose_affine;
+
+	//rot_(3, 3, cv::DataType<double>::type);
+
+	cv::Mat rot_ = cv::Mat(pose_affine.rotation());
+	cv::Mat tr_ = cv::Mat(pose_affine.translation());
+	cv::Mat uvw = cv::Mat::ones(3, 1, CV_32F);
+	cv::Mat t_vec = cv::Mat::ones(3, 1, CV_32F);
+	uvw.at<float>(0) = t_p.x;
+	uvw.at<float>(1) = t_p.y;
+	cv::Mat LHS = rot_.inv()*cam_matrix.inv()*uvw;
+	t_vec.at<float>(0) = tr_.at<float>(0);
+	t_vec.at<float>(1) = tr_.at<float>(1);
+	t_vec.at<float>(2) = tr_.at<float>(2);
+
+
+	cv::Mat RHS = rot_.inv()*t_vec;
+
+	float s = 20.0 + RHS.at<float>(2, 0);
+	s /= LHS.at<float>(2, 0);
+	cv::Mat world_point_mat = rot_.inv()*(s*cam_matrix.inv()*uvw - t_vec);
+	worldPoint.x = world_point_mat.at<float>(0, 0);
+	worldPoint.y = world_point_mat.at<float>(1, 0);
+	worldPoint.z = world_point_mat.at<float>(2, 0);
+
+	return worldPoint;
+
+
+}
 
 void viz_tools::ray_tracer(void){
 	cv::viz::Widget geo_temp = myWindow->getWidget("geometry");
@@ -608,6 +703,7 @@ void viz_tools::ray_tracer(void){
 	//node_out.close();
 	ray_tracer_class.set_face_vector(face_verticies);
 	std::vector<raytracer::intersected_rays> ray_trace_output = ray_tracer_class.ray_tracer_run();
+
 	//change from glm to cv
 	std::vector<cv::Point3f> ray_trace_output_cv;// = glm_to_cv_3d<glm::vec3, cv::Point3f>(ray_trace_output);
 	for (auto ray_trace_ptr = ray_trace_output.begin(); ray_trace_ptr != ray_trace_output.end(); ++ray_trace_ptr){
@@ -615,7 +711,7 @@ void viz_tools::ray_tracer(void){
 		ray_trace_output_cv.push_back(cv::Point3f(ray_trace_ptr->intersected_position.x, ray_trace_ptr->intersected_position.y, ray_trace_ptr->intersected_position.z));
 	}
 	if (ray_trace_output_cv.size() != 0){
-
+		ray_tracer_class.set_ray_tracer_status(true);//Set the status of ray tracing
 
 		cv::viz::WCloud cloud(ray_trace_output_cv);
 
@@ -624,17 +720,28 @@ void viz_tools::ray_tracer(void){
 	}
 //	mesh_W.cast();	cv::viz::Mesh mesh312 =mesh_W.cast<cv::viz::Mesh>();
 	face_information_intersected.clear();
+
+	//Use a temporary variable so that the original does not change
+	std::vector<face_information> face_information_vector_temporary = face_information_vector;
 	for (auto intersected_ptr = ray_trace_output.begin(); intersected_ptr != ray_trace_output.end(); ++intersected_ptr){
 		intersection _intersection_;
 		_intersection_.inversection_position = intersected_ptr->intersected_position;
 		_intersection_.u = intersected_ptr->u;
 		_intersection_.v = intersected_ptr->v;
 		_intersection_.w = intersected_ptr->w;
-		face_information_vector.at(intersected_ptr->face_id).intersection_vector_t.push_back(_intersection_);
+		_intersection_.ray_id = intersected_ptr->ray_id;
+		face_information_vector_temporary.at(intersected_ptr->face_id).intersection_vector_t0.push_back(_intersection_);
 		//_face_.intersection_vector_t = intersected_ptr->intersected_position;
 
 		
-		face_information_intersected.push_back(face_information_vector.at(intersected_ptr->face_id));
+		
+	}
+
+	//If the face has rays passing through, then we add it to face_information_intersected
+	for (auto face_info_ptr = face_information_vector_temporary.begin(); face_info_ptr != face_information_vector_temporary.end(); ++face_info_ptr){
+		if (face_info_ptr->intersection_vector_t0.size() != 0){
+			face_information_intersected.push_back(*face_info_ptr);
+		}
 	}
 }
 viz_tools::~viz_tools(){

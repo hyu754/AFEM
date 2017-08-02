@@ -14,13 +14,19 @@ class raytracer
 public:
 	//A structure to store information on rays
 	struct ray_struct{
+		int ray_id; // This ray id will correspond to the optic flow algorithm. 
 		glm::vec3 ray;
 		glm::vec3 start_position;
 	};
 
 	//A structure to store information on intersected rays
 	struct intersected_rays{
+		//Face id
 		int face_id;
+
+		//Ray id
+		int ray_id;
+
 		//The nodes in the face, A,B,C
 		std::vector<glm::vec3> nodes;
 
@@ -36,6 +42,10 @@ private:
 
 	//Vector of all of the faces to be analysed 
 	std::vector<std::vector<glm::vec3>> faces_vector;
+
+
+	//Initial ray trace found
+	bool ray_trace_performed = false;
 	
 public:
 
@@ -69,11 +79,14 @@ public:
 	//Gets the original set of ray_vectors in its default orientation
 	std::vector<ray_struct> get_ray_vector_original(){ return ray_vector_original; }
 
-
-
-
 	//Sets the vector of faces to be analysed
 	void set_face_vector(std::vector<std::vector<glm::vec3>> face_vec_in){ faces_vector = face_vec_in; }
+
+	//Returns the boolean variable to determine if the initial ray tracer is performed
+	bool get_ray_tracer_status(){ return ray_trace_performed; }
+
+	//Sets the boolean variable of ray tracer status
+	void set_ray_tracer_status(bool _bool){ ray_trace_performed = _bool; }
 private:
 
 };

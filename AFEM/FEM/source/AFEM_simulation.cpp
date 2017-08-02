@@ -87,14 +87,15 @@ void AFEM::Simulation::run(){
 
 	cuda_tools_class.make_K(solver_type, element_vec.size(), pos_vec.size());
 
+#if MANUAL_FORCE_ENTRY
 	std::vector<int> force_vector_indicies;
-	int dummy_array[8] = { 124 ,  120  , 116,   112   ,127  , 123 ,  119 ,  115 };// , 120  , 116   ,112 };
-	force_vector_indicies.assign(dummy_array, dummy_array +8);
+	int dummy_array[8] = { 124, 120, 116, 112, 127, 123, 119, 115 };// , 120  , 116   ,112 };
+	force_vector_indicies.assign(dummy_array, dummy_array + 8);
 	std::vector<float> zero_force;
 	zero_force.push_back(0.0f); // x
 	zero_force.push_back(-sin(sin_in) * 50);
 	zero_force.push_back(0.0f); //y
-	
+
 	sin_in = sin_in + 0.1;
 	std::vector<std::vector<float>> force_vector;
 	for (int i = 0; i < force_vector_indicies.size(); i++)
@@ -108,6 +109,8 @@ void AFEM::Simulation::run(){
 		cuda_tools_class.get_number_sudo_forces(force_vector.size());
 		cuda_tools_class.get_sudo_force_information(force_vector, force_vector_indicies);
 	}
+
+#endif // MANUAL_FORCE_ENTRY
 
 	if ((solver_type == AFEM::DYNAMIC_COROTATION) || (solver_type == AFEM::DYNAMIC_NON_COROTATION)){
 		cuda_tools_class.dynamic();

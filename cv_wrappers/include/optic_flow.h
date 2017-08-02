@@ -13,7 +13,8 @@ class optic_flow
 private:
 	//variables for optic flow
 	cv::Mat gray, prevGray, image, frame, frame2;
-	std::vector<cv::Point2f> points[2];
+
+	std::vector<cv::Point2f> points[2]; //!< Brief Left and right point vectors
 	std::vector<cv::Point2f> original_position;//vector to store the original position of the poitns
 	vector<uchar> status;
 	cv::Point2f point;
@@ -24,7 +25,13 @@ public:
 	
 	//initialize key feature points to track.
 	//Input: vector of points to track
-	void initialize_points(std::vector<cv::Point2f>);
+
+	/**
+	* Initialize optic flow points
+	* @see run_LK()
+	* @param initialize_input the first argument.
+	*/
+	void initialize_points(std::vector<cv::Point2f> initialize_input); 
 
 	//Run the LK optic flow algorithm, the input is the display window name
 	void run_LK(std::string);
