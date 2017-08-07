@@ -124,8 +124,8 @@ class cuda_tools{
 	//Variables to use
 	int M = 0, N = 0;// nz = 0, *I = NULL, *J = NULL;
 	float *val = NULL;
-	const float tol = 1e-7f;
-	const int max_iter =1550;
+	const float tol = 1e-3f;
+	const int max_iter =2800;
 	float *x;
 	float *rhs;
 	float a, b, na, r0, r1;
@@ -143,6 +143,9 @@ class cuda_tools{
 	int number_sudo_forces;
 	std::vector<std::vector<float>> sudo_force_vector;
 	std::vector<int> sudo_force_indicies_vector;
+
+	//Alpha for energy min
+	float alpha_energy_min = 1000000000.0f;
 
 public:
 	cuda_tools();
@@ -177,8 +180,8 @@ public:
 	void stationary_BC_f(float *zero_u);
 
 	//Make f vector
-	void make_f(std::vector<int> indicies, std::vector<std::vector<float>> force,int num_nodes, int dim);
-
+	//void make_f(std::vector<int> indicies, std::vector<std::vector<float>> force,int num_nodes, int dim);
+	void make_f( int num_nodes, int dim);
 
 	//place holder for host -> device
 	void host_to_device();
@@ -207,6 +210,10 @@ public:
 
 	//Energy minisation routine
 	void energy_minisation();
+
+	//Set alpha for energy min
+	void set_alpha_energy_minisation(float alpha_in){ alpha_energy_min = alpha_in; }
+	
 
 	//Getting information about energy minisation parameters
 	void get_number_sudo_forces(int _in){ number_sudo_forces = _in; }

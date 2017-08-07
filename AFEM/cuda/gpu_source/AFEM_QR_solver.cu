@@ -1,5 +1,5 @@
 
-
+#include <iomanip>
 #include <stdio.h>
 #include <math.h>
 #include <iostream>
@@ -7,7 +7,7 @@
 #include "Utilities.cuh"
 #include <fstream>
 #include <ctime>
-
+//#define ANAYSE_CG
 #define IDX2C(i,j,ld) (((j)*(ld))+( i )) 
 void printMatrix(int m, int n, const double*A, int lda, const char* name) { for (int row = 0; row < m; row++){ for (int col = 0; col < n; col++){ double Areg = A[row + col*lda]; printf("%s(%d,%d) = %f\n", name, row + 1, col + 1, Areg); } } }
 
@@ -438,7 +438,7 @@ void cuda_tools::cg(void){
 		for (int i = 0; i < Ncols; i++){
 			for (int j = 0; j < Ncols; j++){
 				//std::cout << LHSOUT[IDX2C(j, i, Ncols)] << " ";
-				output << LHSOUT[IDX2C(j, i, Ncols)] << " ";
+				output <<(float)LHSOUT[IDX2C(j, i, Ncols)] << " ";
 			}
 			//std::cout << std::endl;
 			output << "\n";
@@ -471,6 +471,11 @@ void cuda_tools::cg(void){
 		//cudaMalloc((void **)&d_p, N*sizeof(float));
 		k = 1;
 		double start_time = std::clock();
+
+#ifdef ANAYSE_CG
+		std::ofstream output_cg;
+		output_cg.open("cg_output.txt");
+#endif
 		while (r1 >tol*tol && k <= max_iter)
 		{
 			if (k > 1)
@@ -510,8 +515,16 @@ void cuda_tools::cg(void){
 			
 		//	cudaThreadSynchronize();
 			//printf("iteration = %3d, residual = %e\n", k, sqrt(r1));
+#ifdef ANAYSE_CG
+			output_cg << k << " " << r1 << std::endl;
+#endif
 			k++;
 		}
+
+#ifdef ANAYSE_CG
+		
+		output_cg.close();
+#endif
 		std::cout << "iteration time"<< (std::clock() - start_time) / CLOCKS_PER_SEC << std::endl;
 		//cudaMemcpy(x, d_x, N*sizeof(float), cudaMemcpyDeviceToHost);
 
@@ -541,7 +554,7 @@ void cuda_tools::cg(void){
 		/*free(I);
 		free(J);*/
 		free(val);
-		//free(x);
+		free(x);
 		//free(rhs);
 		cudaFree(d_col);
 		cudaFree(d_row);
@@ -550,6 +563,14 @@ void cuda_tools::cg(void){
 		cudaFree(d_r);
 		cudaFree(d_p);
 		cudaFree(d_Ax);
+
+		cudaFree(d_A);
+		cudaFree(d_A_ColIndices);
+		cudaFree(d_A_RowIndices);
+
+
+
+
 	}
 
 

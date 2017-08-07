@@ -6,6 +6,7 @@
 #include <string>
 #define WRITE_TO_FILE
 //#define CPU_CG_SOLVER
+//#define MANUAL_FORCE_ENTRY
 #ifdef CPU_CG_SOLVER
 #include <Eigen\Eigen>
 #include <Eigen\IterativeLinearSolvers>
@@ -87,13 +88,14 @@ void AFEM::Simulation::run(){
 
 	cuda_tools_class.make_K(solver_type, element_vec.size(), pos_vec.size());
 
-#if MANUAL_FORCE_ENTRY
+#ifdef MANUAL_FORCE_ENTRY
 	std::vector<int> force_vector_indicies;
-	int dummy_array[8] = { 124, 120, 116, 112, 127, 123, 119, 115 };// , 120  , 116   ,112 };
-	force_vector_indicies.assign(dummy_array, dummy_array + 8);
+	//int dummy_array[8] = { 124, 120, 116, 112, 127, 123, 119, 115 };// , 120  , 116   ,112 };
+	int dummy_array[1] = { 211 };
+	force_vector_indicies.assign(dummy_array, dummy_array + 1);
 	std::vector<float> zero_force;
 	zero_force.push_back(0.0f); // x
-	zero_force.push_back(-sin(sin_in) * 50);
+	zero_force.push_back(0);
 	zero_force.push_back(0.0f); //y
 
 	sin_in = sin_in + 0.1;
@@ -113,6 +115,7 @@ void AFEM::Simulation::run(){
 #endif // MANUAL_FORCE_ENTRY
 
 	if ((solver_type == AFEM::DYNAMIC_COROTATION) || (solver_type == AFEM::DYNAMIC_NON_COROTATION)){
+		cuda_tools_class.make_f(pos_vec.size(),3);
 		cuda_tools_class.dynamic();
 	}
 	else if (solver_type == AFEM::ENERGY_MINISATION_COROTATION){

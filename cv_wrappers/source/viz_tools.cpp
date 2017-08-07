@@ -192,21 +192,23 @@ cv::Affine3f viz_tools::solve_pnp_matrix(
 cv::Mat viz_tools::augment_mesh(cv::Mat input_image,std::string object_name, cv::Affine3f pose){
 	pose = transform*pose;
 	//Affine3f cloud_pose_global = transform * cloud_pose;
-	//myWindow->setWidgetPose("geometryline", pose);
-	myWindow->setWidgetPose("geometry", pose);
 	myWindow->setWidgetPose("geometryline", pose);
-	myWindow->setWidgetPose("stationary_cloud", pose);
+	//myWindow->setWidgetPose("geometry", pose);
+	//myWindow->setWidgetPose("geometryline", pose);
+	if (stationary_exist ==true)
+		myWindow->setWidgetPose("stationary_cloud", pose);
+	myWindow->setWidgetPose("geometry_surface", pose);
 
 	/*myWindow->setRenderingProperty("stationary_cloud", cv::viz::RenderingProperties::POINT_SIZE, 3.0);
 	*/
-	try{
+	/*try{
 		myWindow->setWidgetPose("cloud", pose);
 		myWindow->setRenderingProperty("cloud", cv::viz::RenderingProperties::POINT_SIZE, 10.0);
 
 	}
 	catch(...){
 		std::cout << "no cloud" << std::endl;
-	}
+	}*/
 	
 	cv::Mat screenshot = myWindow->getScreenshot();
 	
@@ -261,6 +263,7 @@ cv::Mat viz_tools::augment_mesh(cv::Mat input_image,std::string object_name, cv:
 
 void viz_tools::render_geometry_FEM(std::vector<AFEM::element> element_vector,std::vector<AFEM::position_3D> position_vector){
 	cv::viz::Mesh geometry;
+	//cv::viz::Mesh geometry_surface; //This mesh is for visualizing some textures on the face 
 	std::vector<cv::Vec3d> points;
 	std::vector<cv::Point3f> points3f_;
 	std::vector<glm::vec3> points_glm;
@@ -478,9 +481,169 @@ void viz_tools::render_geometry_FEM(std::vector<AFEM::element> element_vector,st
 
 }
 
+
+void viz_tools::render_geometry_surface_FEM(std::vector<AFEM::element> element_vector, std::vector<AFEM::position_3D> position_vector){
+	cv::viz::Mesh geometry;
+	//cv::viz::Mesh geometry_surface; //This mesh is for visualizing some textures on the face 
+	std::vector<cv::Vec3d> points;
+	std::vector<cv::Point3f> points3f_;
+	std::vector<glm::vec3> points_glm;
+	std::vector<int> polygons;
+	std::vector<cv::Vec2d> tcoords;
+	float max_x = -INFINITY;
+	float max_y = -INFINITY;
+	//assign nodes first
+	for (auto node_ptr = position_vector.begin(); node_ptr != position_vector.end(); ++node_ptr){
+
+		cv::Vec3d _pos_(node_ptr->x, node_ptr->y, node_ptr->z);
+		if (node_ptr->x > max_x){
+			max_x = node_ptr->x;
+		}
+		if (node_ptr->y > max_y){
+			max_y = node_ptr->y;
+		}
+		points.push_back(_pos_);
+		points3f_.push_back(cv::Point3f(_pos_));
+	}
+	for (auto node_ptr = position_vector.begin(); node_ptr != position_vector.end(); ++node_ptr){
+
+		tcoords.push_back(cv::Vec2d(node_ptr->x / max_x, node_ptr->y / max_y));
+	
+
+	}
+
+
+	
+
+	//Texture coordinate variables
+	
+
+
+	std:vector<cv::viz::WLine > line_vector;
+
+	int _element_counter_ = 0;
+	int _face_counter_ = 0;
+	//a vector to store existing combinations
+	std::vector<std::vector<int>> non_repeated_indicies;
+	for (auto element_ptr = element_vector.begin(); element_ptr != element_vector.end(); ++element_ptr){
+		int indicies[4] = {
+			element_ptr->nodes_in_elem[0],
+			element_ptr->nodes_in_elem[1],
+			element_ptr->nodes_in_elem[2],
+			element_ptr->nodes_in_elem[3]
+		};
+
+		/*node 1*/
+
+		if ((points[indicies[0]].val[2] > 7.9) &(points[indicies[1]].val[2] > 7.9)&(points[indicies[2]].val[2] > 7.9)){
+			polygons.push_back(3);
+			polygons.push_back(indicies[0]);
+			polygons.push_back(indicies[1]);
+			polygons.push_back(indicies[2]);
+
+		/*	tcoords.push_back(cv::Vec2d(points[indicies[0]].val[0] / max_x, points[indicies[0]].val[1] / max_y));
+			tcoords.push_back(cv::Vec2d(points[indicies[1]].val[0] / max_x, points[indicies[1]].val[1] / max_y));
+			tcoords.push_back(cv::Vec2d(points[indicies[2]].val[0] / max_x, points[indicies[2]].val[1] / max_y));
+*/
+		}
+
+
+
+
+		/*node 2*/
+		if ((points[indicies[0]].val[2] > 7.9) &(points[indicies[3]].val[2] > 7.9)&(points[indicies[1]].val[2] > 7.9)){
+			polygons.push_back(3);
+			polygons.push_back(indicies[0]);
+			polygons.push_back(indicies[3]);
+			polygons.push_back(indicies[1]);
+		/*	tcoords.push_back(cv::Vec2d(points[indicies[0]].val[0] / max_x, points[indicies[0]].val[1] / max_y));
+			tcoords.push_back(cv::Vec2d(points[indicies[3]].val[0] / max_x, points[indicies[3]].val[1] / max_y));
+			tcoords.push_back(cv::Vec2d(points[indicies[1]].val[0] / max_x, points[indicies[1]].val[1] / max_y));
+*/
+		}
+
+		/*node 3*/
+		if ((points[indicies[1]].val[2] > 7.9) &(points[indicies[3]].val[2] > 7.9)&(points[indicies[2]].val[2] > 7.9)){
+			polygons.push_back(3);
+			polygons.push_back(indicies[1]);
+			polygons.push_back(indicies[3]);
+			polygons.push_back(indicies[2]);
+			/*tcoords.push_back(cv::Vec2d(points[indicies[1]].val[0] / max_x, points[indicies[1]].val[1] / max_y));
+			tcoords.push_back(cv::Vec2d(points[indicies[3]].val[0] / max_x, points[indicies[3]].val[1] / max_y));
+			tcoords.push_back(cv::Vec2d(points[indicies[2]].val[0] / max_x, points[indicies[2]].val[1] / max_y));
+*/
+		}
+
+		/*node 4*/
+		if ((points[indicies[0]].val[2] > 7.9) &(points[indicies[1]].val[2] > 7.9)&(points[indicies[2]].val[3] > 7.9)){
+			polygons.push_back(3);
+			polygons.push_back(indicies[0]);
+			polygons.push_back(indicies[2]);
+			polygons.push_back(indicies[3]);
+		/*	tcoords.push_back(cv::Vec2d(points[indicies[0]].val[0] / max_x, points[indicies[0]].val[1] / max_y));
+			tcoords.push_back(cv::Vec2d(points[indicies[2]].val[0] / max_x, points[indicies[2]].val[1] / max_y));
+			tcoords.push_back(cv::Vec2d(points[indicies[3]].val[0] / max_x, points[indicies[3]].val[1] / max_y));
+*/
+		}
+
+		
+
+
+
+	}
+
+	cv::Mat test = cv::imread( "UOA_LOGO.jpg");
+
+	geometry.cloud = cv::Mat(points3f_, true).reshape(3, 1);
+	geometry.polygons = cv::Mat(polygons, true).reshape(1, 1);
+	geometry.tcoords = cv::Mat(tcoords, true).reshape(2, 1);
+	geometry.texture = test;
+	cv::viz::WMesh mesh_geometry = cv::viz::WMesh(geometry);
+	myWindow->showWidget("geometry_surface", cv::viz::WMesh(mesh_geometry));
+	myWindow->setRenderingProperty("geometry_surface", cv::viz::SHADING, cv::viz::SHADING_PHONG);
+
+	geometry_mapper["geometry_surface"] = geometry;
+
+
+}
+
 void viz_tools::update_mesh_position(std::string object_name, std::vector<AFEM::position_3D> new_position){
 
 	cv::viz::Mesh _mesh = geometry_mapper[object_name];
+	
+	std::vector<cv::Point3f> points3f_;
+
+
+
+
+	//assign nodes first
+	for (auto node_ptr = new_position.begin(); node_ptr != new_position.end(); ++node_ptr){
+
+		cv::Vec3d _pos_(node_ptr->x, node_ptr->y, node_ptr->z);
+		//points.push_back(_pos_);
+		points3f_.push_back(cv::Point3f(_pos_));
+	}
+
+	_mesh.cloud = cv::Mat(points3f_, true).reshape(3, 1);
+	geometry_mapper[object_name] = _mesh;
+	
+
+	cv::viz::WMesh WMesh_ = cv::viz::WMesh(_mesh);
+	cv::viz::WMesh WMesh_line = cv::viz::WMesh(_mesh);
+	WMesh_.setColor(cv::viz::Color::blue());
+	WMesh_line.setColor(cv::viz::Color::cherry());
+	myWindow->showWidget(object_name, WMesh_);
+	myWindow->showWidget(object_name + "line", WMesh_line);
+	myWindow->setRenderingProperty(object_name, cv::viz::RenderingProperties::OPACITY, 1);
+	myWindow->setRenderingProperty(object_name + "line", cv::viz::RenderingProperties::REPRESENTATION, cv::viz::RepresentationValues::REPRESENTATION_WIREFRAME);
+	//	myWindow->setRenderingProperty("geometry", cv::viz::RenderingProperties::REPRESENTATION, cv::viz::RepresentationValues::REPRESENTATION_WIREFRAME);
+	myWindow->setRenderingProperty(object_name + "line", cv::viz::RenderingProperties::LINE_WIDTH, 3);
+
+}
+void viz_tools::update_mesh_surface_position(std::string object_name, std::vector<AFEM::position_3D> new_position){
+
+	cv::viz::Mesh _mesh = geometry_mapper[object_name];
+
 	std::vector<cv::Point3f> points3f_;
 
 
@@ -497,18 +660,11 @@ void viz_tools::update_mesh_position(std::string object_name, std::vector<AFEM::
 	_mesh.cloud = cv::Mat(points3f_, true).reshape(3, 1);
 	geometry_mapper[object_name] = _mesh;
 
-	cv::viz::WMesh WMesh_ = cv::viz::WMesh(_mesh);
-	cv::viz::WMesh WMesh_line = cv::viz::WMesh(_mesh);
-	WMesh_.setColor(cv::viz::Color::blue());
-	WMesh_line.setColor(cv::viz::Color::cherry());
-	myWindow->showWidget(object_name, WMesh_);
-	myWindow->showWidget(object_name + "line", WMesh_line);
-	myWindow->setRenderingProperty(object_name, cv::viz::RenderingProperties::OPACITY, 1);
-	myWindow->setRenderingProperty(object_name + "line", cv::viz::RenderingProperties::REPRESENTATION, cv::viz::RepresentationValues::REPRESENTATION_WIREFRAME);
-	//	myWindow->setRenderingProperty("geometry", cv::viz::RenderingProperties::REPRESENTATION, cv::viz::RepresentationValues::REPRESENTATION_WIREFRAME);
-	myWindow->setRenderingProperty(object_name + "line", cv::viz::RenderingProperties::LINE_WIDTH, 3);
 
+	cv::viz::WMesh WMesh_ = cv::viz::WMesh(_mesh);
+	myWindow->showWidget(object_name, WMesh_);
 }
+
 
 void viz_tools::render_stationary_FEM(std::string geometry_name,::vector<AFEM::stationary> stationary_vec){
 	std::vector<cv::Point3f> cloud_;
@@ -518,10 +674,16 @@ void viz_tools::render_stationary_FEM(std::string geometry_name,::vector<AFEM::s
 		cv::Vec3f pos_ = _mesh.cloud.at<cv::Vec3f>((int)stationary_ptr->node_number);
 		cloud_.push_back(cv::Point3f(pos_.val[0],pos_.val[1],pos_.val[2]));
 	}
-	cv::viz::WCloud cloud_temp(cloud_);
-	cloud_temp.setColor(cv::viz::Color::apricot());
-	myWindow->showWidget("stationary_cloud", cloud_temp);
-	myWindow->setRenderingProperty("stationary_cloud", cv::viz::RenderingProperties::POINT_SIZE, 20.0);
+	if (cloud_.size() != 0){
+		cv::viz::WCloud cloud_temp(cloud_);
+		cloud_temp.setColor(cv::viz::Color::apricot());
+		myWindow->showWidget("stationary_cloud", cloud_temp);
+		myWindow->setRenderingProperty("stationary_cloud", cv::viz::RenderingProperties::POINT_SIZE, 20.0);
+	}
+	else {
+		stationary_exist = false;
+	}
+	
 }
 
 
@@ -614,7 +776,7 @@ cv::Point3f viz_tools::transform_image_to_original_frame(const cv::Point2f t_p){
 
 	cv::Mat RHS = rot_.inv()*t_vec;
 
-	float s = 20.0 + RHS.at<float>(2, 0);
+	float s = 8.0 + RHS.at<float>(2, 0);
 	s /= LHS.at<float>(2, 0);
 	cv::Mat world_point_mat = rot_.inv()*(s*cam_matrix.inv()*uvw - t_vec);
 	worldPoint.x = world_point_mat.at<float>(0, 0);

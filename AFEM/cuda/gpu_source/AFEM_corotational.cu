@@ -175,7 +175,7 @@ __device__ void find_Jacobian_localK_localM_corotational(AFEM::element *in_eleme
 
 
 
-	float rho = 1000.0;
+	float rho = 1000.0f;
 
 	float B[6][12];
 

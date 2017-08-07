@@ -32,7 +32,7 @@ include_directories(${CMAKE_SOURCE_DIR}/include/Eigen/)
 #list(APPEND CUDA_NVCC_FLAGS "-arch=sm_20;-std=c++11;-O2;-DVERBOSE")
 
 
-set(CUDA_NVCC_FLAGS ${CUDA_NVCC_FLAGS} --gpu-architecture sm_50)
+#set(CUDA_NVCC_FLAGS ${CUDA_NVCC_FLAGS} --gpu-architecture sm_50)
 add_subdirectory(AFEM/cuda)
 add_subdirectory(AFEM/FEM)
 ADD_EXECUTABLE(FEM_TEST tests/test_fem.cpp)

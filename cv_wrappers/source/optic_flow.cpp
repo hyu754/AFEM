@@ -125,6 +125,20 @@ void optic_flow::run_LK(std::string name){
 
 }
 
+void optic_flow::draw_result(cv::Mat *input_image){
+	int _count_status_ = 0;
+	for (auto status_ptr = status.begin(); status_ptr != status.end(); ++status_ptr){
+		if ((*status_ptr)){
+			circle(*input_image, points[1].at(_count_status_), 1, cv::Scalar(0, 250, 1), 3, 8);
+			cv::line(*input_image, original_position.at(_count_status_), points[1].at(_count_status_), cv::Scalar(0, 100, 200));
+
+		}
+
+		_count_status_++;
+
+	}
+}
+
 optic_flow::optic_flow(){
 	std::cout << "Initialize optic flow using LK" << std::endl;
 

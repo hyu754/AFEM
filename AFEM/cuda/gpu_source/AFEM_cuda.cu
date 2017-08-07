@@ -2150,6 +2150,7 @@ __global__ void gpu_make_f(float *f_d, int numnodes, AFEM::position_3D *pos_info
 	if (x < numnodes){
 
 		if (x == node_apply){
+			printf("%f\n", force_x);
 			f_d[pos_info[x].displacement_index[0]] += force_x; 
 			f_d[pos_info[x].displacement_index[1]] += force_y;
 			f_d[pos_info[x].displacement_index[2]] += force_z;
@@ -2402,7 +2403,7 @@ void cuda_tools::make_K(AFEM::elastic_solver_type solver_in, int num_elem, int n
 }
 int first = 1;
 float force_change = -2;
-void cuda_tools::make_f(std::vector<int> indicies, std::vector<std::vector<float>> force,int num_nodes, int dim){
+void cuda_tools::make_f(int num_nodes, int dim){
 	int blocks, threads;
 	if (num_nodes <= 256){
 		blocks = 1;
@@ -2431,9 +2432,11 @@ void cuda_tools::make_f(std::vector<int> indicies, std::vector<std::vector<float
 	//}
 	//_ASSERT(indicies.size() == force.size());
 	int _counter_ = 0;
-	for(auto indicies_ptr = indicies.begin(); indicies_ptr != indicies.end(); ++indicies_ptr){
+
+		for (auto indicies_ptr = sudo_force_indicies_vector.begin(); indicies_ptr != sudo_force_indicies_vector.end(); ++indicies_ptr){
 		//indicies_ptr - indicies_ptr[0];
-		gpu_make_f << <blocks, threads >> >(f_d, num_nodes, position_array_d, dim, *indicies_ptr, force[_counter_].at(0), force[_counter_].at(1), force[_counter_].at(2));
+			std::cout << "force: " << sudo_force_vector[_counter_].at(0)*1000.0 << std::endl;
+			gpu_make_f << <blocks, threads >> >(f_d, num_nodes, position_array_d, dim, *indicies_ptr, sudo_force_vector[_counter_].at(0)*1000000000.0, sudo_force_vector[_counter_].at(1)*1000000000.0, sudo_force_vector[_counter_].at(2) * 1000000000.0);
 
 
 		_counter_++;
@@ -2580,22 +2583,22 @@ void cuda_tools::update_geometry(AFEM::elastic_solver_type type_in){
 	free(RHS_host);
 #endif
 #ifdef TESTING
-	/*
-	OUTPUT SOLUTION TO Ax = b
-	*/
+	///*
+	//OUTPUT SOLUTION TO Ax = b
+	//*/
 
-	float *sln_host;
-	sln_host = (float *)malloc(sizeof(*sln_host) * 3 * Nnodes);
-	cudaMemcpy(sln_host, u_dot_sln, sizeof(*u_dot_sln) * 3 * Nnodes, cudaMemcpyDeviceToHost);
-	std::ofstream sln_out("sln_out.txt");
+	//float *sln_host;
+	//sln_host = (float *)malloc(sizeof(*sln_host) * 3 * Nnodes);
+	//cudaMemcpy(sln_host, u_dot_sln, sizeof(*u_dot_sln) * 3 * Nnodes, cudaMemcpyDeviceToHost);
+	//std::ofstream sln_out("sln_out.txt");
 
-	for (int i = 0; i < 3 * Nnodes; i++){
-		sln_out << sln_host[i] << std::endl;
-	}
+	//for (int i = 0; i < 3 * Nnodes; i++){
+	//	sln_out << sln_host[i] << std::endl;
+	//}
 
 
-	sln_out.close();
-	free(sln_host);
+	//sln_out.close();
+	//free(sln_host);
 #endif
 
 	
@@ -2708,7 +2711,7 @@ void cuda_tools::energy_minisation(){
 	int *sudo_force_indicies_d;
 	cudaMalloc((void**)&sudo_force_array_d, sizeof(*sudo_force_array_d) *number_sudo_forces); //element array
 	cudaMalloc((void**)&sudo_force_indicies_d, sizeof(*sudo_force_indicies_d)*number_sudo_forces);
-	
+
 	//Populate the stretch energy vector
 	//apply a non zero force if the sudo force vector size is greater than 0
 	if (sudo_force_vector.size() > 0){
@@ -2737,12 +2740,12 @@ void cuda_tools::energy_minisation(){
 
 
 	//Find A and b to solve.
-	float alpha = 1000000000.0f;
+	float alpha = alpha_energy_min;
 	find_A_b_energy_minimisation_corotational << <blocks_nodesdim, threads_nodesdim >> >(K_d, xInitial_d, RKx_matrix_d, f_d, RHS, M_d, LHS, Nnodes, dt, alpha, 0.002, 3, stationary_array_d, Nstationary, sudo_force_array_d, sudo_force_indicies_d, sudo_force_vector.size());
 	//Free memory
 	delete sudo_force_array;
 	delete sudo_force_indicies;
-	cudaFree(sudo_force_array);
+	cudaFree(sudo_force_array_d);
 	cudaFree(sudo_force_indicies_d);
 
 }

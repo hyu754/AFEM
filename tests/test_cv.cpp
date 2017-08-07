@@ -60,7 +60,7 @@ int main(void){
 	viz_class.set_camera_position();
 	viz_class.set_camera();
 	viz_class.render_geometry_FEM(element_, position_);
-
+	viz_class.render_geometry_surface_FEM(element_, position_);
 
 	std::vector<cv::Point3f> position_3f;
 	for (auto position_ptr = position_.begin(); position_ptr != position_.end(); ++position_ptr){
@@ -109,7 +109,9 @@ int main(void){
 			position_.at(node_i) = node_current;
 			position_3f.push_back(cv::Point3f(node_current.x, node_current.y, node_current.z));
 	}
-		viz_class.update_mesh_position("geometry", position_);
+		viz_class.update_mesh_position("geometry", position_); //update entire mesh
+		viz_class.update_mesh_surface_position("geometry_surface", position_); //update the surface
+
 		cap >> input_image;
 
 		/*
@@ -145,15 +147,17 @@ int main(void){
 		*/
 
 		cv::setMouseCallback("input_image", onMouse, 0);
-
-		int text_counter = 0;
-		for (auto ptr_auto = out_vector_unordered.begin(); ptr_auto != out_vector_unordered.end(); ++ptr_auto){
-			cv::circle(input_image, *ptr_auto, 5, cv::Scalar(255, 100, 100), 5);
-			cv::putText(input_image, std::to_string(text_counter), *ptr_auto, 1, 2, cv::Scalar(10, 200, 100));
-			text_counter++;
+		//If extrinsic has not been found , we draw to screen
+		if (viz_class.extrinsic_found == false){
+			int text_counter = 0;
+			for (auto ptr_auto = out_vector_unordered.begin(); ptr_auto != out_vector_unordered.end(); ++ptr_auto){
+				cv::circle(input_image, *ptr_auto, 5, cv::Scalar(255, 100, 100), 5);
+				cv::putText(input_image, std::to_string(text_counter), *ptr_auto, 1, 2, cv::Scalar(10, 200, 100));
+				text_counter++;
+			}
+			cv::imshow("input_image", input_image);
+			cv::waitKey(1);
 		}
-		cv::imshow("input_image", input_image);
-		cv::waitKey(1);
 
 
 		std::vector<int> indicies2d, indicies3d;
@@ -195,7 +199,7 @@ int main(void){
 
 
 			cv::Mat augmented_image = viz_class.augment_mesh(input_image, "geometry", viz_class.pose_affine);
-
+			OF.draw_result(&augmented_image);
 			cv::imshow("augmented image", augmented_image);
 			cv::waitKey(1);
 
@@ -261,7 +265,7 @@ int main(void){
 				if (ray_ptr->intersection_vector_t0.at(_i).istracked == true){
 					//now loop through all of the verticies
 					for (auto vertex_ptr = ray_ptr->indicies.begin(); vertex_ptr != ray_ptr->indicies.end(); ++vertex_ptr){
-						if (force_.length() < 5) //only smallish deformation is allowed
+						if (glm::length<float>(force_) < 15.0) //only smallish deformation is allowed
 							verticies_mapper[*vertex_ptr].push_back(force_);
 						//	force_vector_indicies.push_back(*vertex_ptr);
 						//	force_vector.push_back(force_);
@@ -299,6 +303,11 @@ int main(void){
 		sim.cuda_tools_class.get_number_sudo_forces(force_vector.size());
 		sim.cuda_tools_class.get_sudo_force_information(force_vector, force_vector_indicies);
 		
+
+
+
+
+
 		viz_class.render();
 
 		sim.run();

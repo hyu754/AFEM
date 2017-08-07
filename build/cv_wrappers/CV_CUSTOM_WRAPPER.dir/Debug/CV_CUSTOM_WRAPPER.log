@@ -1,6 +1,35 @@
-﻿  viz_tools.cpp
+﻿  Building Custom Rule D:/GitHub/AFEM/cv_wrappers/CMakeLists.txt
+  CMake does not need to re-run because D:\GitHub\AFEM\build\cv_wrappers\CMakeFiles\generate.stamp is up-to-date.
+  aruco_tools.cpp
+D:\GitHub\AFEM\cv_wrappers\source\aruco_tools.cpp(57): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+D:\GitHub\AFEM\cv_wrappers\source\aruco_tools.cpp(58): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+D:\GitHub\AFEM\cv_wrappers\source\aruco_tools.cpp(59): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+D:\GitHub\AFEM\cv_wrappers\source\aruco_tools.cpp(132): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+D:\GitHub\AFEM\cv_wrappers\source\aruco_tools.cpp(192): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+  optic_flow.cpp
+D:\GitHub\AFEM\cv_wrappers\source\optic_flow.cpp(53): warning C4101: 'i' : unreferenced local variable
+D:\GitHub\AFEM\cv_wrappers\source\optic_flow.cpp(53): warning C4101: 'k' : unreferenced local variable
+  raytracer.cpp
+D:\GitHub\AFEM\AFEM\FEM\include\AFEM_geometry.hpp(132): warning C4551: function call missing argument list
+D:\GitHub\AFEM\AFEM\FEM\include\AFEM_geometry.hpp(151): warning C4267: 'return' : conversion from 'size_t' to 'int', possible loss of data
+D:\GitHub\AFEM\cv_wrappers\source\raytracer.cpp(70): warning C4056: overflow in floating-point constant arithmetic
+  surf.cpp
+  viz_tools.cpp
 D:\GitHub\AFEM\AFEM\FEM\include\AFEM_geometry.hpp(132): warning C4551: function call missing argument list
 D:\GitHub\AFEM\AFEM\FEM\include\AFEM_geometry.hpp(151): warning C4267: 'return' : conversion from 'size_t' to 'int', possible loss of data
 D:\GitHub\AFEM\cv_wrappers\source\viz_tools.cpp(42): warning C4102: 'std' : unreferenced label
-D:\GitHub\AFEM\cv_wrappers\source\viz_tools.cpp(279): warning C4102: 'std' : unreferenced label
+D:\GitHub\AFEM\cv_wrappers\source\viz_tools.cpp(282): warning C4102: 'std' : unreferenced label
+D:\GitHub\AFEM\cv_wrappers\source\viz_tools.cpp(493): warning C4056: overflow in floating-point constant arithmetic
+D:\GitHub\AFEM\cv_wrappers\source\viz_tools.cpp(494): warning C4056: overflow in floating-point constant arithmetic
+D:\GitHub\AFEM\cv_wrappers\source\viz_tools.cpp(522): warning C4102: 'std' : unreferenced label
+  viz_widget.cpp
+  Generating Code...
+d:\github\afem\cv_wrappers\source\viz_tools.cpp(493): warning C4756: overflow in constant arithmetic
+d:\github\afem\cv_wrappers\source\viz_tools.cpp(494): warning C4756: overflow in constant arithmetic
+d:\github\afem\cv_wrappers\source\viz_tools.cpp(493): warning C4756: overflow in constant arithmetic
+d:\github\afem\cv_wrappers\source\raytracer.cpp(46): warning C4756: overflow in constant arithmetic
+d:\github\afem\cv_wrappers\source\raytracer.cpp(70): warning C4756: overflow in constant arithmetic
+d:\github\afem\cv_wrappers\source\raytracer.cpp(71): warning C4756: overflow in constant arithmetic
+d:\github\afem\cv_wrappers\source\raytracer.cpp(46): warning C4756: overflow in constant arithmetic
+d:\github\afem\cv_wrappers\source\raytracer.cpp(70): warning C4756: overflow in constant arithmetic
   CV_CUSTOM_WRAPPER.vcxproj -> D:\GitHub\AFEM\build\cv_wrappers\Debug\CV_CUSTOM_WRAPPER.lib

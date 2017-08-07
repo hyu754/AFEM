@@ -70,7 +70,7 @@ set(generated_file_internal "D:/GitHub/AFEM/build/AFEM/cuda/CMakeFiles/AFEM_cuda
 set(generated_cubin_file_internal "D:/GitHub/AFEM/build/AFEM/cuda/CMakeFiles/AFEM_cuda_lib.dir/gpu_source/$(Configuration)/AFEM_cuda_lib_generated_Utilities.cu.obj.cubin.txt") # path
 
 set(CUDA_NVCC_EXECUTABLE "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v7.5/bin/nvcc.exe") # path
-set(CUDA_NVCC_FLAGS --gpu-architecture;sm_50 ;; ) # list
+set(CUDA_NVCC_FLAGS  ;; ) # list
 # Build specific configuration flags
 set(CUDA_NVCC_FLAGS_DEBUG  ; )
 set(CUDA_NVCC_FLAGS_RELEASE  ; )

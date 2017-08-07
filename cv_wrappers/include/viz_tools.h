@@ -119,6 +119,9 @@ private:
 	//Geometry mapper
 	std::map<std::string, cv::viz::Mesh> geometry_mapper;
 
+	//boolean variable to determine if stationary points exists
+	bool stationary_exist = true;
+
 public:
 	
 
@@ -169,6 +172,11 @@ public:
 	//Get geometry from AFEM::geometry
 	void render_geometry_FEM(std::vector<AFEM::element> geometry, std::vector<AFEM::position_3D> position_vector);
 
+	//Get geometry from AFEM::geometry, this one will only render the surface
+	//A texture will be displayed on this surface
+	void render_geometry_surface_FEM(std::vector<AFEM::element> geometry, std::vector<AFEM::position_3D> position_vector);
+
+
 	//Renders the stationary points on screen
 	void render_stationary_FEM(std::string geometry_name,std::vector<AFEM::stationary> stationary_vec);
 
@@ -195,6 +203,15 @@ public:
 	//Input:	std::string name - name of object to be changed
 	//			AFEM::position_3D - the new position of the mesh
 	void update_mesh_position(std::string object_name, std::vector<AFEM::position_3D> new_position);
+
+
+	//Update the position of the surface of the mesh, this is for textures, etc
+	//Input:	std::string name - name of object to be changed
+	//			AFEM::position_3D - the new position of the mesh
+	void update_mesh_surface_position(std::string object_name, std::vector<AFEM::position_3D> new_position);
+
+	
+
 
 	//Gets the ray tracer class pointer
 	raytracer* return_ray_tracer_class(){ return &ray_tracer_class; };

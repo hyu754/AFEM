@@ -71,6 +71,9 @@ public:
 	//get initialized bool
 	bool get_initialized_bool(void){ return initialized; }
 
+	//This function will draw the result onto the image given as the input to this function
+	void draw_result(cv::Mat *input_image);
+
 	optic_flow();
 	~optic_flow();
 };
