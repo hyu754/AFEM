@@ -744,7 +744,7 @@ __global__ void find_A_b_energy_minimisation_corotational(float *K_in, float *xI
 					LHS[IDX2C(dof, dof, 3 * (num_nodes))] = LHS[IDX2C(dof, dof, 3 * (num_nodes))] + alpha;
 				}
 				else{
-					LHS[IDX2C(dof, dof, 3 * (num_nodes))] = LHS[IDX2C(dof, dof, 3 * (num_nodes))] +alpha/20.0;
+					LHS[IDX2C(dof, dof, 3 * (num_nodes))] = LHS[IDX2C(dof, dof, 3 * (num_nodes))] +alpha;
 				}
 				
 
@@ -757,7 +757,7 @@ __global__ void find_A_b_energy_minimisation_corotational(float *K_in, float *xI
 				}
 				else if (dof_counter == 2){
 
-					RHS[dof] = RHS[dof] + (alpha/20.0)* (xInitial[dof] + sudo_force_vec[i].fz);//sudo_force_vec[i].fz);
+					RHS[dof] = RHS[dof] + (alpha)* (xInitial[dof] + sudo_force_vec[i].fz);//sudo_force_vec[i].fz);
 				}
 
 				dof_counter++;

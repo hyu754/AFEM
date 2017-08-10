@@ -1,9 +1,2 @@
-﻿  Building Custom Rule D:/GitHub/AFEM/CMakeLists.txt
-  CMake does not need to re-run because D:\GitHub\AFEM\build\CMakeFiles\generate.stamp is up-to-date.
-  test_cv.cpp
-D:\GitHub\AFEM\AFEM\FEM\include\AFEM_geometry.hpp(132): warning C4551: function call missing argument list
-D:\GitHub\AFEM\AFEM\FEM\include\AFEM_geometry.hpp(151): warning C4267: 'return' : conversion from 'size_t' to 'int', possible loss of data
-D:\GitHub\AFEM\AFEM\cuda\gpu_include\AFEM_cuda.cuh(89): warning C4305: 'initializing' : truncation from 'double' to 'float'
-D:\GitHub\AFEM\tests\test_cv.cpp(303): warning C4267: 'argument' : conversion from 'size_t' to 'int', possible loss of data
-     Creating library D:/GitHub/AFEM/build/Debug/CV_TEST.lib and object D:/GitHub/AFEM/build/Debug/CV_TEST.exp
+﻿     Creating library D:/GitHub/AFEM/build/Debug/CV_TEST.lib and object D:/GitHub/AFEM/build/Debug/CV_TEST.exp
   CV_TEST.vcxproj -> D:\GitHub\AFEM\build\Debug\CV_TEST.exe

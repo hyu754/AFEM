@@ -6,7 +6,7 @@
 #include <string>
 #define WRITE_TO_FILE
 //#define CPU_CG_SOLVER
-//#define MANUAL_FORCE_ENTRY
+#define MANUAL_FORCE_ENTRY
 #ifdef CPU_CG_SOLVER
 #include <Eigen\Eigen>
 #include <Eigen\IterativeLinearSolvers>
@@ -91,7 +91,7 @@ void AFEM::Simulation::run(){
 #ifdef MANUAL_FORCE_ENTRY
 	std::vector<int> force_vector_indicies;
 	//int dummy_array[8] = { 124, 120, 116, 112, 127, 123, 119, 115 };// , 120  , 116   ,112 };
-	int dummy_array[1] = { 211 };
+	int dummy_array[1] = { 289 };
 	force_vector_indicies.assign(dummy_array, dummy_array + 1);
 	std::vector<float> zero_force;
 	zero_force.push_back(0.0f); // x
@@ -104,7 +104,7 @@ void AFEM::Simulation::run(){
 		force_vector.push_back(zero_force);
 	//force_vector_indicies.push_back(10);
 	if ((solver_type == AFEM::elastic_solver_type::DYNAMIC_COROTATION) || (solver_type == AFEM::elastic_solver_type::DYNAMIC_NON_COROTATION)){
-		cuda_tools_class.make_f(force_vector_indicies, force_vector, pos_vec.size(), 3);
+	//	cuda_tools_class.make_f(force_vector_indicies, force_vector, pos_vec.size(), 3);
 	}
 	else if (solver_type == AFEM::elastic_solver_type::ENERGY_MINISATION_COROTATION){
 

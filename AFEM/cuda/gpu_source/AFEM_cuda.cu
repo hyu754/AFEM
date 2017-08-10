@@ -2028,6 +2028,22 @@ __global__ void reset_f_GPU(float *f_d, float *RKx_d,int numNodes, int dim){
 		//M_d[x] = 0;
 	}
 }
+
+//Make matrix symmetric
+__global__ void make_matrix_symmetric_gpu(float *Matrix, int numNodes, int dim){
+
+	int row_idx = threadIdx.x + blockIdx.x * blockDim.x;
+	if (row_idx < numNodes*dim){
+		for (int i = row_idx; i < numNodes*dim; i++){
+			if (Matrix[IDX2C(row_idx, i, 3 * (numNodes))] != Matrix[IDX2C(i, row_idx, 3 * (numNodes))]){
+				Matrix[IDX2C(i, row_idx, 3 * (numNodes))]=Matrix[IDX2C(row_idx, i, 3 * (numNodes))]  ;
+			}
+		}
+		
+	}
+	
+
+}
 __global__ void update_position_vector(AFEM::position_3D *pos_in, float *u_dot_in, float dt, int numNodes, int dim){
 	int x = threadIdx.x + blockIdx.x *blockDim.x;
 
@@ -2518,6 +2534,23 @@ void cuda_tools::reset_K(int num_elem, int num_nodes){
 
 }
 
+void cuda_tools::make_matrix_symmetric(int num_elem, int num_nodes){
+	int blocks, threads;
+	int total_size = Nnodes*3;
+	if (total_size <= 256){
+		blocks = 1;
+		threads = total_size;
+	}
+	else {
+		blocks = (total_size + 256) / 256;
+		threads = 256;
+	}
+
+	//The threads will span the rows
+	make_matrix_symmetric_gpu << <blocks, threads >> >(LHS, num_nodes, 3);
+	
+
+}
 
 void cuda_tools::update_geometry(AFEM::elastic_solver_type type_in){
 	int blocks_nodes2, threads_nodes2;
@@ -2749,6 +2782,8 @@ void cuda_tools::energy_minisation(){
 	cudaFree(sudo_force_indicies_d);
 
 }
+
+
 
 
 cuda_tools::cuda_tools(){

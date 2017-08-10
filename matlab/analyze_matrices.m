@@ -8,8 +8,8 @@ if(issymmetric(a)==0)
           if(a(i,j) ~= a(j,i))
              disp(['Non symmetric element: \n']);
              disp(['i = ',num2str(i),', j = ', num2str(j),'\n']);
-             disp([num2str(a(i,j)),' ~= ' , num2str(a(j,i)), '\n']);
-             
+            % disp([num2str(a(i,j)),' ~= ' , num2str(a(j,i)), '\n']);
+             disp(['Difference : ',num2str(a(i,j)-a(j,i))]);
           end
        end
     end

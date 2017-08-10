@@ -103,12 +103,12 @@ int main(void){
 		std::vector<cv::Point3f> position_3f;
 
 		AFEM::position_3D * position_ptr = sim.get_position_vector();
-		for (int node_i = 0; node_i < geo.get_num_nodes();node_i++){
+		for (int node_i = 0; node_i < geo.get_num_nodes(); node_i++){
 
 			AFEM::position_3D node_current = position_ptr[node_i];
 			position_.at(node_i) = node_current;
 			position_3f.push_back(cv::Point3f(node_current.x, node_current.y, node_current.z));
-	}
+		}
 		viz_class.update_mesh_position("geometry", position_); //update entire mesh
 		viz_class.update_mesh_surface_position("geometry_surface", position_); //update the surface
 
@@ -176,22 +176,22 @@ int main(void){
 		/*
 		Below if statment surrounds code that will find the transformation between the camera frame and the world coordiante
 		*/
-		
+
 		if (indicies3d.size() == out_vector_unordered.size()){
 
-			
+
 			if (viz_class.extrinsic_found == false){
 				viz_class.solve_pnp_matrix(position_3f, indicies3d, out_vector_unordered, indicies2d);
 				viz_class.extrinsic_found = true;
 			}
 			else{
-				
+
 				std::vector<cv::Point3f> tracked_points_nonhomo;
 				for (auto t_p = tracked_points_vector.begin(); t_p != tracked_points_vector.end(); ++t_p){
-					cv::Point3f worldPoint  = viz_class.transform_image_to_original_frame(*t_p);
+					cv::Point3f worldPoint = viz_class.transform_image_to_original_frame(*t_p);
 					tracked_points_nonhomo.push_back(worldPoint); // this should be in the original reference frame
 				}
-				if (viz_class.return_ray_tracer_class()->get_ray_tracer_status()==false)
+				if (viz_class.return_ray_tracer_class()->get_ray_tracer_status() == false)
 					viz_class.generate_rays(tracked_points_nonhomo);
 
 
@@ -208,7 +208,7 @@ int main(void){
 		std::vector<viz_tools::face_information> ray_info = viz_class.return_ray_trace_vector();
 
 		//If we have not performed the ray tracer
-		if (viz_class.return_ray_tracer_class()->get_ray_tracer_status()== false){
+		if (viz_class.return_ray_tracer_class()->get_ray_tracer_status() == false){
 			//run the ray tracer
 			viz_class.ray_tracer();
 		}
@@ -233,10 +233,10 @@ int main(void){
 						cv::Point2f optic_flow_image_pt = tracked_points_vector.at(intersec_ptr->ray_id);
 
 						cv::Point3f worldPoint = viz_class.transform_image_to_original_frame(optic_flow_image_pt);
-						ray_info_ptr->intersection_vector_t.at(_intersect_counter).inversection_position = 
-							glm::vec3(worldPoint.x,worldPoint.y,worldPoint.z);
+						ray_info_ptr->intersection_vector_t.at(_intersect_counter).inversection_position =
+							glm::vec3(worldPoint.x, worldPoint.y, worldPoint.z);
 
-						
+
 					}
 					else {
 						intersec_ptr->istracked = false;
@@ -244,9 +244,9 @@ int main(void){
 					_intersect_counter++;
 				}
 			}
-			
+
 		}
-		
+
 
 		//Set sudo forces
 		std::vector<int> force_vector_indicies;
@@ -257,11 +257,11 @@ int main(void){
 		for (auto ray_ptr = ray_info.begin(); ray_ptr != ray_info.end(); ++ray_ptr){
 			//std::vector<float> force_;
 			for (int _i = 0; _i < ray_ptr->intersection_vector_t.size(); _i++){
-				
+
 				glm::vec3 force_;
-				force_ = ray_ptr->intersection_vector_t.at(_i).inversection_position 
+				force_ = ray_ptr->intersection_vector_t.at(_i).inversection_position
 					- ray_ptr->intersection_vector_t0.at(_i).inversection_position;
-			
+
 				if (ray_ptr->intersection_vector_t0.at(_i).istracked == true){
 					//now loop through all of the verticies
 					for (auto vertex_ptr = ray_ptr->indicies.begin(); vertex_ptr != ray_ptr->indicies.end(); ++vertex_ptr){
@@ -275,11 +275,11 @@ int main(void){
 
 		}
 
-		for (auto verticies_mapper_ptr = verticies_mapper.begin(); 
+		for (auto verticies_mapper_ptr = verticies_mapper.begin();
 			verticies_mapper_ptr != verticies_mapper.end();	++verticies_mapper_ptr){
 			force_vector_indicies.push_back(verticies_mapper_ptr->first);
 
-			std::vector<glm::vec3> force_vec=verticies_mapper_ptr->second;
+			std::vector<glm::vec3> force_vec = verticies_mapper_ptr->second;
 			glm::vec3 force_averaged;
 			for (int i = 0; i < force_vec.size(); i++){
 				force_averaged += force_vec.at(i);
@@ -302,7 +302,7 @@ int main(void){
 
 		sim.cuda_tools_class.get_number_sudo_forces(force_vector.size());
 		sim.cuda_tools_class.get_sudo_force_information(force_vector, force_vector_indicies);
-		
+
 
 
 
@@ -311,7 +311,7 @@ int main(void){
 		viz_class.render();
 
 		sim.run();
-}
+	}
 	return 0;
 }
 //#include "viz_tools.h"

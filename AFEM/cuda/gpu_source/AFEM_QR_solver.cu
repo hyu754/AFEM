@@ -371,6 +371,7 @@ void cuda_tools::cg(void){
 		x[i] =0.0;
 	}
 		/* Get handle to the CUBLAS context */
+	//make_matrix_symmetric(Nelems, 3);
 		cublasHandle_t cublasHandle = 0;
 		cublasStatus_t cublasStatus;
 		cublasStatus = cublasCreate(&cublasHandle);
@@ -425,7 +426,7 @@ void cuda_tools::cg(void){
 
 		//output.close();
 		//free(LHSOUT);
-
+	
 #if 0
 
 		float *LHSOUT = (float *)malloc(Ncols * Ncols*sizeof(float));
@@ -457,11 +458,13 @@ void cuda_tools::cg(void){
 		(cudaMalloc((void **)&d_p, N*sizeof(float)));
 		(cudaMalloc((void **)&d_Ax, N*sizeof(float)));
 
-		alpha = 1.0;
-		alpham1 = -1.0;
+		alpha = 1;
+		alpham1 = -1;
 		beta = 0.0;
 		r0 = 0.0;
 		cudaMemcpy(d_x, x, N*sizeof(float), cudaMemcpyHostToDevice);
+		//cudaMemcpy(d_x, solution_vector_d, N*sizeof(float), cudaMemcpyDeviceToDevice);
+		
 		cudaMemcpy(d_r, RHS, N*sizeof(float), cudaMemcpyDeviceToDevice);
 	
 		cusparseScsrmv(cusparseHandle, CUSPARSE_OPERATION_NON_TRANSPOSE, Ncols, Ncols, nnz, &alpha, descr, d_A, d_A_RowIndices, d_A_ColIndices, d_x, &beta, d_Ax);
