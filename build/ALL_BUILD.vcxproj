@@ -180,6 +180,9 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ProjectReference Include="D:/GitHub/AFEM/build/AFEM/FEM/FEM_lib.vcxproj">
       <Project>6EA86278-6B19-301F-B772-37B244B7A352</Project>
     </ProjectReference>
+    <ProjectReference Include="D:/GitHub/AFEM/build/PHANTOM_EXPERIMENT.vcxproj">
+      <Project>62016D26-DDA1-3CCE-837A-BAC4BD1F52C5</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

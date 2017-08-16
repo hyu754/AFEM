@@ -30,6 +30,7 @@ public:
 	std::vector<AFEM::position_3D> pos_vec;
 	std::vector<AFEM::element> element_vec;
 	std::vector<AFEM::stationary> stationary_vec;
+	std::vector<int> tumour_vec;
 
 
 

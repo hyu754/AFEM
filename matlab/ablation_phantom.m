@@ -1,4 +1,8 @@
-%% This script will generate the mesh of the abdominal phantom 
+
+clear all
+close all
+
+%% This script will generate the mesh of the abdominal phantom
 %add directory to iso2mesh and samples
 addpath('D:\Downloads\iso2mesh\')
 addpath('D:\Downloads\iso2mesh\sample\')
@@ -10,11 +14,11 @@ addpath('D:\abdominal_image\DICOM\20170626\15070000\parta\')
 %Generate geometry using MATLAB's internal PDE generator
 model = createpde(1);
 importGeometry(model,'D:\abdominal_image\DICOM\20170626\15070000\parta\outersurface.stl');
-mesh_generated =generateMesh(model,'Hmax',20);
+mesh_generated =generateMesh(model,'Hmax',30,'GeometricOrder','linear');
 %Plot the model
-pdeplot3D(model,'FaceAlpha',0.5);
+%pdeplot3D(model,'FaceAlpha',0.5);
 
-%Assign class variables 
+%Assign class variables
 mesh_element = mesh_generated.Elements';
 mesh_nodes = mesh_generated.Nodes';
 
@@ -44,39 +48,164 @@ z_concat = [ z_tumour z_vertebrae z_ribs];
 
 [newnode,newelem,newface]=meshrefine(mesh_nodes,mesh_element(:,1:4),[],[x_concat',y_concat',z_concat']);
 
+%% Find the node number of each of the above inserted nodes
+
 %Number of nodes
 [numNodes,~] = size(newnode);
+%Number of elements
+[numElem,~ ] = size(newelem);
 %Number of insertion points
 numInsertion = length(x_concat);
 for i=1:numNodes
-   for j = 1: numInsertion
-       
-       if (norm(newnode(i,:)- [x_concat(j) y_concat(j) z_concat(j)])<0.0001)
-          disp('equal') 
-       end
-   end
+    for j = 1: numInsertion
+        
+        if (norm(newnode(i,:)- [x_concat(j) y_concat(j) z_concat(j)])<0.0001)
+            %disp('equal')
+        end
+    end
 end
 
 
-%% Plot the result
-
+%% Find the plane that will act as direchlet BC
+%make a plane based on the points picked
+draw_plane = false; 
 figure
 hold on
+x_=0:1:300;
+[X,Y] = meshgrid(x_);
+[a1,b1,c1,d1] = find_equation_plane([0 0 8],[0 1 8],[1 0 8]);
+Z=(d1- a1 * X - b1 * Y)/c1;
+if(draw_plane == true)
+    surf(X,Y,Z)    
+end
+
+%shading flat
+xlabel('x'); ylabel('y'); zlabel('z')
+
+
+[a2,b2,c2,d2] = find_equation_plane([0 0 110],[0 1 110],[1 0 110]);
+Z=(d2- a2 * X - b2 * Y)/c2;
+if(draw_plane == true)
+    surf(X,Y,Z)    
+end
+%shading flat
+xlabel('x'); ylabel('y'); zlabel('z')
+compare = zeros(1,numNodes);
+compare_tumour = zeros(1,numNodes);
+stationary_nodes=[]
+
+%additional boundary values
+additional_boundary_values = [x_ribs',y_ribs',z_ribs'];
+additional_boundary_values  = [additional_boundary_values; x_vertebrae', y_vertebrae', z_vertebrae'];
+
+tumour_position = [x_tumour', y_tumour',z_tumour'];
+for l = 1:numNodes
+    %check if it is near anyplanes
+    diff1 = dot(newnode(l,:),[a1 b1 c1])-d1;
+    diff2 = dot(newnode(l,:),[a2 b2 c2])-d2;
+    if ((norm(diff1)<4)||(norm(diff2)<4))
+        compare(l)=1;
+        stationary_nodes = [stationary_nodes;newnode(l,:)];
+    else
+        %compare(l)=0;
+        
+    end
+    
+    %for the base
+    if(newnode(l,2)<20)
+        
+        compare(l) = 1;
+          stationary_nodes = [stationary_nodes;newnode(l,:)];
+        
+    end
+    
+    for j = 1:size(additional_boundary_values,1)
+       if norm(newnode(l,:)- additional_boundary_values(j,:)) <0.001
+          compare(l)=1; 
+          stationary_nodes = [stationary_nodes;newnode(l,:)];
+          %disp('equal');
+       end
+    end
+    
+    for j = 1:size(tumour_position,1)
+       if norm(newnode(l,:)- tumour_position(j,:)) <0.001
+          compare_tumour(l)=1; 
+          
+       end
+    end
+    
+end
+
+
+
+%stationary id
+stationary =[];
+%tumour id
+tumour_id = [];
+counter =1;
+for i = 1:numNodes
+    if compare(i)
+        stationary(counter)=i-1;
+        counter= counter+1;
+    end
+    
+    if compare_tumour(i)
+        tumour_id = [tumour_id (i-1)];
+        
+    end
+    
+end
+
+
+
+%% Plot the result
+% plot the nodes 
+%  scatter3(newnode(:,1),newnode(:,2),newnode(:,3),'b');
+%     
+
+
+% plot the stationary nodes on the sides
+scatter3(stationary_nodes(:,1),stationary_nodes(:,2),stationary_nodes(:,3),'r');
+
 % plot tumour position
 scatter3(x_tumour,y_tumour,z_tumour,150,'filled')
 
-% plot vertebrae position
-scatter3(x_vertebrae,y_vertebrae,z_vertebrae,200,'filled');
-
-% plot ribs position
-scatter3(x_ribs,y_ribs,z_ribs, 300, 'filled');
+% % plot vertebrae position
+% scatter3(x_vertebrae,y_vertebrae,z_vertebrae,200,'filled');
+% 
+% % plot ribs position
+% scatter3(x_ribs,y_ribs,z_ribs, 300, 'filled');
 
 %Plot the new mesh
 plotmesh(newnode,newelem)
 %set alpha
-alpha 0.7
+alpha 0.5
 
 
+%% Write to FEM solver
+
+file_path = 'D:\GitHub\AFEM\Geometry\';
+
+fileID = fopen([file_path,'FEM_Nodes.txt'],'w');
+fprintf(fileID,'%d\n',numNodes);
+fprintf(fileID,'%f %f %f\n',newnode'/1000);
+fclose(fileID)
+
+fileID = fopen([file_path,'FEM_Elem.txt'],'w');
+fprintf(fileID,'%d  4\n',numElem);
+fprintf(fileID,'%d %d %d %d\n',newelem'-1);
+fclose(fileID);
+
+fileID = fopen([file_path,'FEM_Stationary.txt'],'w');
+fprintf(fileID,'%d \n',length(stationary));
+fprintf(fileID,'%d \n',stationary);
+fclose(fileID);
+
+
+fileID = fopen([file_path,'FEM_Tumour.txt'],'w');
+fprintf(fileID,'%d \n',length(tumour_id));
+fprintf(fileID,'%d \n',tumour_id);
+fclose(fileID);
 
 
 

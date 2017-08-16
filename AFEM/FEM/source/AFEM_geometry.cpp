@@ -167,6 +167,30 @@ bool AFEM::Geometry::read_stationary(std::string s_in){
 	
 }
 
+
+bool AFEM::Geometry::read_tumour(std::string s_in){
+	std::ifstream tumour_in(s_in);
+
+	if (!tumour_in){
+		std::cout << "cannot open tumour file \n";
+		return false;
+	}
+	int a;
+	tumour_in >> a;
+	for (int i = 0; i < a; i++){
+		int node;
+
+		//Read in what nodes is stationary
+		tumour_in >> node;
+		
+		tumour_id.push_back(node);
+
+	}
+	tumour_in.close();
+	std::cout << "Reading in tumour nodes" << std::endl;
+
+}
+
 void AFEM::Geometry::make_K_matrix(){
 	//cuda_tools_class.hello();
 	//Linear3DBarycentric_B_CUDA_host();

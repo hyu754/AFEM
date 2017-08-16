@@ -294,7 +294,7 @@ void OnRender() {
 	//draw grid
 	DrawGrid();
 
-	glColor3f(0.75, 0.75, 0.75);
+	
 	glBegin(GL_LINES);
 
 	for (int i = 0; i < global_ptr->element_vec.size(); i++) {
@@ -302,11 +302,12 @@ void OnRender() {
 		n2 = in_pos[in_element->nodes_in_elem[1]];
 		n3 = in_pos[in_element->nodes_in_elem[2]];
 		n4 = in_pos[in_element->nodes_in_elem[3]];*/
+		
 		AFEM::position_3D p1 = global_ptr->pos_array[global_ptr->element_array[i].nodes_in_elem[0]];
 		AFEM::position_3D p2 = global_ptr->pos_array[global_ptr->element_array[i].nodes_in_elem[1]];
 		AFEM::position_3D p3 = global_ptr->pos_array[global_ptr->element_array[i].nodes_in_elem[2]];
 		AFEM::position_3D p4 = global_ptr->pos_array[global_ptr->element_array[i].nodes_in_elem[3]];
-
+		glColor3f(0.75, 0.75, p1.z);
 
 
 		glVertex3f(p4.x, p4.y, p4.z);		glVertex3f(p1.x, p1.y, p1.z);
@@ -324,14 +325,14 @@ void OnRender() {
 	//draw points	
 	
 	glEnable(GL_POINT_SMOOTH);
-	glPointSize((GLfloat)5.0);
+	glPointSize((GLfloat)2.0);
 	glBegin(GL_POINTS);
 
 	
 
 	for (int i = 0; i < global_ptr->element_vec.size(); i++) {
 	
-		glColor3f((float)!0, (float)1, (float)0);
+		glColor3f((float)1, (float)1, (float)0);
 
 
 
@@ -395,6 +396,31 @@ void OnRender() {
 
 
 	glEnd();
+
+
+
+	/*
+	Render the tumours
+	*/
+	glPointSize((GLfloat)20.0);
+	//glColor3f(0.15, 0.15, 0.75);
+	glBegin(GL_POINTS);
+
+	for (int i = 0; i < global_ptr->element_vec.size(); i++) {
+		glColor3f((float)0.1, (float)0.2, (float)0.5);
+		for (int j = 0; j < global_ptr->tumour_vec.size(); j++){
+			for (int k = 0; k < 4; k++){
+				if (global_ptr->tumour_vec[j] == global_ptr->element_array[i].nodes_in_elem[k]){
+					AFEM::position_3D tumour_pos = global_ptr->pos_array[global_ptr->tumour_vec[j]];
+					glVertex3f(tumour_pos.x, tumour_pos.y, tumour_pos.z);
+				}
+			}
+		}
+	}
+	glEnd();
+
+
+
 
 	glutSwapBuffers(); 
 }

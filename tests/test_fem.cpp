@@ -12,6 +12,7 @@ int main(void){
 	geo.read_nodes("FEM_Nodes.txt");
 	geo.read_elem("FEM_Elem.txt");
 	geo.read_stationary("FEM_Stationary.txt");
+	geo.read_tumour("FEM_Tumour.txt");
 	//geo.make_K_matrix();
 
 	AFEM::Simulation sim(geo);
@@ -20,26 +21,26 @@ int main(void){
 	
 	sim.cuda_tools_class.set_alpha_energy_minisation(10000000.0);
 	//Finding which alpha gives the best time
-	float min_time = INFINITY;
-	int min_time_alpha;
-	for (unsigned long long int i = 0; i < 100000000; i += 100000000/100){
-		std::cout << " RUNNING ALPHA : " << i << std::endl;
-		sim.cuda_tools_class.set_alpha_energy_minisation((float(i)));
-		//find time for run
-		float start = clock();
-		sim.run();
-		float time_taken = (start - clock()) / CLOCKS_PER_SEC;
+	//float min_time = INFINITY;
+	//int min_time_alpha;
+	//for (unsigned long long int i = 0; i < 100000000; i += 100000000/100){
+	//	std::cout << " RUNNING ALPHA : " << i << std::endl;
+	//	sim.cuda_tools_class.set_alpha_energy_minisation((float(i)));
+	//	//find time for run
+	//	float start = clock();
+	//	sim.run();
+	//	float time_taken = (start - clock()) / CLOCKS_PER_SEC;
 
-		if (time_taken < min_time){
-			min_time = time_taken;
-			min_time_alpha = i;
-		}
+	//	if (time_taken < min_time){
+	//		min_time = time_taken;
+	//		min_time_alpha = i;
+	//	}
 
 
-	}
+	//}
 
-	std::cout << "The alpha that gave the minimum time of : " << min_time << " seconds, was when alpha is : " << min_time_alpha << std::endl;
-		
+	//std::cout << "The alpha that gave the minimum time of : " << min_time << " seconds, was when alpha is : " << min_time_alpha << std::endl;
+	//	
 
 	AFEM::Visualization viz(&sim);
 

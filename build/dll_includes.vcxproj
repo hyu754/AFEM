@@ -181,6 +181,8 @@ if %errorlevel% neq 0 goto :cmEnd
 if %errorlevel% neq 0 goto :cmEnd
 "D:\Program Files\CMake\bin\cmake.exe" -E copy D:/GitHub/AFEM/Geometry/FEM_Stationary.txt D:/GitHub/AFEM/build/
 if %errorlevel% neq 0 goto :cmEnd
+"D:\Program Files\CMake\bin\cmake.exe" -E copy D:/GitHub/AFEM/Geometry/FEM_Tumour.txt D:/GitHub/AFEM/build/
+if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 :cmErrorLevel
@@ -209,6 +211,8 @@ if %errorlevel% neq 0 goto :cmEnd
 "D:\Program Files\CMake\bin\cmake.exe" -E copy D:/GitHub/AFEM/Geometry/FEM_Elem.txt D:/GitHub/AFEM/build/
 if %errorlevel% neq 0 goto :cmEnd
 "D:\Program Files\CMake\bin\cmake.exe" -E copy D:/GitHub/AFEM/Geometry/FEM_Stationary.txt D:/GitHub/AFEM/build/
+if %errorlevel% neq 0 goto :cmEnd
+"D:\Program Files\CMake\bin\cmake.exe" -E copy D:/GitHub/AFEM/Geometry/FEM_Tumour.txt D:/GitHub/AFEM/build/
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -239,6 +243,8 @@ if %errorlevel% neq 0 goto :cmEnd
 if %errorlevel% neq 0 goto :cmEnd
 "D:\Program Files\CMake\bin\cmake.exe" -E copy D:/GitHub/AFEM/Geometry/FEM_Stationary.txt D:/GitHub/AFEM/build/
 if %errorlevel% neq 0 goto :cmEnd
+"D:\Program Files\CMake\bin\cmake.exe" -E copy D:/GitHub/AFEM/Geometry/FEM_Tumour.txt D:/GitHub/AFEM/build/
+if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 :cmErrorLevel
@@ -267,6 +273,8 @@ if %errorlevel% neq 0 goto :cmEnd
 "D:\Program Files\CMake\bin\cmake.exe" -E copy D:/GitHub/AFEM/Geometry/FEM_Elem.txt D:/GitHub/AFEM/build/
 if %errorlevel% neq 0 goto :cmEnd
 "D:\Program Files\CMake\bin\cmake.exe" -E copy D:/GitHub/AFEM/Geometry/FEM_Stationary.txt D:/GitHub/AFEM/build/
+if %errorlevel% neq 0 goto :cmEnd
+"D:\Program Files\CMake\bin\cmake.exe" -E copy D:/GitHub/AFEM/Geometry/FEM_Tumour.txt D:/GitHub/AFEM/build/
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone

@@ -265,7 +265,7 @@ int main(void){
 				if (ray_ptr->intersection_vector_t0.at(_i).istracked == true){
 					//now loop through all of the verticies
 					for (auto vertex_ptr = ray_ptr->indicies.begin(); vertex_ptr != ray_ptr->indicies.end(); ++vertex_ptr){
-						if (glm::length<float>(force_) < 15.0) //only smallish deformation is allowed
+						if (glm::length<float>(force_) < 25.0) //only smallish deformation is allowed
 							verticies_mapper[*vertex_ptr].push_back(force_);
 						//	force_vector_indicies.push_back(*vertex_ptr);
 						//	force_vector.push_back(force_);

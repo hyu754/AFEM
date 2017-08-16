@@ -113,6 +113,9 @@ class AFEM::Geometry{
 	//Vector of stationary nodes
 	std::vector<stationary> stationary_vector;
 
+	//Vector of tumour nodes ids
+	std::vector<int> tumour_id;
+
 	//Dimensions
 	dimension dim;
 
@@ -143,6 +146,9 @@ public:
 	//Reading the elements for the geometry
 	bool read_elem(std::string s_in);
 
+	//Read in tumour id's
+	bool read_tumour(std::string s_in);
+
 	bool read_stationary(std::string s_in);
 
 	void make_K_matrix(void);
@@ -160,7 +166,8 @@ public:
 	//return stationary
 	std::vector<stationary> return_stationary_vector(){ return stationary_vector; }
 
-
+	//return tumour id vector
+	std::vector<int> return_tumour_id_vector(){ return tumour_id; }
 
 
 };

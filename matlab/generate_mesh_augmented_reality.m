@@ -238,7 +238,7 @@ p=V;
 t=T;
 [num_points,n]= size(p);
 vector = 0:num_points*3-1;
-dummy = vec2mat(vector,3);
+%dummy = vec2mat(vector,3);
 
 fileID = fopen([file_path,'FEM_Nodes.txt'],'w');
 fprintf(fileID,'%d\n',num_points);

@@ -119,6 +119,9 @@ private:
 	//Geometry mapper
 	std::map<std::string, cv::viz::Mesh> geometry_mapper;
 
+	//Geometry display, this is to control if a geometry is displayed
+	std::map<std::string, bool> geometry_display_bool;
+
 	//boolean variable to determine if stationary points exists
 	bool stationary_exist = true;
 

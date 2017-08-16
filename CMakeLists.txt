@@ -38,11 +38,16 @@ add_subdirectory(AFEM/FEM)
 ADD_EXECUTABLE(FEM_TEST tests/test_fem.cpp)
 ADD_EXECUTABLE(CV_TEST tests/test_cv.cpp)
 
+#Experiments
+ADD_EXECUTABLE(PHANTOM_EXPERIMENT experiment/experiment_abdominal_phantom.cpp)
+
 
 #target_link_libraries(OpenCloth freeglutd glew32d)
 #target_link_libraries( AFEM cudart cublas cuda cusparse)
 target_link_libraries( FEM_TEST AFEM_cuda_lib FEM_lib cudart freeglutd glew32d)
 target_link_libraries(CV_TEST ${OpenCV_LIBS} AFEM_cuda_lib FEM_lib CV_CUSTOM_WRAPPER ${VTK_LIBRARIES})
+target_link_libraries(PHANTOM_EXPERIMENT ${OpenCV_LIBS} AFEM_cuda_lib FEM_lib CV_CUSTOM_WRAPPER ${VTK_LIBRARIES})
+
 #Adding dll to the debug (assuming debug) folder
 
 
@@ -59,6 +64,7 @@ COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/Geometry/FEM_Elem.txt      
  COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/Geometry/FEM_Elem.txt          ${CMAKE_BINARY_DIR}/
  
 COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/Geometry/FEM_Stationary.txt          ${CMAKE_BINARY_DIR}/
+COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/Geometry/FEM_Tumour.txt          ${CMAKE_BINARY_DIR}/
 
 )
 #add_dependencies(OpenCloth  dll_includes)
@@ -79,6 +85,8 @@ COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/Geometry/FEM_Stationary.txt
 )
 add_dependencies(FEM_TEST   dll_includes)
 add_dependencies(CV_TEST dll_cv_includes)
+add_dependencies(PHANTOM_EXPERIMENT dll_cv_includes)
+
 
 endif(1)
 

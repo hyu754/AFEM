@@ -22,6 +22,7 @@ AFEM::Simulation::Simulation(AFEM::Geometry geo_in){
 	pos_vec = afem_geometry.return_position3D();
 	element_vec = afem_geometry.return_element_vector();
 	stationary_vec = afem_geometry.return_stationary_vector();
+	tumour_vec = afem_geometry.return_tumour_id_vector();
 	std::cout << "With " << element_vec.size() << "elements" << " and with " << pos_vec.size() << " nodes" << std::endl;
 
 
@@ -43,6 +44,7 @@ void AFEM::Simulation::element_std_to_array(){
 	element_array = new element[element_vec.size()];
 	stationary_array = new stationary[stationary_vec.size()];
 	pos_array = new position_3D[pos_vec.size()];
+	
 
 	//Populating the element array with AFEM::element structures
 	for (int i = 0; i < element_vec.size(); i++){
@@ -91,11 +93,11 @@ void AFEM::Simulation::run(){
 #ifdef MANUAL_FORCE_ENTRY
 	std::vector<int> force_vector_indicies;
 	//int dummy_array[8] = { 124, 120, 116, 112, 127, 123, 119, 115 };// , 120  , 116   ,112 };
-	int dummy_array[1] = { 289 };
+	int dummy_array[1] = { 166 };
 	force_vector_indicies.assign(dummy_array, dummy_array + 1);
 	std::vector<float> zero_force;
 	zero_force.push_back(0.0f); // x
-	zero_force.push_back(0);
+	zero_force.push_back(0.01 * sin(sin_in));
 	zero_force.push_back(0.0f); //y
 
 	sin_in = sin_in + 0.1;

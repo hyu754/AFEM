@@ -1,9 +1,1 @@
-﻿  test_fem.cpp
-D:\GitHub\AFEM\AFEM\FEM\include\AFEM_geometry.hpp(132): warning C4551: function call missing argument list
-D:\GitHub\AFEM\AFEM\FEM\include\AFEM_geometry.hpp(151): warning C4267: 'return' : conversion from 'size_t' to 'int', possible loss of data
-D:\GitHub\AFEM\AFEM\cuda\gpu_include\AFEM_cuda.cuh(89): warning C4305: 'initializing' : truncation from 'double' to 'float'
-D:\GitHub\AFEM\tests\test_fem.cpp(29): warning C4244: 'initializing' : conversion from 'clock_t' to 'float', possible loss of data
-D:\GitHub\AFEM\tests\test_fem.cpp(35): warning C4244: '=' : conversion from 'unsigned __int64' to 'int', possible loss of data
-d:\github\afem\tests\test_fem.cpp(23): warning C4756: overflow in constant arithmetic
-d:\github\afem\tests\test_fem.cpp(23): warning C4756: overflow in constant arithmetic
-  FEM_TEST.vcxproj -> D:\GitHub\AFEM\build\Debug\FEM_TEST.exe
+﻿  FEM_TEST.vcxproj -> D:\GitHub\AFEM\build\Debug\FEM_TEST.exe

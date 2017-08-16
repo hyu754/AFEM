@@ -1,13 +1,20 @@
-﻿  AFEM_simulation.cpp
-d:\github\afem\afem\fem\include\AFEM_geometry.hpp(132): warning C4551: function call missing argument list
-d:\github\afem\afem\fem\include\AFEM_geometry.hpp(151): warning C4267: 'return' : conversion from 'size_t' to 'int', possible loss of data
+﻿  AFEM_visualization.cpp
+d:\github\afem\afem\fem\include\AFEM_geometry.hpp(135): warning C4551: function call missing argument list
+d:\github\afem\afem\fem\include\AFEM_geometry.hpp(157): warning C4267: 'return' : conversion from 'size_t' to 'int', possible loss of data
 D:\GitHub\AFEM\AFEM\cuda\gpu_include\AFEM_cuda.cuh(89): warning C4305: 'initializing' : truncation from 'double' to 'float'
-D:\GitHub\AFEM\AFEM\FEM\source\AFEM_simulation.cpp(28): warning C4267: 'argument' : conversion from 'size_t' to 'int', possible loss of data
-D:\GitHub\AFEM\AFEM\FEM\source\AFEM_simulation.cpp(62): warning C4267: 'argument' : conversion from 'size_t' to 'int', possible loss of data
-D:\GitHub\AFEM\AFEM\FEM\source\AFEM_simulation.cpp(65): warning C4267: 'argument' : conversion from 'size_t' to 'int', possible loss of data
-D:\GitHub\AFEM\AFEM\FEM\source\AFEM_simulation.cpp(89): warning C4267: 'argument' : conversion from 'size_t' to 'int', possible loss of data
-D:\GitHub\AFEM\AFEM\FEM\source\AFEM_simulation.cpp(101): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
-D:\GitHub\AFEM\AFEM\FEM\source\AFEM_simulation.cpp(111): warning C4267: 'argument' : conversion from 'size_t' to 'int', possible loss of data
-D:\GitHub\AFEM\AFEM\FEM\source\AFEM_simulation.cpp(118): warning C4267: 'argument' : conversion from 'size_t' to 'int', possible loss of data
-D:\GitHub\AFEM\AFEM\FEM\source\AFEM_simulation.cpp(135): warning C4267: 'argument' : conversion from 'size_t' to 'int', possible loss of data
+D:\GitHub\AFEM\AFEM\FEM\source\AFEM_visualization.cpp(118): warning C4267: '=' : conversion from 'size_t' to 'int', possible loss of data
+D:\GitHub\AFEM\AFEM\FEM\source\AFEM_visualization.cpp(232): warning C4101: 'e' : unreferenced local variable
+D:\GitHub\AFEM\AFEM\FEM\source\AFEM_visualization.cpp(310): warning C4244: 'argument' : conversion from 'double' to 'GLfloat', possible loss of data
+D:\GitHub\AFEM\AFEM\FEM\source\AFEM_visualization.cpp(313): warning C4244: 'argument' : conversion from 'double' to 'GLfloat', possible loss of data
+D:\GitHub\AFEM\AFEM\FEM\source\AFEM_visualization.cpp(314): warning C4244: 'argument' : conversion from 'double' to 'GLfloat', possible loss of data
+D:\GitHub\AFEM\AFEM\FEM\source\AFEM_visualization.cpp(315): warning C4244: 'argument' : conversion from 'double' to 'GLfloat', possible loss of data
+D:\GitHub\AFEM\AFEM\FEM\source\AFEM_visualization.cpp(317): warning C4244: 'argument' : conversion from 'double' to 'GLfloat', possible loss of data
+D:\GitHub\AFEM\AFEM\FEM\source\AFEM_visualization.cpp(318): warning C4244: 'argument' : conversion from 'double' to 'GLfloat', possible loss of data
+D:\GitHub\AFEM\AFEM\FEM\source\AFEM_visualization.cpp(320): warning C4244: 'argument' : conversion from 'double' to 'GLfloat', possible loss of data
+D:\GitHub\AFEM\AFEM\FEM\source\AFEM_visualization.cpp(347): warning C4244: 'argument' : conversion from 'double' to 'GLfloat', possible loss of data
+D:\GitHub\AFEM\AFEM\FEM\source\AFEM_visualization.cpp(348): warning C4244: 'argument' : conversion from 'double' to 'GLfloat', possible loss of data
+D:\GitHub\AFEM\AFEM\FEM\source\AFEM_visualization.cpp(349): warning C4244: 'argument' : conversion from 'double' to 'GLfloat', possible loss of data
+D:\GitHub\AFEM\AFEM\FEM\source\AFEM_visualization.cpp(350): warning C4244: 'argument' : conversion from 'double' to 'GLfloat', possible loss of data
+D:\GitHub\AFEM\AFEM\FEM\source\AFEM_visualization.cpp(371): warning C4244: 'argument' : conversion from 'double' to 'GLfloat', possible loss of data
+D:\GitHub\AFEM\AFEM\FEM\source\AFEM_visualization.cpp(415): warning C4244: 'argument' : conversion from 'double' to 'GLfloat', possible loss of data
   FEM_lib.vcxproj -> D:\GitHub\AFEM\build\AFEM\FEM\Debug\FEM_lib.lib

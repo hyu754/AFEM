@@ -197,7 +197,9 @@ cv::Mat viz_tools::augment_mesh(cv::Mat input_image,std::string object_name, cv:
 	//myWindow->setWidgetPose("geometryline", pose);
 	if (stationary_exist ==true)
 		myWindow->setWidgetPose("stationary_cloud", pose);
-	myWindow->setWidgetPose("geometry_surface", pose);
+	
+	if (geometry_display_bool["geometry_surface"] == true)
+		myWindow->setWidgetPose("geometry_surface", pose);
 
 	/*myWindow->setRenderingProperty("stationary_cloud", cv::viz::RenderingProperties::POINT_SIZE, 3.0);
 	*/
@@ -593,17 +595,21 @@ void viz_tools::render_geometry_surface_FEM(std::vector<AFEM::element> element_v
 	}
 
 	cv::Mat test = cv::imread( "UOA_LOGO.jpg");
+	if (polygons.size() != 0){
+		geometry.cloud = cv::Mat(points3f_, true).reshape(3, 1);
+		geometry.polygons = cv::Mat(polygons, true).reshape(1, 1);
+		geometry.tcoords = cv::Mat(tcoords, true).reshape(2, 1);
+		geometry.texture = test;
+		cv::viz::WMesh mesh_geometry = cv::viz::WMesh(geometry);
+		myWindow->showWidget("geometry_surface", cv::viz::WMesh(mesh_geometry));
+		myWindow->setRenderingProperty("geometry_surface", cv::viz::SHADING, cv::viz::SHADING_PHONG);
 
-	geometry.cloud = cv::Mat(points3f_, true).reshape(3, 1);
-	geometry.polygons = cv::Mat(polygons, true).reshape(1, 1);
-	geometry.tcoords = cv::Mat(tcoords, true).reshape(2, 1);
-	geometry.texture = test;
-	cv::viz::WMesh mesh_geometry = cv::viz::WMesh(geometry);
-	myWindow->showWidget("geometry_surface", cv::viz::WMesh(mesh_geometry));
-	myWindow->setRenderingProperty("geometry_surface", cv::viz::SHADING, cv::viz::SHADING_PHONG);
-
-	geometry_mapper["geometry_surface"] = geometry;
-
+		geometry_mapper["geometry_surface"] = geometry;
+		geometry_display_bool["geometry_surface"] = true;
+	}
+	else{
+		geometry_display_bool["geometry_surface"] = false;
+	}
 
 }
 
@@ -642,27 +648,29 @@ void viz_tools::update_mesh_position(std::string object_name, std::vector<AFEM::
 }
 void viz_tools::update_mesh_surface_position(std::string object_name, std::vector<AFEM::position_3D> new_position){
 
-	cv::viz::Mesh _mesh = geometry_mapper[object_name];
+	if (geometry_display_bool[object_name] == true){
+		cv::viz::Mesh _mesh = geometry_mapper[object_name];
 
-	std::vector<cv::Point3f> points3f_;
+		std::vector<cv::Point3f> points3f_;
 
 
 
 
-	//assign nodes first
-	for (auto node_ptr = new_position.begin(); node_ptr != new_position.end(); ++node_ptr){
+		//assign nodes first
+		for (auto node_ptr = new_position.begin(); node_ptr != new_position.end(); ++node_ptr){
 
-		cv::Vec3d _pos_(node_ptr->x, node_ptr->y, node_ptr->z);
-		//points.push_back(_pos_);
-		points3f_.push_back(cv::Point3f(_pos_));
+			cv::Vec3d _pos_(node_ptr->x, node_ptr->y, node_ptr->z);
+			//points.push_back(_pos_);
+			points3f_.push_back(cv::Point3f(_pos_));
+		}
+
+		_mesh.cloud = cv::Mat(points3f_, true).reshape(3, 1);
+		geometry_mapper[object_name] = _mesh;
+
+
+		cv::viz::WMesh WMesh_ = cv::viz::WMesh(_mesh);
+		myWindow->showWidget(object_name, WMesh_);
 	}
-
-	_mesh.cloud = cv::Mat(points3f_, true).reshape(3, 1);
-	geometry_mapper[object_name] = _mesh;
-
-
-	cv::viz::WMesh WMesh_ = cv::viz::WMesh(_mesh);
-	myWindow->showWidget(object_name, WMesh_);
 }
 
 
