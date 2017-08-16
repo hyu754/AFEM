@@ -586,4 +586,47 @@ D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(2777): warning C4267: 'argument
   
 D:/GitHub/AFEM/AFEM/cuda/gpu_source/AFEM_cuda.cu(2777): warning C4305: 'argument' : truncation from 'double' to 'float'
   
+  Building NVCC (Device) object AFEM/cuda/CMakeFiles/AFEM_cuda_lib.dir/gpu_source/Debug/AFEM_cuda_lib_generated_Utilities.cu.obj
+  Utilities.cu
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/Utilities.cu(131): warning : unrecognized character escape sequence
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/Utilities.cu(131): warning : unrecognized character escape sequence
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/Utilities.cu(236): warning : unrecognized character escape sequence
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/Utilities.cu(236): warning : unrecognized character escape sequence
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/Utilities.cu(131): warning : unrecognized character escape sequence
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/Utilities.cu(131): warning : unrecognized character escape sequence
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/Utilities.cu(236): warning : unrecognized character escape sequence
+  
+  
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/Utilities.cu(236): warning : unrecognized character escape sequence
+  
+  
+  
+  Utilities.cu
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/Utilities.cu(131): warning C4313: 'fprintf'  : '%d' in format string conflicts with argument 4 of type 'const char *'
+  
+D:/GitHub/AFEM/AFEM/cuda/gpu_source/Utilities.cu(236): warning C4313: 'fprintf'  : '%d' in format string conflicts with argument 4 of type 'const char *'
+  
+  Building Custom Rule D:/GitHub/AFEM/AFEM/cuda/CMakeLists.txt
+  CMake does not need to re-run because D:\GitHub\AFEM\build\AFEM\cuda\CMakeFiles\generate.stamp is up-to-date.
   AFEM_cuda_lib.vcxproj -> D:\GitHub\AFEM\build\AFEM\cuda\Debug\AFEM_cuda_lib.lib

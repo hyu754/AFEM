@@ -6,7 +6,7 @@
 #include "opencv2/opencv_modules.hpp"
 
 
-
+#include "glm\glm.hpp"
 #include "opencv2/core.hpp"
 #include "opencv2/features2d.hpp"
 #include "opencv2/highgui.hpp"
@@ -22,8 +22,11 @@
 #include <opencv2/viz/vizcore.hpp>
 #include <opencv2/viz/widgets.hpp>
 #include <opencv2/viz/widget_accessor.hpp>
+#ifdef AFEM_USE
 #include <AFEM_geometry.hpp>
+#endif
 #include "raytracer.h"
+#include "cv_custom_wrapper_types.h"
 
 class viz_tools
 {
@@ -172,8 +175,10 @@ public:
 	//Pose, is the new pose of the virtual object from solve_pnp_matrix
 	cv::Mat augment_mesh(cv::Mat input_image,std::string object_name,cv::Affine3f pose);
 
+#ifdef AFEM_USE
 	//Get geometry from AFEM::geometry
-	void render_geometry_FEM(std::vector<AFEM::element> geometry, std::vector<AFEM::position_3D> position_vector);
+	//Specifiy if face is to be displayed
+	void render_geometry_FEM(std::vector<AFEM::element> geometry, std::vector<AFEM::position_3D> position_vector, bool display_face = false);
 
 	//Get geometry from AFEM::geometry, this one will only render the surface
 	//A texture will be displayed on this surface
@@ -181,7 +186,24 @@ public:
 
 
 	//Renders the stationary points on screen
-	void render_stationary_FEM(std::string geometry_name,std::vector<AFEM::stationary> stationary_vec);
+	/*void render_stationary_FEM(std::vector<AFEM::position_3D> position_vec,std::vector<AFEM::stationary> stationary_vec,float size = 20.0, std::string objet_name = "stationary_point", cv::Scalar color = cv::Scalar(20,200,200));*/
+	void render_stationary_FEM(std::string geometry_name, std::vector<AFEM::stationary> stationary_vec);
+
+	//Render the tumour points on screen
+	void render_tumour_FEM(std::string geometry_name, std::vector<int> tumour_vec);
+
+	//Update the position of the verticies of the mesh
+	//Input:	std::string name - name of object to be changed
+	//			AFEM::position_3D - the new position of the mesh
+	void update_mesh_position(std::string object_name, std::vector<AFEM::position_3D> new_position);
+
+
+	//Update the position of the surface of the mesh, this is for textures, etc
+	//Input:	std::string name - name of object to be changed
+	//			AFEM::position_3D - the new position of the mesh
+	void update_mesh_surface_position(std::string object_name, std::vector<AFEM::position_3D> new_position);
+#endif
+
 
 	//Generates the rays used for ray tracing
 	//Features in origiinal reference contains features transformed into the original reference frame,
@@ -202,17 +224,9 @@ public:
 	template<typename T, typename S>
 	std::vector<S> glm_to_cv_3d(std::vector<T>);
 
-	//Update the position of the verticies of the mesh
-	//Input:	std::string name - name of object to be changed
-	//			AFEM::position_3D - the new position of the mesh
-	void update_mesh_position(std::string object_name, std::vector<AFEM::position_3D> new_position);
 
-
-	//Update the position of the surface of the mesh, this is for textures, etc
-	//Input:	std::string name - name of object to be changed
-	//			AFEM::position_3D - the new position of the mesh
-	void update_mesh_surface_position(std::string object_name, std::vector<AFEM::position_3D> new_position);
-
+	//Find the affine transformation between two set of points that are assumed to have the same order
+	cv::Affine3f find_affine_transformation_3d(worldPointVector orig_state, worldPointVector final_state);
 	
 
 
@@ -223,6 +237,16 @@ public:
 	//Input:	(u,v)-point on the image frame
 	//Output: (x,y,z)-3d position in the original reference frame
 	cv::Point3f transform_image_to_original_frame(const cv::Point2f);
+
+
+	//Add point to viewer
+	//Input:	pnts_3D- 3d points in the form vector<point3f>
+	//			name - name of point cloud
+	//			size - size of the point cloud
+	//			color - color of point cloud
+	void render_point_cloud(std::vector<cv::Point3f> pnts_3D, std::string name, float size = 20.0f, cv::Scalar color = cv::Scalar(200,100,200));
+	void render_point_cloud(std::vector<cv::Point3f> pnts_3D, cv::Affine3f pose, std::string name, float size = 20.0f, cv::Scalar color = cv::Scalar(200, 100, 200));
+
 
 	//constructors
 	viz_tools();

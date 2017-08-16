@@ -6,7 +6,7 @@
 #include <string>
 #define WRITE_TO_FILE
 //#define CPU_CG_SOLVER
-#define MANUAL_FORCE_ENTRY
+//#define MANUAL_FORCE_ENTRY
 #ifdef CPU_CG_SOLVER
 #include <Eigen\Eigen>
 #include <Eigen\IterativeLinearSolvers>
@@ -140,13 +140,15 @@ void AFEM::Simulation::run(){
 
 }
 
+void AFEM::Simulation::write_position(std::string file_name){
+	std::ofstream file_out(file_name);
+	for (int i = 0; i < afem_geometry.get_num_nodes(); i++){
+		file_out << pos_array[i].x << " " << pos_array[i].y << " " << pos_array[i].z << std::endl;
+	}
 
-
-
-
-
-
-
+	file_out.close();
+	
+}
 
 
 

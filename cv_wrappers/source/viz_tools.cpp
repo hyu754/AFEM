@@ -261,9 +261,31 @@ cv::Mat viz_tools::augment_mesh(cv::Mat input_image,std::string object_name, cv:
 	return dst;
 }
 
+#ifdef AFEM_USE
+//
+//void viz_tools::render_stationary_FEM(
+//	std::vector<AFEM::position_3D> pos_vec,
+//	std::vector<AFEM::stationary> statvec,
+//	float size,
+//	std::string object_name,
+//	cv::Scalar color)
+//{
+//
+//	/*first change from afem to std*/
+//	std::vector<cv::Point3f> stat_vec_cv;
+//	for (auto iter = statvec.begin(); iter != statvec.end(); ++iter){
+//		stat_vec_cv.push_back(cv::Point3f(pos_vec.at(iter->node_number).x, pos_vec.at(iter->node_number).y,
+//			pos_vec.at(iter->node_number).z));
+//
+//
+//	}
+//
+//
+//	render_point_cloud(stat_vec_cv, object_name, size, color);
+//	
+//}
 
-
-void viz_tools::render_geometry_FEM(std::vector<AFEM::element> element_vector,std::vector<AFEM::position_3D> position_vector){
+void viz_tools::render_geometry_FEM(std::vector<AFEM::element> element_vector,std::vector<AFEM::position_3D> position_vector, bool display_face){
 	cv::viz::Mesh geometry;
 	//cv::viz::Mesh geometry_surface; //This mesh is for visualizing some textures on the face 
 	std::vector<cv::Vec3d> points;
@@ -443,15 +465,24 @@ void viz_tools::render_geometry_FEM(std::vector<AFEM::element> element_vector,st
 		mesh_geometry.setColor(cv::viz::Color::blue());
 		myWindow->setBackgroundColor();// cv::viz::Color::white());//cv::viz::Color::white()
 		
-		mesh_geometry_line.setColor(cv::viz::Color::magenta());
+		mesh_geometry_line.setColor(cv::viz::Color::orange_red());
 		//mesh_geometry_line.
 		myWindow->showWidget("geometryline", mesh_geometry_line);
 
-		myWindow->showWidget("geometry", mesh_geometry);
+		if (display_face == true){
+			myWindow->showWidget("geometry", mesh_geometry);
+			myWindow->setRenderingProperty("geometry", cv::viz::RenderingProperties::OPACITY, 0.5);
+			geometry_mapper["geometry"] = geometry;
+		}
 		myWindow->setRenderingProperty("geometryline", cv::viz::RenderingProperties::REPRESENTATION, cv::viz::RepresentationValues::REPRESENTATION_WIREFRAME);
-	//	myWindow->setRenderingProperty("geometry", cv::viz::RenderingProperties::REPRESENTATION, cv::viz::RepresentationValues::REPRESENTATION_WIREFRAME);
-		myWindow->setRenderingProperty("geometryline", cv::viz::RenderingProperties::LINE_WIDTH,4);
-		//myWindow->setRenderingProperty("geometry", cv::viz::RenderingProperties::OPACITY, 0.5);
+		myWindow->setRenderingProperty("geometryline", cv::viz::RenderingProperties::SHADING, cv::viz::ShadingValues::SHADING_FLAT);
+		//	myWindow->setRenderingProperty("geometry", cv::viz::RenderingProperties::REPRESENTATION, cv::viz::RepresentationValues::REPRESENTATION_WIREFRAME);
+		myWindow->setRenderingProperty("geometryline", cv::viz::RenderingProperties::LINE_WIDTH,1);
+		//myWindow->removeAllLights();
+		/*cv::Vec3f cam_pos(400, 400 , 640.0);
+		cv::Vec3f cam_focal_point(400, 400 , 0);
+		myWindow->addLight(cam_focal_point, cam_pos, cv::viz::Color::blue());*/
+		myWindow->setBackgroundColor(cv::viz::Color::celestial_blue());
 		
 
 		global_mesh_ptr = geometry;
@@ -459,7 +490,7 @@ void viz_tools::render_geometry_FEM(std::vector<AFEM::element> element_vector,st
 
 		//Add geometries to mapper for easy access
 
-		geometry_mapper["geometry"] = geometry;
+		
 	//WTetraHedron zzz;
 	//myWindow->showWidget("triangle" + std::to_string(1), zzz);
 	/*WTetraHedron zzz(
@@ -674,7 +705,7 @@ void viz_tools::update_mesh_surface_position(std::string object_name, std::vecto
 }
 
 
-void viz_tools::render_stationary_FEM(std::string geometry_name,::vector<AFEM::stationary> stationary_vec){
+void viz_tools::render_stationary_FEM(std::string geometry_name,std::vector<AFEM::stationary> stationary_vec){
 	std::vector<cv::Point3f> cloud_;
 
 	cv::viz::Mesh _mesh = global_mesh_ptr;
@@ -684,9 +715,9 @@ void viz_tools::render_stationary_FEM(std::string geometry_name,::vector<AFEM::s
 	}
 	if (cloud_.size() != 0){
 		cv::viz::WCloud cloud_temp(cloud_);
-		cloud_temp.setColor(cv::viz::Color::apricot());
-		myWindow->showWidget("stationary_cloud", cloud_temp);
-		myWindow->setRenderingProperty("stationary_cloud", cv::viz::RenderingProperties::POINT_SIZE, 20.0);
+		cloud_temp.setColor(cv::viz::Color::magenta());
+		myWindow->showWidget(geometry_name, cloud_temp);
+		myWindow->setRenderingProperty(geometry_name, cv::viz::RenderingProperties::POINT_SIZE, 10.0);
 	}
 	else {
 		stationary_exist = false;
@@ -694,7 +725,24 @@ void viz_tools::render_stationary_FEM(std::string geometry_name,::vector<AFEM::s
 	
 }
 
+void viz_tools::render_tumour_FEM(std::string geometry_name, std::vector<int> tumour_vec){
+	std::vector<cv::Point3f> cloud_;
 
+	cv::viz::Mesh _mesh = global_mesh_ptr;
+	for (auto iter= tumour_vec.begin(); iter!= tumour_vec.end(); ++iter){
+		cv::Vec3f pos_ = _mesh.cloud.at<cv::Vec3f>(*iter);
+		cloud_.push_back(cv::Point3f(pos_.val[0], pos_.val[1], pos_.val[2]));
+	}
+	if (cloud_.size() != 0){
+		cv::viz::WCloud cloud_temp(cloud_);
+		cloud_temp.setColor(cv::viz::Color::green());
+		myWindow->showWidget(geometry_name, cloud_temp);
+		myWindow->setRenderingProperty(geometry_name, cv::viz::RenderingProperties::POINT_SIZE, 25);
+	}
+	
+
+}
+#endif
 void viz_tools::generate_rays(std::vector<cv::Point3f> features_in_original_reference){
 
 	int height = size_window.height;
@@ -914,6 +962,63 @@ void viz_tools::ray_tracer(void){
 		}
 	}
 }
+
+
+cv::Affine3f viz_tools::find_affine_transformation_3d(worldPointVector orig_state, worldPointVector final_state){
+
+	cv::Affine3f final_result;
+
+	cv::Mat matrix_output;
+	std::vector<uchar> status;
+	if (!orig_state.empty() && !final_state.empty()){
+		if (orig_state.size() == final_state.size()){
+			cv::estimateAffine3D(orig_state, final_state, matrix_output  ,status);
+		}
+	}
+	else{
+		std::cout << "Error : Points must be non-empty" << std::endl;
+		return final_result;
+	}
+	
+	for (int i = 0; i < 3; i++){
+		for (int j = 0; j < 3; j++){
+
+			final_result.matrix.val[ j+3*i] = matrix_output.at<double>(i, j);
+		}
+		final_result.matrix.val[3*3 + 3 * i] = matrix_output.at<double>(i, 3);
+	}
+	//final_result.matrix = matrix_output;
+	return final_result;
+
+
+}
+
+void viz_tools::render_point_cloud(std::vector<cv::Point3f> pnts_3D, std::string name, float size, cv::Scalar color){
+
+	cv::viz::WCloud cloud_temp(pnts_3D);
+	cloud_temp.setColor(cv::viz::Color(color[0], color[1], color[2]));
+
+	
+	myWindow->showWidget(name, cloud_temp);
+	myWindow->setRenderingProperty(name, cv::viz::RenderingProperties::POINT_SIZE, size);
+	
+}
+
+
+void viz_tools::render_point_cloud(std::vector<cv::Point3f> pnts_3D, cv::Affine3f pose, std::string name, float size, cv::Scalar color){
+
+	cv::viz::WCloud cloud_temp(pnts_3D);
+	cloud_temp.setColor(cv::viz::Color(color[0], color[1], color[2]));
+
+	
+	myWindow->showWidget(name, cloud_temp);
+	myWindow->setWidgetPose(name, pose);
+	myWindow->setRenderingProperty(name, cv::viz::RenderingProperties::POINT_SIZE, size);
+
+}
+
+
+
 viz_tools::~viz_tools(){
 	//std::cout << "SURF WRAPPER DESTROYED" << std::endl;
 }

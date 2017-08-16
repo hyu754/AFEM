@@ -36,8 +36,16 @@ void optic_flow::run_LK(std::string name){
 
 
 	frame.copyTo(image);
-		
-	cvtColor(image, gray, cv::COLOR_BGR2GRAY);
+
+	//Convert image if not gray
+	if (image.channels() == 1){
+
+		gray = image;
+	}
+	else {
+		cvtColor(image, gray, cv::COLOR_BGR2GRAY);
+	}
+	
 	
 	//gray = image;
 	if (!points[0].empty()){
@@ -91,7 +99,7 @@ void optic_flow::run_LK(std::string name){
 	int _count_status_ = 0;
 	for (auto status_ptr = status.begin(); status_ptr != status.end(); ++status_ptr){
 		if ((*status_ptr)){
-			circle(image, points[1].at(_count_status_), 1, cv::Scalar(0, 250, 1), 3, 8);
+			circle(image, points[1].at(_count_status_), 20, cv::Scalar(0, 250, 1), 3, 8);
 			cv::line(image, original_position.at(_count_status_), points[1].at(_count_status_), cv::Scalar(0, 100, 200));
 			
 		} 
@@ -144,7 +152,7 @@ optic_flow::optic_flow(){
 
 	termcrit.maxCount = 10;
 	termcrit.epsilon = 0.01;
-
+	 
 	subPixWinSize.height = 10;
 	subPixWinSize.width = 10;
 	winSize.height = 10;

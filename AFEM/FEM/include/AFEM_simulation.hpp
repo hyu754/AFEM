@@ -24,7 +24,9 @@ public:
 
 	//run the loop
 	void run(void);
-	
+
+	//Write position at time t to file
+	void write_position(std::string file_name);
 	
 	//These variables will be populated when the class is initialized
 	std::vector<AFEM::position_3D> pos_vec;
@@ -53,12 +55,13 @@ public:
 
 	cuda_tools cuda_tools_class;
 private:
-	
+	//Geometry class to store geometry
 	AFEM::Geometry afem_geometry;
 
 
 	//Solver type, can be dynamic (with or without corotation), and energy minimisation
 	AFEM::elastic_solver_type solver_type;
+	
 	
 
 	

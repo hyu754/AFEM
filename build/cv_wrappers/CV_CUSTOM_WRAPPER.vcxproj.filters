@@ -13,6 +13,9 @@
     <ClCompile Include="D:\GitHub\AFEM\cv_wrappers\source\raytracer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="D:\GitHub\AFEM\cv_wrappers\source\stereo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="D:\GitHub\AFEM\cv_wrappers\source\surf.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -27,6 +30,9 @@
     <ClInclude Include="D:\GitHub\AFEM\cv_wrappers\include\aruco_tools.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="D:\GitHub\AFEM\cv_wrappers\include\cv_custom_wrapper_types.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
     <ClInclude Include="D:\GitHub\AFEM\cv_wrappers\include\hough_circle.h">
       <Filter>Headers</Filter>
     </ClInclude>
@@ -34,6 +40,9 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="D:\GitHub\AFEM\cv_wrappers\include\raytracer.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHub\AFEM\cv_wrappers\include\stereo.h">
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="D:\GitHub\AFEM\cv_wrappers\include\surf.h">

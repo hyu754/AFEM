@@ -23,6 +23,8 @@ include_directories(${VTK_INCLUDE_DIRS})
 include_directories(${CMAKE_SOURCE_DIR}/cv_wrappers/include/)
 link_directories(${CMAKE_SOURCE_DIR}/lib)
 add_subdirectory(cv_wrappers/)
+#Add precompile header so we use AFEM
+target_compile_definitions(CV_CUSTOM_WRAPPER PRIVATE AFEM_USE)
 #add_executable(OpenCloth "OpenCloth/OpenCloth_CoRotated_Linear_FEM/main.cpp")
 
 #include Eigen headers
@@ -46,46 +48,34 @@ ADD_EXECUTABLE(PHANTOM_EXPERIMENT experiment/experiment_abdominal_phantom.cpp)
 #target_link_libraries( AFEM cudart cublas cuda cusparse)
 target_link_libraries( FEM_TEST AFEM_cuda_lib FEM_lib cudart freeglutd glew32d)
 target_link_libraries(CV_TEST ${OpenCV_LIBS} AFEM_cuda_lib FEM_lib CV_CUSTOM_WRAPPER ${VTK_LIBRARIES})
-target_link_libraries(PHANTOM_EXPERIMENT ${OpenCV_LIBS} AFEM_cuda_lib FEM_lib CV_CUSTOM_WRAPPER ${VTK_LIBRARIES})
-
-#Adding dll to the debug (assuming debug) folder
-
-
+target_link_libraries(PHANTOM_EXPERIMENT ovrvision64d ${OpenCV_LIBS} AFEM_cuda_lib FEM_lib CV_CUSTOM_WRAPPER ${VTK_LIBRARIES})
+target_compile_definitions(PHANTOM_EXPERIMENT PRIVATE AFEM_USE)
+target_compile_definitions(CV_TEST PRIVATE AFEM_USE)
+#Adding dll and other necessary information to the debug (assuming debug) folder
 if(1)
-add_custom_target(dll_includes
-
-  COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/bin/freeglutd.dll            ${CMAKE_BINARY_DIR}/Debug/
-  COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/bin/glew32d.dll          ${CMAKE_BINARY_DIR}/Debug/
-  COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/bin/msvcp120.dll            ${CMAKE_BINARY_DIR}/Debug/
-  COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/bin/msvcr120.dll          ${CMAKE_BINARY_DIR}/Debug/
-  COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/Geometry/FEM_Nodes.txt          ${CMAKE_BINARY_DIR}/Debug/
-COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/Geometry/FEM_Nodes.txt          ${CMAKE_BINARY_DIR}/
-COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/Geometry/FEM_Elem.txt          ${CMAKE_BINARY_DIR}/Debug/
- COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/Geometry/FEM_Elem.txt          ${CMAKE_BINARY_DIR}/
- 
-COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/Geometry/FEM_Stationary.txt          ${CMAKE_BINARY_DIR}/
-COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/Geometry/FEM_Tumour.txt          ${CMAKE_BINARY_DIR}/
-
-)
-#add_dependencies(OpenCloth  dll_includes)
-
-
+file(GLOB dlls_extra ${CMAKE_SOURCE_DIR}/bin/*.DLL)
 file(GLOB dlls_vtk ${VTK_DIR}/bin/debug/*.dll)
 file(GLOB dlls_cv ${OpenCV_DIR}/bin/debug/*.dll)
-message(${VTK_DIR}/bin/debug/)
+file(GLOB FEM_files ${CMAKE_SOURCE_DIR}/Geometry/*.txt)
+file(GLOB cam_prop ${CMAKE_SOURCE_DIR}/camera_info/*.xml)
+
+add_custom_target(dll_includes
+COMMAND ${CMAKE_COMMAND} -E copy ${dlls_extra}            ${CMAKE_BINARY_DIR}/Debug/
+)
+
+add_custom_target(fem_info  COMMAND ${CMAKE_COMMAND} -E copy ${FEM_files}          ${CMAKE_BINARY_DIR}/)
+add_custom_target(cam_info 
+	COMMAND ${CMAKE_COMMAND} -E copy ${cam_prop} 			${CMAKE_BINARY_DIR}/
+	COMMAND ${CMAKE_COMMAND} -E copy ${cam_prop} 			${CMAKE_BINARY_DIR}/Debug/
+)
 add_custom_target(dll_cv_includes
 COMMAND ${CMAKE_COMMAND} -E copy ${dlls_vtk}     ${CMAKE_BINARY_DIR}/Debug/
 COMMAND ${CMAKE_COMMAND} -E copy ${dlls_cv}     ${CMAKE_BINARY_DIR}/Debug/
-  COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/Geometry/FEM_Nodes.txt          ${CMAKE_BINARY_DIR}/Debug/
-COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/Geometry/FEM_Nodes.txt          ${CMAKE_BINARY_DIR}/
-COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/Geometry/FEM_Elem.txt          ${CMAKE_BINARY_DIR}/Debug/
- COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/Geometry/FEM_Elem.txt          ${CMAKE_BINARY_DIR}/
- 
-COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/Geometry/FEM_Stationary.txt          ${CMAKE_BINARY_DIR}/
+
 )
 add_dependencies(FEM_TEST   dll_includes)
-add_dependencies(CV_TEST dll_cv_includes)
-add_dependencies(PHANTOM_EXPERIMENT dll_cv_includes)
+add_dependencies(CV_TEST dll_cv_includes fem_info)
+add_dependencies(PHANTOM_EXPERIMENT dll_cv_includes fem_info cam_info)
 
 
 endif(1)

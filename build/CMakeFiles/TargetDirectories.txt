@@ -3,6 +3,8 @@ D:/GitHub/AFEM/build/CMakeFiles/FEM_TEST.dir
 D:/GitHub/AFEM/build/CMakeFiles/dll_includes.dir
 D:/GitHub/AFEM/build/CMakeFiles/PHANTOM_EXPERIMENT.dir
 D:/GitHub/AFEM/build/CMakeFiles/dll_cv_includes.dir
+D:/GitHub/AFEM/build/CMakeFiles/fem_info.dir
+D:/GitHub/AFEM/build/CMakeFiles/cam_info.dir
 D:/GitHub/AFEM/build/CMakeFiles/ALL_BUILD.dir
 D:/GitHub/AFEM/build/CMakeFiles/ZERO_CHECK.dir
 D:/GitHub/AFEM/build/cv_wrappers/CMakeFiles/CV_CUSTOM_WRAPPER.dir
