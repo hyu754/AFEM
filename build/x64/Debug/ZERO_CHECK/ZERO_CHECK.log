@@ -1,8 +1,5 @@
 ﻿  Checking Build System
-  CMake is re-running because D:/GitHub/AFEM/build/CMakeFiles/generate.stamp is out-of-date.
-    the file 'D:/GitHub/AFEM/CMakeLists.txt'
-    is newer than 'D:/GitHub/AFEM/build/CMakeFiles/generate.stamp.depend'
-    result='-1'
-  -- Configuring done
-  -- Generating done
-  -- Build files have been written to: D:/GitHub/AFEM/build
+  CMake does not need to re-run because D:/GitHub/AFEM/build/CMakeFiles/generate.stamp is up-to-date.
+  CMake does not need to re-run because D:/GitHub/AFEM/build/cv_wrappers/CMakeFiles/generate.stamp is up-to-date.
+  CMake does not need to re-run because D:/GitHub/AFEM/build/AFEM/cuda/CMakeFiles/generate.stamp is up-to-date.
+  CMake does not need to re-run because D:/GitHub/AFEM/build/AFEM/FEM/CMakeFiles/generate.stamp is up-to-date.

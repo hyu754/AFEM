@@ -9,15 +9,14 @@
 #include <iostream>
 #include <ctype.h>
 
+#include "cv_custom_wrapper_types.h"
 using namespace std;
 class stereo
 {
 public:
 	enum DIRECTIONS{ LEFT, RIGHT };
 private:
-	//Make some custom variables
-	typedef std::vector<cv::Point2f> imagePointVector;
-	typedef std::vector<cv::Point3f> wordlPointVector;
+	
 
 
 	//Intrinsic matrix and distoryion vector
@@ -70,9 +69,14 @@ public:
 	cv::Rect return_roi(DIRECTIONS dir){ if (dir == DIRECTIONS::LEFT){ return roi_left; } else { return roi_right; } }
 
 	//This function performs triangulation on the left and right points
-	//Input:	left_points, right_points - left and right points in R2
+	//Input:	none-assuming that it has already been set
 	//Output:	world_points - points in R3
 	std::vector<cv::Point3f> triangulation();
+	
+	//This function performs triangulation on the left and right points
+	//Input:	left_points, right_points - left and right points in R2		
+	//Output:	world_points - points in R3
+	std::vector<cv::Point3f> triangulation(imagePointVector left_pnts, imagePointVector right_pnts);
 
 	//Function to determin if ROI is set
 	bool roi_is_set(){ if (roi_left.height  && roi_right.height){ return true; } else{ return false; } }

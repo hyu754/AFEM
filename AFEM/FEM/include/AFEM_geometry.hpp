@@ -38,8 +38,13 @@
 
 
 namespace AFEM{
-	//Solver type
-	enum elastic_solver_type{ DYNAMIC_NON_COROTATION, DYNAMIC_COROTATION, ENERGY_MINISATION_COROTATION };
+	//Solver types, currently only linear methods are available
+	enum elastic_solver_type{ 
+		STATIC_NON_COROTATION,
+		DYNAMIC_NON_COROTATION, 
+		DYNAMIC_COROTATION, 
+		ENERGY_MINISATION_COROTATION 
+	};
 	enum dimension{ TWO_DIMENSION, THREE_DIMENSION };
 	//Structures to store geometry information
 
@@ -48,7 +53,9 @@ namespace AFEM{
 	};
 
 	struct position_3D{
-		double x, y, z;
+		double x=0.0;
+		double y=0.0;
+		double z=0.0;
 		int displacement_index[3];
 	};
 
@@ -116,6 +123,10 @@ class AFEM::Geometry{
 	//Vector of tumour nodes ids
 	std::vector<int> tumour_id;
 
+
+	//Vector of tumour nodes ids
+	std::vector<int> side_constraint_id;
+
 	//Dimensions
 	dimension dim;
 
@@ -149,7 +160,13 @@ public:
 	//Read in tumour id's
 	bool read_tumour(std::string s_in);
 
+	//Read the stationary vector id
 	bool read_stationary(std::string s_in);
+
+
+	//Read the side constraint id
+	bool read_side_constraint(std::string s_in);
+
 
 	void make_K_matrix(void);
 
@@ -169,6 +186,8 @@ public:
 	//return tumour id vector
 	std::vector<int> return_tumour_id_vector(){ return tumour_id; }
 
+	//return side constraint id vector
+	std::vector<int> return_side_constraint_id_vector(){ return side_constraint_id; }
 
 };
 

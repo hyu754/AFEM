@@ -263,6 +263,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   <ItemGroup>
     <ClInclude Include="D:\GitHub\AFEM\cv_wrappers\include\aruco_tools.h" />
     <ClInclude Include="D:\GitHub\AFEM\cv_wrappers\include\cv_custom_wrapper_types.h" />
+    <ClInclude Include="D:\GitHub\AFEM\cv_wrappers\include\cv_io.h" />
     <ClInclude Include="D:\GitHub\AFEM\cv_wrappers\include\hough_circle.h" />
     <ClInclude Include="D:\GitHub\AFEM\cv_wrappers\include\optic_flow.h" />
     <ClInclude Include="D:\GitHub\AFEM\cv_wrappers\include\raytracer.h" />
@@ -271,6 +272,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="D:\GitHub\AFEM\cv_wrappers\include\viz_tools.h" />
     <ClInclude Include="D:\GitHub\AFEM\cv_wrappers\include\viz_widget.h" />
     <ClCompile Include="D:\GitHub\AFEM\cv_wrappers\source\aruco_tools.cpp"  />
+    <ClCompile Include="D:\GitHub\AFEM\cv_wrappers\source\cv_io.cpp"  />
     <ClCompile Include="D:\GitHub\AFEM\cv_wrappers\source\hough_circle.cpp"  />
     <ClCompile Include="D:\GitHub\AFEM\cv_wrappers\source\optic_flow.cpp"  />
     <ClCompile Include="D:\GitHub\AFEM\cv_wrappers\source\raytracer.cpp"  />

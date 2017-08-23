@@ -468,7 +468,7 @@ void viz_tools::render_geometry_FEM(std::vector<AFEM::element> element_vector,st
 		mesh_geometry_line.setColor(cv::viz::Color::orange_red());
 		//mesh_geometry_line.
 		myWindow->showWidget("geometryline", mesh_geometry_line);
-
+		geometry_mapper["geometryline"] = geometry;
 		if (display_face == true){
 			myWindow->showWidget("geometry", mesh_geometry);
 			myWindow->setRenderingProperty("geometry", cv::viz::RenderingProperties::OPACITY, 0.5);
@@ -677,6 +677,45 @@ void viz_tools::update_mesh_position(std::string object_name, std::vector<AFEM::
 	myWindow->setRenderingProperty(object_name + "line", cv::viz::RenderingProperties::LINE_WIDTH, 3);
 
 }
+
+void viz_tools::update_mesh_position(std::string object_name, int numberOfNodes,AFEM::position_3D *new_position,bool display_face){
+
+	cv::viz::Mesh _mesh = geometry_mapper[object_name];
+
+	std::vector<cv::Point3f> points3f_;
+
+
+	
+
+	//assign nodes first
+	for (int i = 0; i < numberOfNodes; i++){
+
+		cv::Vec3d _pos_(new_position[i].x, new_position[i].y, new_position[i].z);
+		//points.push_back(_pos_);
+		points3f_.push_back(cv::Point3f(_pos_));
+	}
+
+	_mesh.cloud = cv::Mat(points3f_, true).reshape(3, 1);
+	geometry_mapper[object_name] = _mesh;
+
+
+
+	cv::viz::WMesh WMesh_line = cv::viz::WMesh(_mesh);
+
+	WMesh_line.setColor(cv::viz::Color::cherry());
+	if (display_face == true){
+		cv::viz::WMesh WMesh_ = cv::viz::WMesh(_mesh);
+		WMesh_.setColor(cv::viz::Color::blue());
+		myWindow->showWidget(object_name, WMesh_);
+		myWindow->setRenderingProperty(object_name, cv::viz::RenderingProperties::OPACITY, 1);
+	}
+	myWindow->showWidget(object_name , WMesh_line);
+
+	myWindow->setRenderingProperty(object_name , cv::viz::RenderingProperties::REPRESENTATION, cv::viz::RepresentationValues::REPRESENTATION_WIREFRAME);
+	//	myWindow->setRenderingProperty("geometry", cv::viz::RenderingProperties::REPRESENTATION, cv::viz::RepresentationValues::REPRESENTATION_WIREFRAME);
+	myWindow->setRenderingProperty(object_name , cv::viz::RenderingProperties::LINE_WIDTH, 1);
+
+}
 void viz_tools::update_mesh_surface_position(std::string object_name, std::vector<AFEM::position_3D> new_position){
 
 	if (geometry_display_bool[object_name] == true){
@@ -717,7 +756,7 @@ void viz_tools::render_stationary_FEM(std::string geometry_name,std::vector<AFEM
 		cv::viz::WCloud cloud_temp(cloud_);
 		cloud_temp.setColor(cv::viz::Color::magenta());
 		myWindow->showWidget(geometry_name, cloud_temp);
-		myWindow->setRenderingProperty(geometry_name, cv::viz::RenderingProperties::POINT_SIZE, 10.0);
+		myWindow->setRenderingProperty(geometry_name, cv::viz::RenderingProperties::POINT_SIZE, 15.0);
 	}
 	else {
 		stationary_exist = false;
@@ -740,6 +779,25 @@ void viz_tools::render_tumour_FEM(std::string geometry_name, std::vector<int> tu
 		myWindow->setRenderingProperty(geometry_name, cv::viz::RenderingProperties::POINT_SIZE, 25);
 	}
 	
+
+}
+
+
+void viz_tools::render_tumour_FEM(std::string geometry_name, std::string base_geometry,std::vector<int> tumour_vec){
+	std::vector<cv::Point3f> cloud_;
+
+	cv::viz::Mesh _mesh = geometry_mapper[base_geometry];
+	for (auto iter = tumour_vec.begin(); iter != tumour_vec.end(); ++iter){
+		cv::Vec3f pos_ = _mesh.cloud.at<cv::Vec3f>(*iter);
+		cloud_.push_back(cv::Point3f(pos_.val[0], pos_.val[1], pos_.val[2]));
+	}
+	if (cloud_.size() != 0){
+		cv::viz::WCloud cloud_temp(cloud_);
+		cloud_temp.setColor(cv::viz::Color::green());
+		myWindow->showWidget(geometry_name, cloud_temp);
+		myWindow->setRenderingProperty(geometry_name, cv::viz::RenderingProperties::POINT_SIZE, 25);
+	}
+
 
 }
 #endif
@@ -980,14 +1038,14 @@ cv::Affine3f viz_tools::find_affine_transformation_3d(worldPointVector orig_stat
 		return final_result;
 	}
 	
-	for (int i = 0; i < 3; i++){
-		for (int j = 0; j < 3; j++){
-
-			final_result.matrix.val[ j+3*i] = matrix_output.at<double>(i, j);
-		}
-		final_result.matrix.val[3*3 + 3 * i] = matrix_output.at<double>(i, 3);
+	for (int i = 0; i < 3; i++){//row
+		for (int j = 0; j < 4; j++){ //col
+			final_result.matrix.val[j+4*i] = matrix_output.at<double>(i,j);
+		} 		
 	}
-	//final_result.matrix = matrix_output;
+
+	
+	
 	return final_result;
 
 
@@ -997,6 +1055,13 @@ void viz_tools::render_point_cloud(std::vector<cv::Point3f> pnts_3D, std::string
 
 	cv::viz::WCloud cloud_temp(pnts_3D);
 	cloud_temp.setColor(cv::viz::Color(color[0], color[1], color[2]));
+	
+	int id = 0;
+	for (auto pnts_ptr = pnts_3D.begin(); pnts_ptr != pnts_3D.end(); ++pnts_ptr){
+		cv::viz::WText3D text3d(std::to_string(id), *pnts_ptr,0.001);
+		id++;
+		myWindow->showWidget(std::to_string(id), text3d);
+	}
 
 	
 	myWindow->showWidget(name, cloud_temp);
@@ -1004,16 +1069,24 @@ void viz_tools::render_point_cloud(std::vector<cv::Point3f> pnts_3D, std::string
 	
 }
 
+worldPointVector viz_tools::transform_points3d(cv::Affine3f t_mat, worldPointVector pnts_3D){
+	for (auto iter = pnts_3D.begin(); iter != pnts_3D.end(); ++iter){
+
+		(*iter) = t_mat*(*iter);
+	}
+	return pnts_3D;
+}
 
 void viz_tools::render_point_cloud(std::vector<cv::Point3f> pnts_3D, cv::Affine3f pose, std::string name, float size, cv::Scalar color){
 
 	cv::viz::WCloud cloud_temp(pnts_3D);
 	cloud_temp.setColor(cv::viz::Color(color[0], color[1], color[2]));
-
+	
 	
 	myWindow->showWidget(name, cloud_temp);
-	myWindow->setWidgetPose(name, pose);
+	
 	myWindow->setRenderingProperty(name, cv::viz::RenderingProperties::POINT_SIZE, size);
+	myWindow->setRenderingProperty(name, cv::viz::RenderingProperties::REPRESENTATION, cv::viz::REPRESENTATION_WIREFRAME);
 
 }
 

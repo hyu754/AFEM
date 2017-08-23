@@ -73,7 +73,7 @@ void stereo::set_images(cv::Mat im_in, DIRECTIONS dir){
 	}
 }
 
-void stereo::set_points(stereo::imagePointVector vec_in, DIRECTIONS dir){
+void stereo::set_points(imagePointVector vec_in, DIRECTIONS dir){
 	if (dir == DIRECTIONS::LEFT){
 		left_image_points = vec_in;
 	}
@@ -86,7 +86,7 @@ void stereo::set_points(stereo::imagePointVector vec_in, DIRECTIONS dir){
 
 }
 
-stereo::imagePointVector stereo::undistort_points(imagePointVector dist_points, DIRECTIONS dir){
+imagePointVector stereo::undistort_points(imagePointVector dist_points, DIRECTIONS dir){
 	imagePointVector undistorted;
 	if (dist_points.empty()){
 		std::cout << "ERROR :Vector to be undistorted cannot be empty" << std::endl;
@@ -103,10 +103,20 @@ stereo::imagePointVector stereo::undistort_points(imagePointVector dist_points, 
 	return undistorted;
 }
 
+std::vector<cv::Point3f> stereo::triangulation(imagePointVector left_pnts, imagePointVector right_pnts){
+
+	set_points(left_pnts, DIRECTIONS::LEFT);
+	set_points(right_pnts, DIRECTIONS::RIGHT);
+	worldPointVector result = triangulation();
+
+	return result;
+
+}
+
 std::vector<cv::Point3f> stereo::triangulation(){
 
 	//Container to store final 3d pos
-	stereo::wordlPointVector solution_container;
+	worldPointVector solution_container;
 
 	int number_points;
 	if ((left_image_points.size() == right_image_points.size())
@@ -124,13 +134,13 @@ std::vector<cv::Point3f> stereo::triangulation(){
 	left_image_points = undistort_points(left_image_points, DIRECTIONS::LEFT);
 	right_image_points = undistort_points(right_image_points, DIRECTIONS::RIGHT);
 
-	for (int counter = 0;counter < number_points; counter++){
+	for (int counter = 0; counter < number_points; counter++){
 
 		imagePointVector left_temp, right_temp;
 		left_temp.push_back(left_image_points[counter]);
 		right_temp.push_back(right_image_points[counter]);
-		
-		cv::Mat homogeneous_output;	
+
+		cv::Mat homogeneous_output;
 		cv::triangulatePoints(P1, P2, (left_temp), (right_temp), homogeneous_output);
 
 		//Change from homogeneous to non homogeneous
@@ -139,13 +149,13 @@ std::vector<cv::Point3f> stereo::triangulation(){
 		euclidean_output[0] /= euclidean_output[3];
 		euclidean_output[1] /= euclidean_output[3];
 		euclidean_output[2] /= euclidean_output[3];
-		
-		
-		solution_container.push_back(cv::Point3f(euclidean_output[0],euclidean_output[1],euclidean_output[2]));
+
+
+		solution_container.push_back(cv::Point3f(euclidean_output[0], euclidean_output[1], euclidean_output[2]));
 
 
 
-		
+
 
 	}
 

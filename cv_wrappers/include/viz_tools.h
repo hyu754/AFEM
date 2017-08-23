@@ -192,10 +192,22 @@ public:
 	//Render the tumour points on screen
 	void render_tumour_FEM(std::string geometry_name, std::vector<int> tumour_vec);
 
+	//Render the tumour points on screen from a known geometry
+	void render_tumour_FEM(std::string geometry_name, std::string base_geometry,std::vector<int> tumour_vec);
+
+
+
 	//Update the position of the verticies of the mesh
 	//Input:	std::string name - name of object to be changed
 	//			AFEM::position_3D - the new position of the mesh
 	void update_mesh_position(std::string object_name, std::vector<AFEM::position_3D> new_position);
+	
+	//Update the position of the verticies of the mesh
+	//Input:	std::string name - name of object to be changed
+	//			numberofnodes - number of nodes in the mesh
+	//			AFEM::position_3D * -pointer to the new position of the mesh
+	//			display_face - bool value to specify face visibility
+	void update_mesh_position(std::string object_name, int numberofnodes, AFEM::position_3D *new_position, bool display_face = false);
 
 
 	//Update the position of the surface of the mesh, this is for textures, etc
@@ -247,6 +259,13 @@ public:
 	void render_point_cloud(std::vector<cv::Point3f> pnts_3D, std::string name, float size = 20.0f, cv::Scalar color = cv::Scalar(200,100,200));
 	void render_point_cloud(std::vector<cv::Point3f> pnts_3D, cv::Affine3f pose, std::string name, float size = 20.0f, cv::Scalar color = cv::Scalar(200, 100, 200));
 
+	//This function will rotate a vector of points in 3d by an affine tranformation matrix
+	//Input:	t_mat - transformation matrix 
+	//			pnts  -	vector of points to be transformed
+	//Output:	the transformed points
+	worldPointVector transform_points3d(cv::Affine3f t_mat, worldPointVector pnts);
+
+	
 
 	//constructors
 	viz_tools();

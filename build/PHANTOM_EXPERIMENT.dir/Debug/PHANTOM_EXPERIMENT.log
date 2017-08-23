@@ -1,2 +1,5 @@
-﻿     Creating library D:/GitHub/AFEM/build/Debug/PHANTOM_EXPERIMENT.lib and object D:/GitHub/AFEM/build/Debug/PHANTOM_EXPERIMENT.exp
+﻿  experiment_abdominal_phantom.cpp
+D:\GitHub\AFEM\AFEM\FEM\include\AFEM_geometry.hpp(146): warning C4551: function call missing argument list
+D:\GitHub\AFEM\AFEM\FEM\include\AFEM_geometry.hpp(174): warning C4267: 'return' : conversion from 'size_t' to 'int', possible loss of data
+D:\GitHub\AFEM\AFEM\cuda\gpu_include\AFEM_cuda.cuh(89): warning C4305: 'initializing' : truncation from 'double' to 'float'
   PHANTOM_EXPERIMENT.vcxproj -> D:\GitHub\AFEM\build\Debug\PHANTOM_EXPERIMENT.exe

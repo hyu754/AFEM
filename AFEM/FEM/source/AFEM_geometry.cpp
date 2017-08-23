@@ -168,6 +168,8 @@ bool AFEM::Geometry::read_stationary(std::string s_in){
 }
 
 
+
+
 bool AFEM::Geometry::read_tumour(std::string s_in){
 	std::ifstream tumour_in(s_in);
 
@@ -191,6 +193,28 @@ bool AFEM::Geometry::read_tumour(std::string s_in){
 
 }
 
+bool AFEM::Geometry::read_side_constraint(std::string s_in){
+	std::ifstream side_c_in(s_in);
+
+	if (!side_c_in){
+		std::cout << "cannot open side constraint file \n";
+		return false;
+	}
+	int a;
+	side_c_in >> a;
+	for (int i = 0; i < a; i++){
+		int node;
+
+		//Read in what nodes is stationary
+		side_c_in >> node;
+
+		side_constraint_id.push_back(node);
+
+	}
+	side_c_in.close();
+	std::cout << "Reading in  side constraint  nodes" << std::endl;
+
+}
 void AFEM::Geometry::make_K_matrix(){
 	//cuda_tools_class.hello();
 	//Linear3DBarycentric_B_CUDA_host();

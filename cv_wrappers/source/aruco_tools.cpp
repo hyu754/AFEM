@@ -97,6 +97,94 @@ std::vector<cv::Point3f> find_aruco_center(cv::Mat input_image, int x_diff, ster
 }
 
 
+
+//This function assumes that the image is "what we see", 
+//which is not the case for the kinect image as it is flipped in the x direction.
+//Input:	Undistorted image (RGBA)
+//			if outputing an image
+//Ouput:	A 2d vector of all the aruco center poitns
+
+std::vector<cv::Point2f> stereo_ar::find_aruco_center_ovr(cv::Mat input_image,std::string viewer_name){
+	cv::Mat draw_image;
+	input_image.copyTo(draw_image);
+
+	//Variables
+	std::vector< std::vector<cv::Point2f> > markerCorners, rejectedCandidates;
+	std::vector< int > markerIds;
+
+
+	cv::Mat gray;
+	cv::resize(input_image, input_image, cv::Size(input_image.cols, input_image.rows));
+	cv::cvtColor(input_image, gray, cv::COLOR_RGBA2GRAY);
+
+	//cv::flip(gray, gray, 1);
+
+	std::vector<cv::Point2f> empty;
+	cv::aruco::detectMarkers(gray, dictionary, markerCorners, markerIds, parameters, rejectedCandidates);
+	
+	if (!markerCorners.empty()){
+
+		cv::cvtColor(draw_image, draw_image, CV_RGBA2GRAY);
+		cv::aruco::drawDetectedMarkers(draw_image, markerCorners, markerIds);
+
+	}
+		
+
+	std::vector<cv::Point2f> markerCenter;
+	double x_ave, y_ave;
+	for (auto i = markerCorners.begin(); i != markerCorners.end(); ++i){
+		x_ave = y_ave = 0;
+		for (auto j = i->begin(); j != i->end(); ++j){
+			x_ave += j->x;
+			y_ave += j->y;
+		}
+
+
+		markerCenter.push_back(cv::Point2f(x_ave / 4.0, y_ave / 4.0));
+
+		
+	}
+	cv::imshow(viewer_name, draw_image);
+
+
+	if (markerCenter.size() != 0){
+		return markerCenter;
+	}
+	else {
+		return empty;
+	}
+	//
+	//#if 0  //DRAW
+	//	if (!markerCenter.empty())
+	//		cv::circle(gray, markerCenter[0], 10, cv::Scalar(100, 200, 200));
+	//	cv::aruco::drawDetectedMarkers(gray, markerCorners, markerIds);
+	//	cv::imshow("ARUCO", gray);
+	//#endif // 0  //DRAW
+	//	std::vector<cv::Point2f> empty;
+	//	if (markerIds.size() <2){
+	//		return  empty;
+	//	}
+	//
+	//
+	//	else if (markerIds.size() == 2){
+	//		int counter = 0;
+	//		for (auto i_i = markerIds.begin(); i_i != markerIds.end(); ++i_i){
+	//			if ((*i_i == 1) && (counter == 1)){
+	//				cv::Point2f store = markerCenter.at(0);
+	//				markerCenter.at(0) = markerCenter.at(1);
+	//				markerCenter.at(1) = store;
+	//			}
+	//			counter++;
+	//
+	//		}
+	//		return markerCenter;
+	//	}
+
+
+}
+
+
+
 //This function assumes that the image is "what we see", 
 //which is not the case for the kinect image as it is flipped in the x direction.
 //Input:	Undistorted image (RGBA)
@@ -113,7 +201,7 @@ std::vector<cv::Point2f> stereo_ar::find_aruco_center_ovr(cv::Mat input_image){
 	cv::resize(input_image, input_image, cv::Size(input_image.cols, input_image.rows));
 	cv::cvtColor(input_image, gray, cv::COLOR_RGBA2GRAY);
 
-	cv::flip(gray, gray, 1);
+	//cv::flip(gray, gray, 1);
 
 	std::vector<cv::Point2f> empty;
 	cv::aruco::detectMarkers(gray, dictionary, markerCorners, markerIds, parameters, rejectedCandidates);
@@ -171,6 +259,8 @@ std::vector<cv::Point2f> stereo_ar::find_aruco_center_ovr(cv::Mat input_image){
 
 
 }
+
+
 
 
 
@@ -262,5 +352,19 @@ std::vector<cv::Point2f> stereo_ar::find_aruco_center_four_corners(cv::Mat input
 	//		return markerCenter;
 	//	}
 
+}
 
+
+worldPointVector stereo_ar::triangulate_aruco(cv::Mat imleft, cv::Mat imright){
+
+	imagePointVector left_pnts=find_aruco_center_ovr(imleft);
+	imagePointVector right_pnts = find_aruco_center_ovr(imright);
+	
+	//Undistort points
+	left_pnts = undistort_points(left_pnts, stereo::DIRECTIONS::LEFT);
+	right_pnts = undistort_points(right_pnts, stereo::DIRECTIONS::RIGHT);
+	
+	worldPointVector points3d = triangulation(left_pnts, right_pnts);
+
+	return points3d;
 }

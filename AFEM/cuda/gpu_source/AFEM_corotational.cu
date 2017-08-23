@@ -111,7 +111,7 @@ __device__ void find_rotation_corotational(float R[3][3], AFEM::element *in_elem
 
 
 }
-__device__ void find_Jacobian_localK_localM_corotational(AFEM::element *in_element, AFEM::position_3D *in_pos, AFEM::position_3D *original_pos){
+__device__ void find_Jacobian_localK_localM_corotational(AFEM::element *in_element, AFEM::position_3D *in_pos, AFEM::position_3D *original_pos, float E = 25000.0,float nu = 0.492){
 
 	/*float x14 = in_element->position_info[0].x - in_element->position_info[3].x;
 	float x24 = in_element->position_info[1].x - in_element->position_info[3].x;
@@ -175,7 +175,7 @@ __device__ void find_Jacobian_localK_localM_corotational(AFEM::element *in_eleme
 
 
 
-	float rho = 1000.0f;
+	float rho = 1100.0f;
 
 	float B[6][12];
 
@@ -344,8 +344,7 @@ __device__ void find_Jacobian_localK_localM_corotational(AFEM::element *in_eleme
 
 	in_element->volume = det_J / 6.0;
 	//printf("element volume : %f \n", in_element->volume);
-	float E =55000.0;
-	float nu = 0.493;
+
 
 	float D[6][6];
 
@@ -627,7 +626,7 @@ __device__ void find_Jacobian_localK_localM_corotational(AFEM::element *in_eleme
 
 
 	float b1 = 0.0;
-	float b2 = (-0 *rho);// *(det_J / 6) / 4.0;
+	float b2 = (-0.0 *rho);// *(det_J / 6) / 4.0;
 	float b3 = 0.0;
 
 	in_element->f_body[0] = b1*volume / 12.0;
@@ -646,12 +645,12 @@ __device__ void find_Jacobian_localK_localM_corotational(AFEM::element *in_eleme
 
 
 
-__global__ void gpu_make_K_corotational(AFEM::element *in_vec, AFEM::position_3D *in_pos, AFEM::position_3D *original_pos, int numElem, int numNodes, float *K_d, float *M_d, float *f_d,float *RKx_matrix_d)
+__global__ void gpu_make_K_corotational(AFEM::element *in_vec, AFEM::position_3D *in_pos, AFEM::position_3D *original_pos, int numElem, int numNodes, float *K_d, float *M_d, float *f_d, float *RKx_matrix_d, float E ,float nu )
 {
 
 	int x = threadIdx.x + blockIdx.x * blockDim.x;
 	if (x < numElem){
-		find_Jacobian_localK_localM_corotational(&in_vec[x], in_pos,original_pos);
+		find_Jacobian_localK_localM_corotational(&in_vec[x], in_pos,original_pos,E,nu);
 		//find_localM(&in_vec[x]);
 		//K_d[x] = (in_vec[x]).local_K[0];
 		int DOF[12];
@@ -736,7 +735,7 @@ __global__ void find_A_b_dynamic_corotational(float *K_in, float *dx_in, float *
 
 			//Origional
 			//LHS[IDX2C(i, x, 3 * (num_nodes))] = (1.0-dt*rm)*M_in[IDX2C(i, x, 3 * (num_nodes))] - (dt*rk+dt*dt)*K_in[IDX2C(i, x, 3 * (num_nodes))];
-			LHS[IDX2C(i, x, 3 * (num_nodes))] = (1.0+1.0*dt)*M_in[IDX2C(i, x, 3 * (num_nodes))] + (dt*dt)*K_in[IDX2C(i, x, 3 * (num_nodes))];
+			LHS[IDX2C(i, x, 3 * (num_nodes))] = (1.0+1.001*dt)*M_in[IDX2C(i, x, 3 * (num_nodes))] + (dt*dt)*K_in[IDX2C(i, x, 3 * (num_nodes))];
 			/*if (i == x){
 
 			}

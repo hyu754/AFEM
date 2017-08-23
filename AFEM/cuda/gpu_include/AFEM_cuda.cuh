@@ -86,7 +86,7 @@ class cuda_tools{
 	bool corotational_bool = false;
 
 	//dt for dynamic
-	float dt = 1.0/60.0;
+	float dt = 1.0/260.0;
 	//float dt = 1.0;
 	//cuda allocations
 	//----------------------------------------------------------------------------------
@@ -124,8 +124,8 @@ class cuda_tools{
 	//Variables to use
 	int M = 0, N = 0;// nz = 0, *I = NULL, *J = NULL;
 	float *val = NULL;
-	const float tol = 1e-5f;
-	const int max_iter =3000;
+	const float tol = 1e-4f;
+	const int max_iter =150;
 	float *x;
 	float *rhs;
 	float a, b, na, r0, r1;
@@ -147,6 +147,13 @@ class cuda_tools{
 	//Alpha for energy min
 	float alpha_energy_min = 1000000000.0f;
 
+
+	//side constraint vector constraints
+	std::vector<int> side_constraint_vector_id;
+
+	//Young's modulus and poisson's ratio
+	float young_E = 25000.0f;
+	float poisson_Nu = 0.493f;
 public:
 	cuda_tools();
 	~cuda_tools();
@@ -174,6 +181,11 @@ public:
 
 	//A wrapper function that modifies K and f w.r.t the BC
 	void stationary_BC(int num_elem, int num_nodes,int num_stationary,int dim);
+
+	//A wrapper function that modifies K and f w.r.t the BC
+	//This function will ensure no displacement in x,y,z axis if specified
+	void stationary_BC(int num_elem, int num_nodes, int num_stationary, int dim, bool x_zero, bool y_zero, bool z_zero);
+
 
 	//A wrapper function to have zero in the f vector corresponding to bc
 	//A wrapper function that modifies K and f w.r.t the BC
@@ -228,6 +240,18 @@ public:
 
 	//after solving for cholesky, this function will update the geometry
 	void update_geometry( AFEM::elastic_solver_type type);
+
+	//Get the vector of side constraint ids
+	void get_side_constraint_ids(std::vector<int> constraints_){ side_constraint_vector_id = constraints_; }
+
+	//Set the young's modulus
+	void set_young_modulus(float E_in){ young_E = E_in; }
+
+	//Set poisson's ratio
+	void set_poisson_ratio(float nu_in){ poisson_Nu = nu_in; }
+
+	//Reset
+	void reset();
 };
 
 
