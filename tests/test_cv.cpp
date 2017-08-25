@@ -13,7 +13,7 @@
 #include "surf.h"
 #include "optic_flow.h"
 //#include "AFEM_cuda.cuh"
-
+#define AFEM_USE
 
 std::vector<cv::Point2f> out_vector_unordered;
 //On mouse function for the left mouse button

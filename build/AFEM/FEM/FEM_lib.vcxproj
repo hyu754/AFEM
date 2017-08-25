@@ -263,6 +263,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   <ItemGroup>
     <ClCompile Include="D:\GitHub\AFEM\AFEM\FEM\source\AFEM_cpu_solver.cpp"  />
     <ClCompile Include="D:\GitHub\AFEM\AFEM\FEM\source\AFEM_geometry.cpp"  />
+    <ClCompile Include="D:\GitHub\AFEM\AFEM\FEM\source\AFEM_io.cpp"  />
     <ClCompile Include="D:\GitHub\AFEM\AFEM\FEM\source\AFEM_simulation.cpp"  />
     <ClCompile Include="D:\GitHub\AFEM\AFEM\FEM\source\AFEM_visualization.cpp"  />
   </ItemGroup>

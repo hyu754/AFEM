@@ -6,7 +6,7 @@
 #include <string>
 #define WRITE_TO_FILE
 //#define CPU_CG_SOLVER
-#define MANUAL_FORCE_ENTRY
+//#define MANUAL_FORCE_ENTRY
 #ifdef CPU_CG_SOLVER
 #include <Eigen\Eigen>
 #include <Eigen\IterativeLinearSolvers>
@@ -68,7 +68,7 @@ void AFEM::Simulation::element_std_to_array(){
 	}
 
 
-	std::cout << "allocated data to GPU memory " << std::endl;
+	std::cout << "Allocated data to GPU memory " << std::endl;
 
 }
 
@@ -76,6 +76,8 @@ bool origional_position_set = false;
 double orig_x, orig_y, orig_z;
 std::ofstream file_output("tumour_pos.txt");
 float sin_in = 0.0f;
+AFEM::position_3D original_force;
+
 void AFEM::Simulation::run(){
 	//set corotational bool variable
 	if ((solver_type == AFEM::elastic_solver_type::DYNAMIC_COROTATION) || (solver_type == AFEM::elastic_solver_type::ENERGY_MINISATION_COROTATION)){
@@ -85,19 +87,28 @@ void AFEM::Simulation::run(){
 		cuda_tools_class.set_corotational_bool(false);
 	}
 
-
-
-
+	if (original_force.x == 0.0){
+		//set original position
+		original_force.x = pos_array[335].x;
+		original_force.y = pos_array[335].y;
+		original_force.z = pos_array[335].z;
+	}
+	else{
+		std::cout << "Y displacement : " << std::to_string(original_force.y - pos_array[335].y) << std::endl;
+	}
+	cuda_tools_class.set_young_modulus(E_young);
+	cuda_tools_class.set_poisson_ratio(nu_poisson);
 	cuda_tools_class.make_K(solver_type, element_vec.size(), pos_vec.size());
 
-#ifdef MANUAL_FORCE_ENTRY
+
 	std::vector<int> force_vector_indicies;
 	//int dummy_array[8] = { 124, 120, 116, 112, 127, 123, 119, 115 };// , 120  , 116   ,112 };
-	int dummy_array[1] = { 166 };
+	int dummy_array[1] = { 71 };
 	force_vector_indicies.assign(dummy_array, dummy_array + 1);
 	std::vector<float> zero_force;
-	zero_force.push_back(0.0f); // x
-	zero_force.push_back(0.01 * sin(sin_in));
+	zero_force.push_back(0.0f); // 
+	float sin_ = sinf(sin_in)* sinf(sin_in);
+	zero_force.push_back(-0.0175f );
 	zero_force.push_back(0.0f); //y
 
 	sin_in = sin_in + 0.1;
@@ -105,16 +116,14 @@ void AFEM::Simulation::run(){
 	for (int i = 0; i < force_vector_indicies.size(); i++)
 		force_vector.push_back(zero_force);
 	//force_vector_indicies.push_back(10);
-	if ((solver_type == AFEM::elastic_solver_type::DYNAMIC_COROTATION) || (solver_type == AFEM::elastic_solver_type::DYNAMIC_NON_COROTATION)){
-	//	cuda_tools_class.make_f(force_vector_indicies, force_vector, pos_vec.size(), 3);
-	}
-	else if (solver_type == AFEM::elastic_solver_type::ENERGY_MINISATION_COROTATION){
+	if (solver_type == AFEM::elastic_solver_type::ENERGY_MINISATION_COROTATION){
 
 		cuda_tools_class.get_number_sudo_forces(force_vector.size());
 		cuda_tools_class.get_sudo_force_information(force_vector, force_vector_indicies);
 	}
 
-#endif // MANUAL_FORCE_ENTRY
+
+	cuda_tools_class.get_side_constraint_ids(afem_geometry.return_side_constraint_id_vector());
 
 	if ((solver_type == AFEM::DYNAMIC_COROTATION) || (solver_type == AFEM::DYNAMIC_NON_COROTATION)){
 		cuda_tools_class.make_f(pos_vec.size(),3);
@@ -135,20 +144,35 @@ void AFEM::Simulation::run(){
 	cuda_tools_class.copy_data_from_cuda(element_array, pos_array);
 
 	cuda_tools_class.reset_K(element_vec.size(), pos_vec.size());
+	
+	
+	//Incrementing the iteration number
+	iteration_number++;
+}
 
+void AFEM::Simulation::write_position(std::string file_name){
+	std::ofstream file_out(file_name);
+	for (int i = 0; i < afem_geometry.get_num_nodes(); i++){
+		
+		file_out << pos_array[i].x << " " << pos_array[i].y << " " << pos_array[i].z << std::endl;
+	}
 
-
+	file_out.close();
+	
 }
 
 
+void AFEM::Simulation::write_position(std::string file_name, std::vector<int> ids){
+	
+	std::ofstream file_out(file_name);
+	
+	for (int i = 0; i < ids.size(); i++){
+		int id_value = tumour_vec[i];
+		file_out << pos_array[id_value].x << " " << pos_array[id_value].y << " " << pos_array[id_value].z << std::endl;
+	}
 
-
-
-
-
-
-
-
+	file_out.close();
+}
 
 
 /*

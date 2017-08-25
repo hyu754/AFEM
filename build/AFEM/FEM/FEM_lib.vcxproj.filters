@@ -7,6 +7,9 @@
     <ClCompile Include="D:\GitHub\AFEM\AFEM\FEM\source\AFEM_geometry.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="D:\GitHub\AFEM\AFEM\FEM\source\AFEM_io.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="D:\GitHub\AFEM\AFEM\FEM\source\AFEM_simulation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

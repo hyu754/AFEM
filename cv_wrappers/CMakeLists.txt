@@ -1,3 +1,4 @@
+
 file(GLOB SOURCE_FILES source/*.cpp)
 file(GLOB HEADER_FILES include/*.h)
 source_group("Headers" FILES ${HEADER_FILES})

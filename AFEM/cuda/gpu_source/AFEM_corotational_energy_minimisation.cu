@@ -339,13 +339,13 @@ __device__ void find_Jacobian_localK_energy_minisation_corotational(AFEM::elemen
 
 
 
-
+	 
 	in_element->Jacobian = det_J;
 
 	in_element->volume = det_J / 6.0;
 	//printf("element volume : %f \n", in_element->volume);
-	float E =55000.0;
-	float nu = 0.493;
+	float E =25000.0;
+	float nu = 0.496;
 
 	float D[6][6];
 
@@ -744,7 +744,7 @@ __global__ void find_A_b_energy_minimisation_corotational(float *K_in, float *xI
 					LHS[IDX2C(dof, dof, 3 * (num_nodes))] = LHS[IDX2C(dof, dof, 3 * (num_nodes))] + alpha;
 				}
 				else{
-					LHS[IDX2C(dof, dof, 3 * (num_nodes))] = LHS[IDX2C(dof, dof, 3 * (num_nodes))] +alpha/10.0;
+					LHS[IDX2C(dof, dof, 3 * (num_nodes))] = LHS[IDX2C(dof, dof, 3 * (num_nodes))] +alpha;
 				}
 				
 
@@ -757,7 +757,7 @@ __global__ void find_A_b_energy_minimisation_corotational(float *K_in, float *xI
 				}
 				else if (dof_counter == 2){
 
-					RHS[dof] = RHS[dof] + (alpha/10.0)* (xInitial[dof] + sudo_force_vec[i].fz);//sudo_force_vec[i].fz);
+					RHS[dof] = RHS[dof] + (alpha)* (xInitial[dof] + sudo_force_vec[i].fz);//sudo_force_vec[i].fz);
 				}
 
 				dof_counter++;

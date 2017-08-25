@@ -1,6 +1,22 @@
-﻿  hough_circle.cpp
-D:\GitHub\AFEM\cv_wrappers\include\hough_circle.h(40): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
-D:\GitHub\AFEM\cv_wrappers\source\hough_circle.cpp(12): warning C4305: '=' : truncation from 'double' to 'float'
-D:\GitHub\AFEM\cv_wrappers\source\hough_circle.cpp(16): warning C4305: '=' : truncation from 'double' to 'float'
-D:\GitHub\AFEM\cv_wrappers\source\hough_circle.cpp(65): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+﻿  raytracer.cpp
+D:\GitHub\AFEM\AFEM\FEM\include\AFEM_geometry.hpp(146): warning C4551: function call missing argument list
+D:\GitHub\AFEM\AFEM\FEM\include\AFEM_geometry.hpp(174): warning C4267: 'return' : conversion from 'size_t' to 'int', possible loss of data
+D:\GitHub\AFEM\cv_wrappers\source\raytracer.cpp(70): warning C4056: overflow in floating-point constant arithmetic
+  viz_tools.cpp
+D:\GitHub\AFEM\AFEM\FEM\include\AFEM_geometry.hpp(146): warning C4551: function call missing argument list
+D:\GitHub\AFEM\AFEM\FEM\include\AFEM_geometry.hpp(174): warning C4267: 'return' : conversion from 'size_t' to 'int', possible loss of data
+D:\GitHub\AFEM\cv_wrappers\source\viz_tools.cpp(42): warning C4102: 'std' : unreferenced label
+D:\GitHub\AFEM\cv_wrappers\source\viz_tools.cpp(306): warning C4102: 'std' : unreferenced label
+D:\GitHub\AFEM\cv_wrappers\source\viz_tools.cpp(526): warning C4056: overflow in floating-point constant arithmetic
+D:\GitHub\AFEM\cv_wrappers\source\viz_tools.cpp(527): warning C4056: overflow in floating-point constant arithmetic
+D:\GitHub\AFEM\cv_wrappers\source\viz_tools.cpp(555): warning C4102: 'std' : unreferenced label
+  Generating Code...
+d:\github\afem\cv_wrappers\source\viz_tools.cpp(526): warning C4756: overflow in constant arithmetic
+d:\github\afem\cv_wrappers\source\viz_tools.cpp(527): warning C4756: overflow in constant arithmetic
+d:\github\afem\cv_wrappers\source\viz_tools.cpp(526): warning C4756: overflow in constant arithmetic
+d:\github\afem\cv_wrappers\source\raytracer.cpp(46): warning C4756: overflow in constant arithmetic
+d:\github\afem\cv_wrappers\source\raytracer.cpp(70): warning C4756: overflow in constant arithmetic
+d:\github\afem\cv_wrappers\source\raytracer.cpp(71): warning C4756: overflow in constant arithmetic
+d:\github\afem\cv_wrappers\source\raytracer.cpp(46): warning C4756: overflow in constant arithmetic
+d:\github\afem\cv_wrappers\source\raytracer.cpp(70): warning C4756: overflow in constant arithmetic
   CV_CUSTOM_WRAPPER.vcxproj -> D:\GitHub\AFEM\build\cv_wrappers\Debug\CV_CUSTOM_WRAPPER.lib

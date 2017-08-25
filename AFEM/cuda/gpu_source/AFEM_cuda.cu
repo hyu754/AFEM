@@ -2101,7 +2101,7 @@ __global__ void update_Geo_CUDA(AFEM::element *in_vec, AFEM::position_3D *pos_in
 
 //Change the K_d matrix and the f matrix so that they have the necessary BC
 
-__global__ void gpu_stationary_BC(float *K_d, float *f_d, AFEM::stationary *stat_d, int numstationary, int numnodes, int dim){
+__global__ void gpu_stationary_BC(float *K_d, float *f_d, AFEM::stationary *stat_d, int numstationary, int numnodes, int dim, bool x_zero = false, bool y_zero = false, bool z_zero = false){
 	int x = threadIdx.x + blockIdx.x * blockDim.x;
 
 	if (x < numstationary){
@@ -2109,6 +2109,17 @@ __global__ void gpu_stationary_BC(float *K_d, float *f_d, AFEM::stationary *stat
 
 
 		for (int i = 0; i < 3; i++){
+			//if dof =0 and x_zero||y_zero||z_zero =true then we skip it
+			if ((i == 0) && (x_zero == true)){
+				break;
+			}
+			else if ((i == 1) && (y_zero == true)){
+				break;
+			}
+			else if ((i == 2) && (z_zero == true)){
+				break;
+			}
+
 
 			for (int n = 0; n < numnodes*dim; n++){
 				K_d[IDX2C(n, stat_d[x].displacement_index[i], 3 * (numnodes))] = 0.0f;
@@ -2156,6 +2167,53 @@ __global__ void gpu_stationary_BC(float *K_d, float *f_d, AFEM::stationary *stat
 
 }
 
+__global__ void gpu_stationary_BC(float *K_d, float *f_d, AFEM::stationary *stat_d, int numstationary, int numnodes, int dim, int number_special_bc,int *special_bc){
+	int x = threadIdx.x + blockIdx.x * blockDim.x;
+
+	if (x < numstationary){
+
+
+
+		for (int i = 0; i < 3; i++){
+			//if dof =0 and x_zero||y_zero||z_zero =true then we skip it
+			bool special_bc_bool = false;
+			for (int j = 0; j < number_special_bc; j++){
+				if (special_bc[j] == stat_d[x].node_number){
+					special_bc_bool = true;
+					printf("&d \n", special_bc[j]);
+
+				}
+
+			}
+			//see if special bc
+
+			if ((i == 0) && (special_bc_bool == true)){
+				break;
+			}
+			else if ((i == 1) && (special_bc_bool == true)){
+				break;
+			}
+			else if ((i == 2) && (special_bc_bool == true)){
+				break;
+			}
+
+			for (int n = 0; n < numnodes*dim; n++){
+				K_d[IDX2C(n, stat_d[x].displacement_index[i], 3 * (numnodes))] = 0.0f;
+			}
+
+			for (int n = 0; n < numnodes*dim; n++){
+				K_d[IDX2C(stat_d[x].displacement_index[i], n, 3 * (numnodes))] = 0.0f;
+			}
+			K_d[IDX2C(stat_d[x].displacement_index[i], stat_d[x].displacement_index[i], 3 * (numnodes))] = 1.0f;
+			f_d[stat_d[x].displacement_index[i]] = 0.0f;
+		}
+
+	}
+
+
+
+}
+
 
 
 
@@ -2166,14 +2224,16 @@ __global__ void gpu_make_f(float *f_d, int numnodes, AFEM::position_3D *pos_info
 	if (x < numnodes){
 
 		if (x == node_apply){
-			printf("%f\n", force_x);
+			
 			f_d[pos_info[x].displacement_index[0]] += force_x; 
 			f_d[pos_info[x].displacement_index[1]] += force_y;
 			f_d[pos_info[x].displacement_index[2]] += force_z;
+			printf("%f\n", f_d[pos_info[x].displacement_index[1]]);
 
 		}
 	}
 }
+
 
 //Finds u(t), or x(t)-x(0)
 __global__ void find_dx(float *dx_in, AFEM::position_3D *initial_pos, AFEM::position_3D *new_pos, int numnodes){
@@ -2340,7 +2400,22 @@ void cuda_tools::allocate_copy_CUDA_geometry_data(AFEM::element *in_array_elem, 
 	Nstationary = numstationary;
 }
 
+void cuda_tools::reset(){
+	//initialize the force to be 0
+	cudaMemset(f_d, 0.0, sizeof(*f_d)*3*Nnodes);
 
+	//initialize x(t)-x(0) to be 0
+	cudaMemset(dx_d, 0.0, sizeof(*dx_d) * 3 * Nnodes);
+
+	//Initialize x(t) to be 0
+	cudaMemset(xCurrent_d, 0.0, sizeof(*xCurrent_d) * 3 * Nnodes);
+
+	//initialize u_dot to be 0
+	cudaMemset(u_dot_d, 0.0, sizeof(*u_dot_d) * 3 * Nnodes);
+
+	cudaMemcpy(position_array_d, position_array_initial_d, sizeof(AFEM::position_3D)*Nnodes, cudaMemcpyDeviceToDevice);
+	
+}
 void cuda_tools::copy_data_from_cuda(AFEM::element *elem_array_ptr, AFEM::position_3D *pos_array_ptr){
 	cudaMemcpy(elem_array_h, elem_array_d, sizeof(AFEM::element) *Nelems, cudaMemcpyDeviceToHost);
 	cudaMemcpy(position_array_h, position_array_d, sizeof(AFEM::position_3D) *Nnodes, cudaMemcpyDeviceToHost);
@@ -2363,11 +2438,12 @@ void cuda_tools::make_K(AFEM::elastic_solver_type solver_in, int num_elem, int n
 		blocks = (num_elem + 256) / 256;
 		threads = 256;
 	}
+
 	if (solver_in == AFEM::elastic_solver_type::DYNAMIC_NON_COROTATION)
 		gpu_make_K << <blocks, threads >> > (elem_array_d, position_array_d, num_elem, num_nodes, K_d, M_d, f_d);
 
 	if (solver_in == AFEM::elastic_solver_type::DYNAMIC_COROTATION)
-		gpu_make_K_corotational << <blocks, threads >> > (elem_array_d, position_array_d, position_array_initial_d, num_elem, num_nodes, K_d, M_d, f_d,RKx_matrix_d);
+		gpu_make_K_corotational << <blocks, threads >> > (elem_array_d, position_array_d, position_array_initial_d, num_elem, num_nodes, K_d, M_d, f_d,RKx_matrix_d,young_E,poisson_Nu);
 
 	if (solver_in == AFEM::elastic_solver_type::ENERGY_MINISATION_COROTATION)
 		//gpu_make_K << <blocks, threads >> > (elem_array_d, position_array_initial_d, num_elem, num_nodes, K_d, M_d, f_d);
@@ -2447,16 +2523,18 @@ void cuda_tools::make_f(int num_nodes, int dim){
 	//	*/
 	//}
 	//_ASSERT(indicies.size() == force.size());
-	int _counter_ = 0;
+	//int _counter_ = 0;
 
-		for (auto indicies_ptr = sudo_force_indicies_vector.begin(); indicies_ptr != sudo_force_indicies_vector.end(); ++indicies_ptr){
-		//indicies_ptr - indicies_ptr[0];
-			std::cout << "force: " << sudo_force_vector[_counter_].at(0)*1000.0 << std::endl;
-			gpu_make_f << <blocks, threads >> >(f_d, num_nodes, position_array_d, dim, *indicies_ptr, sudo_force_vector[_counter_].at(0)*1000000000.0, sudo_force_vector[_counter_].at(1)*1000000000.0, sudo_force_vector[_counter_].at(2) * 1000000000.0);
+	//	for (auto indicies_ptr = sudo_force_indicies_vector.begin(); indicies_ptr != sudo_force_indicies_vector.end(); ++indicies_ptr){
+	//	//indicies_ptr - indicies_ptr[0];
+	//		std::cout << "force: " << sudo_force_vector[_counter_].at(1) << std::endl;
+
+	//		gpu_make_f << <blocks, threads >> >(f_d, num_nodes, position_array_d, dim, *indicies_ptr, sudo_force_vector[_counter_].at(0), sudo_force_vector[_counter_].at(1), sudo_force_vector[_counter_].at(2) );
 
 
-		_counter_++;
-	}
+	//	_counter_++;
+	//}
+	gpu_make_f << <blocks, threads >> >(f_d, num_nodes, position_array_d, dim, 335, 0, -16.77, 0);
 #ifdef TESTING
 	float *f_host;
 	f_host = (float *)malloc(sizeof(*f_host) * 3 * num_nodes);
@@ -2485,8 +2563,71 @@ void cuda_tools::stationary_BC(int num_elem, int num_nodes, int num_stationary, 
 		blocks = (num_stationary + 256) / 256;
 		threads = 256;
 	}
-	gpu_stationary_BC << <blocks, threads >> >(LHS, RHS, stationary_array_d, num_stationary, num_nodes, dim);
+	//The below BC function will ensure that only y--axis is moving
+	gpu_stationary_BC << <blocks, threads >> >(LHS, RHS, stationary_array_d, num_stationary, num_nodes, dim,false,false,false);
 
+}
+
+void cuda_tools::stationary_BC(int num_elem, int num_nodes, int num_stationary, int dim, bool x_zero, bool y_zero, bool z_zero){
+	int blocks, threads;
+	if (num_stationary <= 256){
+		blocks = 1;
+		threads = num_stationary;
+	}
+	else {
+		blocks = (num_stationary + 256) / 256;
+		threads = 256;
+	}
+	//
+	//bool *x_zero_array, *y_zero_array, *z_zero_array;
+	//x_zero_array = new bool[num_stationary];
+	//y_zero_array = new bool[num_stationary];
+	//z_zero_array = new bool[num_stationary];
+	//
+	//int counter = 0;
+	//for (auto iter = side_constraint_vector_id.begin(); iter != side_constraint_vector_id.end(); ++iter){
+	//	x_zero_array[counter] = *iter;
+	//	
+	//}
+
+	//bool *x_zero_array_d, *y_zero_array_d, *z_zero_array_d;
+	//cudaMalloc((void**)&x_zero_array_d, sizeof(*x_zero_array));
+	//cudaMalloc((void**)&y_zero_array_d, sizeof(*y_zero_array));
+	//cudaMalloc((void**)&z_zero_array_d, sizeof(*z_zero_array));
+	//
+	
+
+
+
+
+	//
+
+
+	///*Free*/
+	//delete x_zero_array;
+	//delete y_zero_array;
+	//delete z_zero_array;
+	//cudaFree(x_zero_array_d);
+	//cudaFree(y_zero_array_d);
+	//cudaFree(z_zero_array_d);
+	int *special_bc;
+	special_bc = new int[side_constraint_vector_id.size() ];
+
+	int counter = 0;
+	for (auto iter = side_constraint_vector_id.begin(); iter != side_constraint_vector_id.end(); ++iter){
+		special_bc[counter] = *iter;
+		counter++;
+	}
+
+	int *special_bc_d;
+	cudaMalloc((void**)&special_bc_d, sizeof(*special_bc_d)*side_constraint_vector_id.size());
+	cudaMemcpy(special_bc_d, special_bc, sizeof(*special_bc_d) * side_constraint_vector_id.size() , cudaMemcpyHostToDevice);
+		
+	gpu_stationary_BC << <blocks, threads >> >(LHS, RHS, stationary_array_d, num_stationary, num_nodes, dim, side_constraint_vector_id.size() ,special_bc_d);
+
+
+	delete special_bc;
+	cudaFree(special_bc_d);
 }
 
 

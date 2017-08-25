@@ -242,7 +242,7 @@ vector = 0:num_points*3-1;
 
 fileID = fopen([file_path,'FEM_Nodes.txt'],'w');
 fprintf(fileID,'%d\n',num_points);
-fprintf(fileID,'%f %f %f\n',p');
+fprintf(fileID,'%f %f %f\n',p'/1000);
 fclose(fileID);
 [numelem,~]=size(t);
 t=t-1;

@@ -21,7 +21,7 @@
 //Corotational dynamic GPU functions
 //M u_dd(t) + C u_d(t) + K (x-x_0) = f(t)
 __device__ void find_Jacobian_localK_localM_corotational(AFEM::element *in_element, AFEM::position_3D *in_pos,AFEM::position_3D *original_pos);
-__global__ void gpu_make_K_corotational(AFEM::element *in_vec, AFEM::position_3D *in_pos, AFEM::position_3D *original_pos, int numElem, int numNodes, float *K_d, float *M_d, float *f_d, float *RK);
+__global__ void gpu_make_K_corotational(AFEM::element *in_vec, AFEM::position_3D *in_pos, AFEM::position_3D *original_pos, int numElem, int numNodes, float *K_d, float *M_d, float *f_d, float *RK,  float E = 25000.0, float nu = 0.492);
 __global__ void find_A_b_dynamic_corotational(float *K_in, float *dx_in, float *x_zero, float *x_current, float *u_dot, float *f_ext, float *RHS, float *M_in, float *LHS, float *RKx, int num_nodes, float dt, int dim);
 
 

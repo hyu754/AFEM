@@ -14,7 +14,7 @@ addpath('D:\abdominal_image\DICOM\20170626\15070000\parta\')
 %Generate geometry using MATLAB's internal PDE generator
 model = createpde(1);
 importGeometry(model,'D:\abdominal_image\DICOM\20170626\15070000\parta\outersurface.stl');
-mesh_generated =generateMesh(model,'Hmax',30,'GeometricOrder','linear');
+mesh_generated =generateMesh(model,'Hmax',20,'GeometricOrder','linear');
 %Plot the model
 %pdeplot3D(model,'FaceAlpha',0.5);
 
@@ -45,8 +45,29 @@ z_concat = [ z_tumour z_vertebrae z_ribs];
 
 
 
-
 [newnode,newelem,newface]=meshrefine(mesh_nodes,mesh_element(:,1:4),[],[x_concat',y_concat',z_concat']);
+
+%% Refine again to make force node precise
+
+%start position of node
+force_start = [146.384 228.63 65.3606];
+%direction
+force_dir = [0 -1 0];
+[t,u,v,idx,xnode]=raysurf(force_start,force_dir,newnode,newface);
+
+%find closest mesh node and move it to position of intersection
+min_distance = 1000000;
+min_id = 0;
+for i = 1:size(newnode,1)
+   diff_vec = newnode(i,:)- xnode;
+   if(norm(diff_vec)<min_distance)
+      min_distance = norm(diff_vec); 
+      min_id = i;
+   end
+end
+
+newnode(min_id,:) = xnode;
+
 
 %% Find the node number of each of the above inserted nodes
 
@@ -95,27 +116,32 @@ compare_tumour = zeros(1,numNodes);
 stationary_nodes=[]
 
 %additional boundary values
+additional_boundary_values=[]
 additional_boundary_values = [x_ribs',y_ribs',z_ribs'];
 additional_boundary_values  = [additional_boundary_values; x_vertebrae', y_vertebrae', z_vertebrae'];
 
 tumour_position = [x_tumour', y_tumour',z_tumour'];
+
+%node ids for the points that are on the side of the phantom
+sideConstraintId =[];
 for l = 1:numNodes
     %check if it is near anyplanes
     diff1 = dot(newnode(l,:),[a1 b1 c1])-d1;
     diff2 = dot(newnode(l,:),[a2 b2 c2])-d2;
     if ((norm(diff1)<4)||(norm(diff2)<4))
         compare(l)=1;
+        sideConstraintId = [ sideConstraintId l];
         stationary_nodes = [stationary_nodes;newnode(l,:)];
     else
-        %compare(l)=0;
+        compare(l)=0;
         
     end
     
     %for the base
     if(newnode(l,2)<20)
         
-        compare(l) = 1;
-          stationary_nodes = [stationary_nodes;newnode(l,:)];
+       % compare(l) = 1;
+         % stationary_nodes = [stationary_nodes;newnode(l,:)];
         
     end
     
@@ -178,6 +204,10 @@ scatter3(x_tumour,y_tumour,z_tumour,150,'filled')
 
 %Plot the new mesh
 plotmesh(newnode,newelem)
+
+%plot force node
+scatter3(force_start(1),force_start(2),force_start(3),20)
+
 %set alpha
 alpha 0.5
 
@@ -206,6 +236,13 @@ fileID = fopen([file_path,'FEM_Tumour.txt'],'w');
 fprintf(fileID,'%d \n',length(tumour_id));
 fprintf(fileID,'%d \n',tumour_id);
 fclose(fileID);
+
+fileID = fopen([file_path,'FEM_SideConstraints.txt'],'w');
+fprintf(fileID,'%d \n',length(sideConstraintId));
+fprintf(fileID,'%d \n',sideConstraintId-1);
+fclose(fileID);
+
+
 
 
 

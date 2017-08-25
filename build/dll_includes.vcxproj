@@ -163,25 +163,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <CustomBuild Include="D:\GitHub\AFEM\build\CMakeFiles\0b0a3ff44231485655c29508c9e55aa7\dll_includes.rule">
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"></Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
-"D:\Program Files\CMake\bin\cmake.exe" -E copy D:/GitHub/AFEM/bin/freeglutd.dll D:/GitHub/AFEM/build/Debug/
-if %errorlevel% neq 0 goto :cmEnd
-"D:\Program Files\CMake\bin\cmake.exe" -E copy D:/GitHub/AFEM/bin/glew32d.dll D:/GitHub/AFEM/build/Debug/
-if %errorlevel% neq 0 goto :cmEnd
-"D:\Program Files\CMake\bin\cmake.exe" -E copy D:/GitHub/AFEM/bin/msvcp120.dll D:/GitHub/AFEM/build/Debug/
-if %errorlevel% neq 0 goto :cmEnd
-"D:\Program Files\CMake\bin\cmake.exe" -E copy D:/GitHub/AFEM/bin/msvcr120.dll D:/GitHub/AFEM/build/Debug/
-if %errorlevel% neq 0 goto :cmEnd
-"D:\Program Files\CMake\bin\cmake.exe" -E copy D:/GitHub/AFEM/Geometry/FEM_Nodes.txt D:/GitHub/AFEM/build/Debug/
-if %errorlevel% neq 0 goto :cmEnd
-"D:\Program Files\CMake\bin\cmake.exe" -E copy D:/GitHub/AFEM/Geometry/FEM_Nodes.txt D:/GitHub/AFEM/build/
-if %errorlevel% neq 0 goto :cmEnd
-"D:\Program Files\CMake\bin\cmake.exe" -E copy D:/GitHub/AFEM/Geometry/FEM_Elem.txt D:/GitHub/AFEM/build/Debug/
-if %errorlevel% neq 0 goto :cmEnd
-"D:\Program Files\CMake\bin\cmake.exe" -E copy D:/GitHub/AFEM/Geometry/FEM_Elem.txt D:/GitHub/AFEM/build/
-if %errorlevel% neq 0 goto :cmEnd
-"D:\Program Files\CMake\bin\cmake.exe" -E copy D:/GitHub/AFEM/Geometry/FEM_Stationary.txt D:/GitHub/AFEM/build/
-if %errorlevel% neq 0 goto :cmEnd
-"D:\Program Files\CMake\bin\cmake.exe" -E copy D:/GitHub/AFEM/Geometry/FEM_Tumour.txt D:/GitHub/AFEM/build/
+"D:\Program Files\CMake\bin\cmake.exe" -E copy D:/GitHub/AFEM/bin/OpenAL32.dll D:/GitHub/AFEM/bin/cudart32_30_14.dll D:/GitHub/AFEM/bin/d3dcompiler_47.dll D:/GitHub/AFEM/bin/d3dcsx_47.dll D:/GitHub/AFEM/bin/freeglut.dll D:/GitHub/AFEM/bin/freeglutd.dll D:/GitHub/AFEM/bin/glew32.dll D:/GitHub/AFEM/bin/glew32d.dll D:/GitHub/AFEM/bin/msvcp120.dll D:/GitHub/AFEM/bin/msvcr120.dll D:/GitHub/AFEM/bin/ovrvision.dll D:/GitHub/AFEM/bin/ovrvisiond.dll D:/GitHub/AFEM/build/Debug/
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -194,25 +176,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'"></Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
-"D:\Program Files\CMake\bin\cmake.exe" -E copy D:/GitHub/AFEM/bin/freeglutd.dll D:/GitHub/AFEM/build/Debug/
-if %errorlevel% neq 0 goto :cmEnd
-"D:\Program Files\CMake\bin\cmake.exe" -E copy D:/GitHub/AFEM/bin/glew32d.dll D:/GitHub/AFEM/build/Debug/
-if %errorlevel% neq 0 goto :cmEnd
-"D:\Program Files\CMake\bin\cmake.exe" -E copy D:/GitHub/AFEM/bin/msvcp120.dll D:/GitHub/AFEM/build/Debug/
-if %errorlevel% neq 0 goto :cmEnd
-"D:\Program Files\CMake\bin\cmake.exe" -E copy D:/GitHub/AFEM/bin/msvcr120.dll D:/GitHub/AFEM/build/Debug/
-if %errorlevel% neq 0 goto :cmEnd
-"D:\Program Files\CMake\bin\cmake.exe" -E copy D:/GitHub/AFEM/Geometry/FEM_Nodes.txt D:/GitHub/AFEM/build/Debug/
-if %errorlevel% neq 0 goto :cmEnd
-"D:\Program Files\CMake\bin\cmake.exe" -E copy D:/GitHub/AFEM/Geometry/FEM_Nodes.txt D:/GitHub/AFEM/build/
-if %errorlevel% neq 0 goto :cmEnd
-"D:\Program Files\CMake\bin\cmake.exe" -E copy D:/GitHub/AFEM/Geometry/FEM_Elem.txt D:/GitHub/AFEM/build/Debug/
-if %errorlevel% neq 0 goto :cmEnd
-"D:\Program Files\CMake\bin\cmake.exe" -E copy D:/GitHub/AFEM/Geometry/FEM_Elem.txt D:/GitHub/AFEM/build/
-if %errorlevel% neq 0 goto :cmEnd
-"D:\Program Files\CMake\bin\cmake.exe" -E copy D:/GitHub/AFEM/Geometry/FEM_Stationary.txt D:/GitHub/AFEM/build/
-if %errorlevel% neq 0 goto :cmEnd
-"D:\Program Files\CMake\bin\cmake.exe" -E copy D:/GitHub/AFEM/Geometry/FEM_Tumour.txt D:/GitHub/AFEM/build/
+"D:\Program Files\CMake\bin\cmake.exe" -E copy D:/GitHub/AFEM/bin/OpenAL32.dll D:/GitHub/AFEM/bin/cudart32_30_14.dll D:/GitHub/AFEM/bin/d3dcompiler_47.dll D:/GitHub/AFEM/bin/d3dcsx_47.dll D:/GitHub/AFEM/bin/freeglut.dll D:/GitHub/AFEM/bin/freeglutd.dll D:/GitHub/AFEM/bin/glew32.dll D:/GitHub/AFEM/bin/glew32d.dll D:/GitHub/AFEM/bin/msvcp120.dll D:/GitHub/AFEM/bin/msvcr120.dll D:/GitHub/AFEM/bin/ovrvision.dll D:/GitHub/AFEM/bin/ovrvisiond.dll D:/GitHub/AFEM/build/Debug/
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -225,25 +189,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'"></Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
-"D:\Program Files\CMake\bin\cmake.exe" -E copy D:/GitHub/AFEM/bin/freeglutd.dll D:/GitHub/AFEM/build/Debug/
-if %errorlevel% neq 0 goto :cmEnd
-"D:\Program Files\CMake\bin\cmake.exe" -E copy D:/GitHub/AFEM/bin/glew32d.dll D:/GitHub/AFEM/build/Debug/
-if %errorlevel% neq 0 goto :cmEnd
-"D:\Program Files\CMake\bin\cmake.exe" -E copy D:/GitHub/AFEM/bin/msvcp120.dll D:/GitHub/AFEM/build/Debug/
-if %errorlevel% neq 0 goto :cmEnd
-"D:\Program Files\CMake\bin\cmake.exe" -E copy D:/GitHub/AFEM/bin/msvcr120.dll D:/GitHub/AFEM/build/Debug/
-if %errorlevel% neq 0 goto :cmEnd
-"D:\Program Files\CMake\bin\cmake.exe" -E copy D:/GitHub/AFEM/Geometry/FEM_Nodes.txt D:/GitHub/AFEM/build/Debug/
-if %errorlevel% neq 0 goto :cmEnd
-"D:\Program Files\CMake\bin\cmake.exe" -E copy D:/GitHub/AFEM/Geometry/FEM_Nodes.txt D:/GitHub/AFEM/build/
-if %errorlevel% neq 0 goto :cmEnd
-"D:\Program Files\CMake\bin\cmake.exe" -E copy D:/GitHub/AFEM/Geometry/FEM_Elem.txt D:/GitHub/AFEM/build/Debug/
-if %errorlevel% neq 0 goto :cmEnd
-"D:\Program Files\CMake\bin\cmake.exe" -E copy D:/GitHub/AFEM/Geometry/FEM_Elem.txt D:/GitHub/AFEM/build/
-if %errorlevel% neq 0 goto :cmEnd
-"D:\Program Files\CMake\bin\cmake.exe" -E copy D:/GitHub/AFEM/Geometry/FEM_Stationary.txt D:/GitHub/AFEM/build/
-if %errorlevel% neq 0 goto :cmEnd
-"D:\Program Files\CMake\bin\cmake.exe" -E copy D:/GitHub/AFEM/Geometry/FEM_Tumour.txt D:/GitHub/AFEM/build/
+"D:\Program Files\CMake\bin\cmake.exe" -E copy D:/GitHub/AFEM/bin/OpenAL32.dll D:/GitHub/AFEM/bin/cudart32_30_14.dll D:/GitHub/AFEM/bin/d3dcompiler_47.dll D:/GitHub/AFEM/bin/d3dcsx_47.dll D:/GitHub/AFEM/bin/freeglut.dll D:/GitHub/AFEM/bin/freeglutd.dll D:/GitHub/AFEM/bin/glew32.dll D:/GitHub/AFEM/bin/glew32d.dll D:/GitHub/AFEM/bin/msvcp120.dll D:/GitHub/AFEM/bin/msvcr120.dll D:/GitHub/AFEM/bin/ovrvision.dll D:/GitHub/AFEM/bin/ovrvisiond.dll D:/GitHub/AFEM/build/Debug/
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -256,25 +202,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
       <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'"></Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
-"D:\Program Files\CMake\bin\cmake.exe" -E copy D:/GitHub/AFEM/bin/freeglutd.dll D:/GitHub/AFEM/build/Debug/
-if %errorlevel% neq 0 goto :cmEnd
-"D:\Program Files\CMake\bin\cmake.exe" -E copy D:/GitHub/AFEM/bin/glew32d.dll D:/GitHub/AFEM/build/Debug/
-if %errorlevel% neq 0 goto :cmEnd
-"D:\Program Files\CMake\bin\cmake.exe" -E copy D:/GitHub/AFEM/bin/msvcp120.dll D:/GitHub/AFEM/build/Debug/
-if %errorlevel% neq 0 goto :cmEnd
-"D:\Program Files\CMake\bin\cmake.exe" -E copy D:/GitHub/AFEM/bin/msvcr120.dll D:/GitHub/AFEM/build/Debug/
-if %errorlevel% neq 0 goto :cmEnd
-"D:\Program Files\CMake\bin\cmake.exe" -E copy D:/GitHub/AFEM/Geometry/FEM_Nodes.txt D:/GitHub/AFEM/build/Debug/
-if %errorlevel% neq 0 goto :cmEnd
-"D:\Program Files\CMake\bin\cmake.exe" -E copy D:/GitHub/AFEM/Geometry/FEM_Nodes.txt D:/GitHub/AFEM/build/
-if %errorlevel% neq 0 goto :cmEnd
-"D:\Program Files\CMake\bin\cmake.exe" -E copy D:/GitHub/AFEM/Geometry/FEM_Elem.txt D:/GitHub/AFEM/build/Debug/
-if %errorlevel% neq 0 goto :cmEnd
-"D:\Program Files\CMake\bin\cmake.exe" -E copy D:/GitHub/AFEM/Geometry/FEM_Elem.txt D:/GitHub/AFEM/build/
-if %errorlevel% neq 0 goto :cmEnd
-"D:\Program Files\CMake\bin\cmake.exe" -E copy D:/GitHub/AFEM/Geometry/FEM_Stationary.txt D:/GitHub/AFEM/build/
-if %errorlevel% neq 0 goto :cmEnd
-"D:\Program Files\CMake\bin\cmake.exe" -E copy D:/GitHub/AFEM/Geometry/FEM_Tumour.txt D:/GitHub/AFEM/build/
+"D:\Program Files\CMake\bin\cmake.exe" -E copy D:/GitHub/AFEM/bin/OpenAL32.dll D:/GitHub/AFEM/bin/cudart32_30_14.dll D:/GitHub/AFEM/bin/d3dcompiler_47.dll D:/GitHub/AFEM/bin/d3dcsx_47.dll D:/GitHub/AFEM/bin/freeglut.dll D:/GitHub/AFEM/bin/freeglutd.dll D:/GitHub/AFEM/bin/glew32.dll D:/GitHub/AFEM/bin/glew32d.dll D:/GitHub/AFEM/bin/msvcp120.dll D:/GitHub/AFEM/bin/msvcr120.dll D:/GitHub/AFEM/bin/ovrvision.dll D:/GitHub/AFEM/bin/ovrvisiond.dll D:/GitHub/AFEM/build/Debug/
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
